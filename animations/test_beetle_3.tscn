@@ -1,0 +1,835 @@
+[gd_scene format=3 uid="uid://clxpfi6gxnlhb"]
+
+[ext_resource type="Script" uid="uid://djommwuv8jyxk" path="res://warship_parts/warship.gd" id="1_pcb3h"]
+[ext_resource type="Script" uid="uid://csy7guyr8xbg8" path="res://animations/beetle_visual_controller.gd" id="2_uuqdi"]
+[ext_resource type="Texture2D" uid="uid://ncl07koug7cg" path="res://assets/beetle_test_parts/dust.png" id="3_2gjcx"]
+[ext_resource type="Shader" uid="uid://c2k6xvn26m7te" path="res://shaders/float_shader.gdshader" id="4_8n1jl"]
+[ext_resource type="Texture2D" uid="uid://c3v6ejv7weyde" path="res://assets/beetle_test_parts/cover_belly_2.png" id="5_llkqo"]
+[ext_resource type="Texture2D" uid="uid://dkhyiijoq42q5" path="res://assets/beetle_test_parts/ship_belly.png" id="6_pcb3h"]
+[ext_resource type="Texture2D" uid="uid://d4d40alb1wkvn" path="res://assets/beetle_test_parts/belly.png" id="6_qe5dt"]
+[ext_resource type="Texture2D" uid="uid://c2s4efj5tglin" path="res://assets/beetle_test_parts/cover_chest_2.png" id="7_rnw41"]
+[ext_resource type="Texture2D" uid="uid://40iwskthxgvv" path="res://assets/beetle_test_parts/chest.png" id="8_x8y2b"]
+[ext_resource type="Texture2D" uid="uid://c6cc2sl7sltx2" path="res://assets/beetle_test_parts/cover_neck_and_head_2.png" id="9_suqrv"]
+[ext_resource type="Texture2D" uid="uid://bmn1lnkllixcj" path="res://assets/beetle_test_parts/neck_and_head.png" id="10_qkvvw"]
+[ext_resource type="Texture2D" uid="uid://b2hwm2yk1se78" path="res://assets/beetle_test_parts/head-sheet.png" id="11_46ibt"]
+[ext_resource type="Script" uid="uid://ck5cytt6grxaj" path="res://HexGridSystem/HexGridManager.gd" id="12_p3ye3"]
+[ext_resource type="Script" uid="uid://b1hw61yxwrt8q" path="res://HexGridSystem/HexSlot.gd" id="13_h24m6"]
+[ext_resource type="PackedScene" uid="uid://pqv5ivbwc77o" path="res://tiles/cannon/cannon_tile.tscn" id="15_uuqdi"]
+[ext_resource type="Script" uid="uid://b1nwjo8kbisq" path="res://warship_parts/CombatEntity.gd" id="15_yrlal"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/ActionData.gd" id="16_3lm1x"]
+[ext_resource type="Resource" uid="uid://bor2imqtxysa1" path="res://resources/BaseDodgeAction.tres" id="17_h20sp"]
+[ext_resource type="Resource" uid="uid://c31syiwdfduk2" path="res://resources/BaseAttackAction.tres" id="18_makwr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uwd3d"]
+
+[sub_resource type="Animation" id="Animation_axqvr"]
+resource_name = "Attack"
+length = 1.625
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualController/ShakeContainer/belly:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualController/ShakeContainer/chest:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75, 0.875, 1, 1.125, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(15, 0), Vector2(0, 0), Vector2(-10, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VisualController/ShakeContainer/head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.75, 0.875, 1, 1.125, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(30, 0), Vector2(0, 0), Vector2(-20, 0), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VisualController:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.375, 0.5, 0.75, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(40, 0), Vector2(50, 0), Vector2(50, 0), Vector2(-60, 0), Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VisualController:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.375, 0.75, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.2199114857512859, -0.3490658503988659, 0.6632251157578453, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("VisualController/attack_dust:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.625, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("VisualController")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"trigger_impact"
+}]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("VisualController/ShakeContainer/head:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.125, 0.625, 0.75, 0.875, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.11170107212763668, -0.2181661564992912, -0.21816616, 0.2234021442552744, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_uwd3d"]
+resource_name = "dodge"
+length = 2.0
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualController:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.125, 1.375, 1.875),
+"transitions": PackedFloat32Array(1, 1, 1.0000004, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(150, 0), Vector2(200, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualController:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.875, 1.375, 1.5, 1.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.17453292519943295, -0.555014702134197, 0.2199114857512859, 0.3298672286269279, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VisualController/dodge_paritcle:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.25, 1.375, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VisualController/dodge_paritcle:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.125, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 1), Vector2(-1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rcob8"]
+resource_name = "Idle"
+length = 1.75
+loop_mode = 1
+step = 0.125
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualController/ShakeContainer/head")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Idle", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("VisualController/ShakeContainer/chest:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.875, 1, 1.125, 1.25, 1.375, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(1, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(-1, 0), Vector2(1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("VisualController/ShakeContainer/belly:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.875, 1, 1.125, 1.25, 1.375, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(-1, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VisualController/ShakeContainer/head/shadow")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Idle", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_u38ck"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualController/ShakeContainer/chest:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualController/ShakeContainer/belly:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VisualController/ShakeContainer/head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VisualController:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VisualController:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("VisualController/attack_dust:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("VisualController/ShakeContainer/head:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("VisualController/dodge_paritcle:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("VisualController/dodge_paritcle:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yrteb"]
+_data = {
+&"Attack": SubResource("Animation_axqvr"),
+&"Dodge": SubResource("Animation_uwd3d"),
+&"Idle": SubResource("Animation_rcob8"),
+&"RESET": SubResource("Animation_u38ck")
+}
+
+[sub_resource type="Gradient" id="Gradient_04cyu"]
+colors = PackedColorArray(0.99999946, 0.9159893, 0.8148036, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g46bt"]
+gradient = SubResource("Gradient_04cyu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_04cyu"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(54.46, 119.98, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+initial_velocity_min = 215.39
+initial_velocity_max = 276.93
+orbit_velocity_min = -0.09999991
+orbit_velocity_max = 0.1000001
+radial_velocity_min = -5.0000224
+radial_velocity_max = 4.9999776
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_g46bt")
+
+[sub_resource type="Gradient" id="Gradient_g46bt"]
+colors = PackedColorArray(1, 0.8288127, 0.6100182, 1, 0.4, 0.2627451, 0.14901961, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lxhcj"]
+gradient = SubResource("Gradient_g46bt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g46bt"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(1, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 120.0
+emission_ring_inner_radius = 80.0
+emission_ring_cone_angle = 90.0
+radial_velocity_min = -100.00002
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 6.0
+color_ramp = SubResource("GradientTexture1D_lxhcj")
+
+[sub_resource type="Gradient" id="Gradient_otp4t"]
+offsets = PackedFloat32Array(0.09016393, 0.6885246)
+colors = PackedColorArray(1, 1, 0.76862746, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qt7or"]
+gradient = SubResource("Gradient_otp4t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rcob8"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 68.165, 1)
+initial_velocity_min = 184.61
+initial_velocity_max = 261.54
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, -90, 0)
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_qt7or")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jnsv8"]
+shader = ExtResource("4_8n1jl")
+shader_parameter/progress = 1.10000002384186
+shader_parameter/mask_tex = ExtResource("5_llkqo")
+shader_parameter/smoothness_level = 0.15
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbix0"]
+shader = ExtResource("4_8n1jl")
+shader_parameter/progress = 1.10000002384186
+shader_parameter/mask_tex = ExtResource("7_rnw41")
+shader_parameter/smoothness_level = 0.15
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_04cyu"]
+load_path = "res://.godot/imported/chest.png-920ec117cdda7d604d2e196bba4823e0.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_04cyu"]
+shader = ExtResource("4_8n1jl")
+shader_parameter/progress = 1.10000002384186
+shader_parameter/mask_tex = ExtResource("9_suqrv")
+shader_parameter/smoothness_level = 0.15
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs8ng"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(0, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvdib"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(111, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7v3tk"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(222, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnsv8"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(333, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04cyu"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(444, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g46bt"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(555, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxhcj"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(666, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8q8i"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(777, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmawh"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(888, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mdwx"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(999, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axqvr"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(1110, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwd3d"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(1221, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otp4t"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(1332, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbix0"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(0, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qt7or"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(111, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcob8"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(222, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u38ck"]
+atlas = ExtResource("11_46ibt")
+region = Rect2(333, 0, 111, 262)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qt7or"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_qkvvw")
+}],
+"loop": false,
+"name": &"Float",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rs8ng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvdib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7v3tk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnsv8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04cyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g46bt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxhcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8q8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmawh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mdwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axqvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwd3d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otp4t")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbix0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qt7or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcob8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u38ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u38ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u38ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u38ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u38ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qt7or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbix0")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 8.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_uwd3d"]
+colors = PackedColorArray(1, 0.77005255, 0.5664478, 1, 1, 0.75960165, 0.7201427, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_otp4t"]
+gradient = SubResource("Gradient_uwd3d")
+
+[sub_resource type="Curve" id="Curve_qt7or"]
+_limits = [0.0, 15.0, 0.0, 1.0]
+_data = [Vector2(0, 11.460675), 0.0, 0.0, 0, 0, Vector2(1, 14.325844), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rcob8"]
+curve = SubResource("Curve_qt7or")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u38ck"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 97.08, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(1, -0.2, 0)
+initial_velocity_min = 538.47
+initial_velocity_max = 569.23
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_rcob8")
+color_ramp = SubResource("GradientTexture1D_otp4t")
+
+[sub_resource type="Gradient" id="Gradient_qt7or"]
+colors = PackedColorArray(1, 0.9022137, 0.6250551, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rcob8"]
+gradient = SubResource("Gradient_qt7or")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yrteb"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 108.715, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(-1, 0, 0)
+initial_velocity_min = 400.0
+initial_velocity_max = 476.91998
+gravity = Vector3(0, 1, 0)
+scale_min = 0.5
+scale_max = 0.79999995
+color_ramp = SubResource("GradientTexture1D_rcob8")
+
+[node name="warship" type="Node2D" unique_id=1544490133 node_paths=PackedStringArray("hexgridmanager", "combatentity", "visual_controller", "animation_player") groups=["Ships"]]
+script = ExtResource("1_pcb3h")
+hexgridmanager = NodePath("VisualController/HexGridManager")
+combatentity = NodePath("CombatEntity")
+visual_controller = NodePath("VisualController")
+animation_player = NodePath("VisualController/AnimationPlayer")
+
+[node name="VisualController" type="Node2D" parent="." unique_id=1806200182 node_paths=PackedStringArray("body_nodes", "body_shadows", "particle_nodes", "animation_player", "hit_particle")]
+material = SubResource("ShaderMaterial_uwd3d")
+use_parent_material = true
+script = ExtResource("2_uuqdi")
+body_nodes = [NodePath("ShakeContainer/belly"), NodePath("ShakeContainer/chest"), NodePath("ShakeContainer/head")]
+body_shadows = [NodePath("ShakeContainer/belly/shadow"), NodePath("ShakeContainer/chest/shadow"), NodePath("ShakeContainer/head/shadow")]
+particle_nodes = [NodePath("starting_dust1"), NodePath("starting_dust2")]
+animation_player = NodePath("AnimationPlayer")
+hit_particle = NodePath("hit_particle")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualController" unique_id=1256129179]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_yrteb")
+
+[node name="starting_dust1" type="GPUParticles2D" parent="VisualController" unique_id=215952527]
+z_index = -1
+emitting = false
+amount = 150
+process_material = SubResource("ParticleProcessMaterial_04cyu")
+
+[node name="starting_dust2" type="GPUParticles2D" parent="VisualController" unique_id=1486843414]
+z_index = -1
+position = Vector2(0, -6)
+emitting = false
+amount = 500
+preprocess = 1.0
+process_material = SubResource("ParticleProcessMaterial_g46bt")
+
+[node name="attack_dust" type="GPUParticles2D" parent="VisualController" unique_id=1362805511]
+z_index = -1
+position = Vector2(29, 16)
+emitting = false
+amount = 80
+texture = ExtResource("3_2gjcx")
+explosiveness = 0.1
+process_material = SubResource("ParticleProcessMaterial_rcob8")
+
+[node name="ShakeContainer" type="Node2D" parent="VisualController" unique_id=1641381197]
+use_parent_material = true
+
+[node name="belly" type="Sprite2D" parent="VisualController/ShakeContainer" unique_id=1344263692]
+clip_children = 2
+material = SubResource("ShaderMaterial_jnsv8")
+scale = Vector2(1, -1)
+texture = ExtResource("6_pcb3h")
+
+[node name="shadow" type="Sprite2D" parent="VisualController/ShakeContainer/belly" unique_id=1859893259]
+modulate = Color(0, 0, 0, 0.49411765)
+z_index = -1
+texture = ExtResource("6_qe5dt")
+
+[node name="chest" type="Sprite2D" parent="VisualController/ShakeContainer" unique_id=1829585139]
+material = SubResource("ShaderMaterial_gbix0")
+scale = Vector2(1, -1)
+texture = ExtResource("8_x8y2b")
+
+[node name="shadow" type="Sprite2D" parent="VisualController/ShakeContainer/chest" unique_id=1805091001]
+modulate = Color(0, 0, 0, 0.49411765)
+z_index = -1
+texture_filter = 1
+texture = SubResource("CompressedTexture2D_04cyu")
+
+[node name="head" type="AnimatedSprite2D" parent="VisualController/ShakeContainer" unique_id=158225720]
+material = SubResource("ShaderMaterial_04cyu")
+position = Vector2(0, -1)
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_qt7or")
+animation = &"Idle"
+
+[node name="shadow" type="AnimatedSprite2D" parent="VisualController/ShakeContainer/head" unique_id=345667835]
+modulate = Color(0, 0, 0, 0.49411765)
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_qt7or")
+animation = &"hit"
+frame = 9
+frame_progress = 1.0
+
+[node name="hit_particle" type="GPUParticles2D" parent="VisualController" unique_id=197593069]
+emitting = false
+amount = 150
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_u38ck")
+
+[node name="dodge_paritcle" type="GPUParticles2D" parent="VisualController" unique_id=1841743937]
+z_index = -1
+emitting = false
+amount = 320
+texture = ExtResource("3_2gjcx")
+process_material = SubResource("ParticleProcessMaterial_yrteb")
+
+[node name="HexGridManager" type="Node2D" parent="VisualController" unique_id=153298630]
+use_parent_material = true
+script = ExtResource("12_p3ye3")
+metadata/_custom_type_script = "uid://ck5cytt6grxaj"
+
+[node name="HexMount" type="Node2D" parent="VisualController/HexGridManager" unique_id=1431782110]
+use_parent_material = true
+position = Vector2(0, 5)
+script = ExtResource("13_h24m6")
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="HexMount2" type="Node2D" parent="VisualController/HexGridManager" unique_id=1394112871]
+use_parent_material = true
+position = Vector2(18, 5)
+script = ExtResource("13_h24m6")
+hex_coords = Vector2i(1, 0)
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="HexMount3" type="Node2D" parent="VisualController/HexGridManager" unique_id=1094319751]
+use_parent_material = true
+position = Vector2(-18, 5)
+script = ExtResource("13_h24m6")
+hex_coords = Vector2i(-1, 0)
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="Tile" parent="VisualController/HexGridManager/HexMount3" unique_id=1726283874 instance=ExtResource("15_uuqdi")]
+
+[node name="HexMount4" type="Node2D" parent="VisualController/HexGridManager" unique_id=1043879834]
+use_parent_material = true
+position = Vector2(-9, -9)
+script = ExtResource("13_h24m6")
+hex_coords = Vector2i(0, -1)
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="HexMount5" type="Node2D" parent="VisualController/HexGridManager" unique_id=1119013445]
+use_parent_material = true
+position = Vector2(9, -9)
+script = ExtResource("13_h24m6")
+hex_coords = Vector2i(1, -1)
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="HexMount6" type="Node2D" parent="VisualController/HexGridManager" unique_id=1304258791]
+use_parent_material = true
+position = Vector2(18, -23)
+script = ExtResource("13_h24m6")
+hex_coords = Vector2i(2, -2)
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="HexMount7" type="Node2D" parent="VisualController/HexGridManager" unique_id=1413468064]
+use_parent_material = true
+position = Vector2(0, -23)
+script = ExtResource("13_h24m6")
+hex_coords = Vector2i(1, -2)
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="HexMount8" type="Node2D" parent="VisualController/HexGridManager" unique_id=509994146]
+use_parent_material = true
+position = Vector2(-18, -23)
+script = ExtResource("13_h24m6")
+hex_coords = Vector2i(0, -2)
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="HexMount9" type="Node2D" parent="VisualController/HexGridManager" unique_id=1958104878]
+use_parent_material = true
+position = Vector2(-9, -37)
+script = ExtResource("13_h24m6")
+hex_coords = Vector2i(1, -3)
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="HexMount10" type="Node2D" parent="VisualController/HexGridManager" unique_id=592853966]
+use_parent_material = true
+position = Vector2(9, -37)
+script = ExtResource("13_h24m6")
+hex_coords = Vector2i(2, -3)
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="HexMount11" type="Node2D" parent="VisualController/HexGridManager" unique_id=1573910796]
+use_parent_material = true
+position = Vector2(0, -51)
+script = ExtResource("13_h24m6")
+hex_coords = Vector2i(2, -4)
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="CombatEntity" type="Node2D" parent="." unique_id=495043276]
+script = ExtResource("15_yrlal")
+inherent_actions = Array[ExtResource("16_3lm1x")]([ExtResource("17_h20sp"), ExtResource("18_makwr")])
+metadata/_custom_type_script = "uid://b1nwjo8kbisq"

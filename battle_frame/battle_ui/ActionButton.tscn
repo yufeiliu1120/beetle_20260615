@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cl5ei4tosvxvu"]
+
+[ext_resource type="Script" uid="uid://dp4unqyrs386h" path="res://battle_frame/battle_ui/ActionButton.gd" id="1_8vlip"]
+
+[node name="Button" type="Button" unique_id=317046269]
+custom_minimum_size = Vector2(100, 0)
+offset_right = 34.0
+offset_bottom = 16.0
+text_overrun_behavior = 4
+autowrap_mode = 2
+script = ExtResource("1_8vlip")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

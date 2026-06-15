@@ -1,0 +1,231 @@
+[gd_scene format=3 uid="uid://pqv5ivbwc77o"]
+
+[ext_resource type="Script" uid="uid://c5b8oeh327h3g" path="res://HexGridSystem/TileBase.gd" id="1_iyb5q"]
+[ext_resource type="Texture2D" uid="uid://bfwjlfigefpg1" path="res://assets/tiles/cannon/fire_sheets.png" id="2_33ewr"]
+[ext_resource type="Script" uid="uid://da2ylup2kah2r" path="res://resources/BaseAttackAction.gd" id="2_synvl"]
+[ext_resource type="Texture2D" uid="uid://brl1sr8cu7vkw" path="res://assets/tiles/cannon/tile_base.png" id="3_dp0wo"]
+[ext_resource type="Script" uid="uid://m2dpx7odauyw" path="res://HexGridSystem/state_machine.gd" id="3_synvl"]
+[ext_resource type="Script" uid="uid://b587eajalvh44" path="res://HexGridSystem/state_idle.gd" id="4_dp0wo"]
+[ext_resource type="Script" uid="uid://cdppfa2ge5fd2" path="res://HexGridSystem/state_dragging.gd" id="5_3itfs"]
+[ext_resource type="Script" uid="uid://2uea10b1ion5" path="res://HexGridSystem/state_placed.gd" id="6_my4ub"]
+[ext_resource type="Texture2D" uid="uid://ncl07koug7cg" path="res://assets/beetle_test_parts/dust.png" id="9_dp0wo"]
+
+[sub_resource type="Resource" id="Resource_dp0wo"]
+script = ExtResource("2_synvl")
+action_name = "炮击"
+tile_anim_name = "fire"
+metadata/_custom_type_script = "uid://da2ylup2kah2r"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33ewr"]
+atlas = ExtResource("2_33ewr")
+region = Rect2(0, 0, 81, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_synvl"]
+atlas = ExtResource("2_33ewr")
+region = Rect2(81, 0, 81, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp0wo"]
+atlas = ExtResource("2_33ewr")
+region = Rect2(162, 0, 81, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3itfs"]
+atlas = ExtResource("2_33ewr")
+region = Rect2(243, 0, 81, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my4ub"]
+atlas = ExtResource("2_33ewr")
+region = Rect2(324, 0, 81, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6t0x"]
+atlas = ExtResource("2_33ewr")
+region = Rect2(405, 0, 81, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pkatj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ewr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ewr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ewr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ewr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ewr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ewr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_synvl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dp0wo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3itfs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_my4ub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6t0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ewr")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 8.0
+}]
+
+[sub_resource type="Animation" id="Animation_3itfs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ln4v5"]
+resource_name = "fire"
+length = 1.5
+step = 0.125
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"fire", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"trigger_impact"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.25],
+"method": &"shake_camera"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.875),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6hrkk"]
+_data = {
+&"RESET": SubResource("Animation_3itfs"),
+&"fire": SubResource("Animation_ln4v5")
+}
+
+[sub_resource type="Gradient" id="Gradient_my4ub"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x6t0x"]
+gradient = SubResource("Gradient_my4ub")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ln4v5"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, -50, 0)
+scale_min = 0.19999999
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_x6t0x")
+
+[node name="Tile" type="Node2D" unique_id=1726283874 node_paths=PackedStringArray("tile_anim_player")]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_iyb5q")
+tile_name = "加农炮地块"
+base_action = SubResource("Resource_dp0wo")
+tile_anim_player = NodePath("AnimationPlayer")
+entity_buffs = {
+"max_ap": 2,
+"max_hp": 0
+}
+require_frontline = true
+provides_shield = true
+breaks_on_block = false
+
+[node name="base" type="Sprite2D" parent="." unique_id=900864189]
+texture = ExtResource("3_dp0wo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=818047113]
+position = Vector2(-3, -1)
+sprite_frames = SubResource("SpriteFrames_pkatj")
+animation = &"fire"
+frame = 11
+frame_progress = 1.0
+
+[node name="StateMachine" type="Node" parent="." unique_id=51638195 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_synvl")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1180187355]
+script = ExtResource("4_dp0wo")
+
+[node name="Dragging" type="Node" parent="StateMachine" unique_id=1619463784]
+script = ExtResource("5_3itfs")
+
+[node name="Placed" type="Node" parent="StateMachine" unique_id=83072976]
+script = ExtResource("6_my4ub")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2123904787]
+libraries/ = SubResource("AnimationLibrary_6hrkk")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1820787586]
+position = Vector2(-26, -2)
+emitting = false
+amount = 50
+texture = ExtResource("9_dp0wo")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ln4v5")

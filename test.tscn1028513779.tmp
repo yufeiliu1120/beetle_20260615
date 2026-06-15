@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://5q4xkp1diqa0"]
+
+[ext_resource type="Script" uid="uid://8hlo646ofmu2" path="res://test.gd" id="1_ppyta"]
+[ext_resource type="Script" uid="uid://dy5ba6ku4uwpc" path="res://battle_frame/combat_manager.gd" id="2_8uh7m"]
+[ext_resource type="Script" uid="uid://ck8gwobidg082" path="res://battle_frame/ActionResolver.gd" id="3_6uqi0"]
+[ext_resource type="PackedScene" uid="uid://rd5yi1kv32x8" path="res://warship_parts/warship_base.tscn" id="4_ppyta"]
+[ext_resource type="PackedScene" uid="uid://buwfdrw4p5fjl" path="res://battle_ui/action_ui_manager.tscn" id="5_ykrsh"]
+
+[node name="Node2D" type="Node2D" unique_id=553631274]
+script = ExtResource("1_ppyta")
+
+[node name="CombatManager" type="Node" parent="." unique_id=364711174 node_paths=PackedStringArray("ui_manager", "action_resolver")]
+script = ExtResource("2_8uh7m")
+ui_manager = NodePath("../CanvasLayer/ActionUIManager")
+action_resolver = NodePath("ActionResolver")
+metadata/_custom_type_script = "uid://dy5ba6ku4uwpc"
+
+[node name="ActionResolver" type="Node" parent="CombatManager" unique_id=40895964]
+script = ExtResource("3_6uqi0")
+metadata/_custom_type_script = "uid://ck8gwobidg082"
+
+[node name="warship" parent="." unique_id=2018497211 groups=["Ships"] instance=ExtResource("4_ppyta")]
+position = Vector2(201, 271)
+is_player = true
+
+[node name="warship2" parent="." unique_id=1089725980 groups=["Ships"] instance=ExtResource("4_ppyta")]
+position = Vector2(499, 263)
+
+[node name="Button" type="Button" parent="." unique_id=37472426]
+offset_right = 136.0
+offset_bottom = 29.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=966504313]
+
+[node name="ActionUIManager" parent="CanvasLayer" unique_id=1211023341 instance=ExtResource("5_ykrsh")]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

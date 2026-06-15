@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseAttackAction" format=3 uid="uid://c31syiwdfduk2"]
+
+[ext_resource type="Script" uid="uid://da2ylup2kah2r" path="res://resources/BaseAttackAction.gd" id="1_6t8vk"]
+
+[resource]
+script = ExtResource("1_6t8vk")
+tags = Array[String](["Attack"])
+action_name = "基础攻击"
+base_cooldown = 1
+ship_anim_name = "Attack"
+metadata/_custom_type_script = "uid://da2ylup2kah2r"

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dfxuojwuvlhpt"]
+
+[ext_resource type="Texture2D" uid="uid://qels6ix02gdt" path="res://assets/test_card.png" id="1_6ylhs"]
+[ext_resource type="Script" uid="uid://d1c0bvodwcdtr" path="res://AssemblyHub/card.gd" id="2_3b6ly"]
+[ext_resource type="PackedScene" uid="uid://oyu8tsjdwv44" path="res://HexGridSystem/test_tile.tscn" id="3_jb62m"]
+
+[node name="TextureRect" type="TextureRect" unique_id=699468790]
+anchors_preset = -1
+anchor_right = 0.05
+anchor_bottom = 0.119
+offset_right = -56.0
+offset_bottom = -88.520004
+mouse_filter = 0
+texture = ExtResource("1_6ylhs")
+script = ExtResource("2_3b6ly")
+tile_scene = ExtResource("3_jb62m")

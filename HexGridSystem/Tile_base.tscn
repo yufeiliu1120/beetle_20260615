@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://io6bs745ynfc"]
+
+[ext_resource type="Script" uid="uid://c5b8oeh327h3g" path="res://HexGridSystem/TileBase.gd" id="1_at37g"]
+[ext_resource type="Texture2D" uid="uid://dkv8nkmakecgg" path="res://assets/test_tile.png" id="2_g4i4c"]
+[ext_resource type="Script" uid="uid://m2dpx7odauyw" path="res://HexGridSystem/state_machine.gd" id="3_g4i4c"]
+[ext_resource type="Script" uid="uid://cdppfa2ge5fd2" path="res://HexGridSystem/state_dragging.gd" id="4_5i6f5"]
+[ext_resource type="Script" uid="uid://b587eajalvh44" path="res://HexGridSystem/state_idle.gd" id="4_sg5wk"]
+[ext_resource type="Script" uid="uid://2uea10b1ion5" path="res://HexGridSystem/state_placed.gd" id="6_jqvbw"]
+
+[node name="Tile" type="Node2D" unique_id=1726283874 node_paths=PackedStringArray("tile_anim_player")]
+script = ExtResource("1_at37g")
+tile_anim_player = NodePath("AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1912889814]
+texture = ExtResource("2_g4i4c")
+
+[node name="StateMachine" type="Node" parent="." unique_id=51638195 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_g4i4c")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1180187355]
+script = ExtResource("4_sg5wk")
+
+[node name="Dragging" type="Node" parent="StateMachine" unique_id=1619463784]
+script = ExtResource("4_5i6f5")
+
+[node name="Placed" type="Node" parent="StateMachine" unique_id=83072976]
+script = ExtResource("6_jqvbw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=907016055]

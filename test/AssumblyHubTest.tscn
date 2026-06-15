@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cf38dc0hg2vf2"]
+
+[ext_resource type="Script" uid="uid://dvhamhxs4rjwq" path="res://test/assumbly_hub_test.gd" id="1_2yvg1"]
+[ext_resource type="PackedScene" uid="uid://gu34hkbe6ddk" path="res://AssemblyHub/AssemblyHub.tscn" id="1_hixtp"]
+[ext_resource type="PackedScene" uid="uid://clxpfi6gxnlhb" path="res://animations/test_beetle_3.tscn" id="3_pqy4h"]
+
+[node name="Node2D" type="Node2D" unique_id=713968183]
+script = ExtResource("1_2yvg1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2042340280]
+
+[node name="Control" parent="CanvasLayer" unique_id=895487477 instance=ExtResource("1_hixtp")]
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=476331361]
+offset_left = 11.0
+offset_top = 158.0
+offset_right = 198.0
+offset_bottom = 202.0
+text = "Start Assembly"
+
+[node name="Button2" type="Button" parent="CanvasLayer" unique_id=1619176932]
+offset_left = 35.0
+offset_top = 91.0
+offset_right = 153.0
+offset_bottom = 122.0
+text = "to battle"
+
+[node name="warship" parent="." unique_id=1544490133 instance=ExtResource("3_pqy4h")]
+position = Vector2(572, 366)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2083253032]
+position = Vector2(665, 358)
+zoom = Vector2(2.065, 2.065)
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]

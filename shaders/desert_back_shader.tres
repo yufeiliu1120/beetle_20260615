@@ -1,0 +1,61 @@
+[gd_resource type="Shader" format=3 uid="uid://bif8bo2fq0lb7"]
+
+[resource]
+code = "
+shader_type canvas_item;
+
+// 沙子主色与高光色
+uniform vec4 sand_color : source_color = vec4(0.98, 0.85, 0.42, 1.0);
+uniform vec4 sparkle_color : source_color = vec4(1.0, 0.95, 0.6, 1.0);
+
+// 闪烁与网格控制
+uniform float sparkle_threshold : hint_range(0.0, 0.999) = 0.95;
+uniform float sparkle_speed = 4.0;
+
+// 【新增控制项】
+uniform float sand_resolution = 256.0;        // 沙子的细腻程度
+uniform float sparkle_resolution = 256.0;     // 亮点网格的细腻程度 (通常设为和沙子一样，或者更小以获得大像素闪烁)
+uniform float sparkle_size : hint_range(0.0, 1.0) = 0.5; // 亮点在自身网格内的占比大小 (1.0 为填满整个网格，0.5 为一半大小)
+
+// 伪随机数生成器
+float random(vec2 uv) {
+    return fract(sin(dot(uv.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+}
+
+void fragment() {
+    vec4 tex_color = texture(TEXTURE, UV);
+    vec4 final_color = tex_color;
+    
+    // 只在非透明区域进行渲染
+    if (tex_color.a > 0.0) {
+        
+        // 1. 铺满沙子底色
+        final_color.rgb = sand_color.rgb;
+        
+        // 2. 亮点所在的独立网格
+        vec2 sparkle_grid_uv = floor(UV * sparkle_resolution);
+        float rand_val = random(sparkle_grid_uv);
+        
+        // 3. 闪烁逻辑
+        if (rand_val > sparkle_threshold) {
+            
+            // 【核心修改】：获取当前网格内的局部坐标 (范围 0.0 到 1.0)
+            // 用 fract 函数提取小数部分，比如 UV 是 1.25，fract 之后就是 0.25
+            vec2 local_uv = fract(UV * sparkle_resolution);
+            
+            // 计算为了让亮点居中，需要留出的边缘空白
+            float margin = (1.0 - sparkle_size) * 0.5;
+            
+            // 判断当前像素是否落在设置的 \"亮点尺寸\" 范围内（绘制居中的小方块）
+            if (local_uv.x >= margin && local_uv.x <= 1.0 - margin && 
+                local_uv.y >= margin && local_uv.y <= 1.0 - margin) {
+                
+                float twinkle = (sin(TIME * sparkle_speed + rand_val * 100.0) * 0.5) + 0.5;
+                final_color.rgb = mix(sand_color.rgb, sparkle_color.rgb, twinkle);
+            }
+        }
+    }
+    
+    COLOR = final_color;
+}
+"

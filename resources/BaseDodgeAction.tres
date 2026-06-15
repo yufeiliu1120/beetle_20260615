@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ActionData" format=3 uid="uid://bor2imqtxysa1"]
+
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/ActionData.gd" id="1_d8atp"]
+
+[resource]
+script = ExtResource("1_d8atp")
+tags = Array[String](["Dodge"])
+action_name = "闪避"
+ship_anim_name = "Dodge"
+metadata/_custom_type_script = "uid://ybacxqsnbg5a"

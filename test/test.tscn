@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://5q4xkp1diqa0"]
+
+[ext_resource type="Script" uid="uid://8hlo646ofmu2" path="res://test/test.gd" id="1_ppyta"]
+[ext_resource type="Script" uid="uid://dy5ba6ku4uwpc" path="res://battle_frame/combat_manager.gd" id="2_8uh7m"]
+[ext_resource type="Script" uid="uid://ck8gwobidg082" path="res://battle_frame/ActionResolver.gd" id="3_6uqi0"]
+[ext_resource type="Shader" uid="uid://bif8bo2fq0lb7" path="res://shaders/desert_back_shader.tres" id="5_tbfq4"]
+[ext_resource type="PackedScene" uid="uid://buwfdrw4p5fjl" path="res://battle_frame/battle_ui/action_ui_manager.tscn" id="5_ykrsh"]
+[ext_resource type="PackedScene" uid="uid://bfnu8f368o6d2" path="res://animations/test_beetle_2.tscn" id="6_s3n3v"]
+[ext_resource type="Script" uid="uid://rb0ehym35dqi" path="res://animations/camera.gd" id="7_kgdm3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s3n3v"]
+shader = ExtResource("5_tbfq4")
+shader_parameter/sand_color = Color(0.98, 0.85, 0.42, 1)
+shader_parameter/sparkle_color = Color(1, 0.95, 0.6, 1)
+shader_parameter/sparkle_threshold = 0.8230000390925
+shader_parameter/sparkle_speed = 4.0
+shader_parameter/sand_resolution = 256.0
+shader_parameter/sparkle_resolution = 256.0
+shader_parameter/sparkle_size = 0.7030000333925
+
+[node name="Node2D" type="Node2D" unique_id=553631274]
+script = ExtResource("1_ppyta")
+
+[node name="CombatManager" type="Node" parent="." unique_id=364711174 node_paths=PackedStringArray("ui_manager", "action_resolver")]
+script = ExtResource("2_8uh7m")
+ui_manager = NodePath("../CanvasLayer/ActionUIManager")
+action_resolver = NodePath("ActionResolver")
+metadata/_custom_type_script = "uid://dy5ba6ku4uwpc"
+
+[node name="ActionResolver" type="Node" parent="CombatManager" unique_id=40895964]
+script = ExtResource("3_6uqi0")
+metadata/_custom_type_script = "uid://ck8gwobidg082"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=966504313]
+
+[node name="ActionUIManager" parent="CanvasLayer" unique_id=1211023341 instance=ExtResource("5_ykrsh")]
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=37472426]
+offset_top = 142.0
+offset_right = 212.0
+offset_bottom = 187.0
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2062162472]
+z_index = -2
+material = SubResource("ShaderMaterial_s3n3v")
+offset_right = 1150.0
+offset_bottom = 649.0
+mouse_filter = 2
+
+[node name="warship2" parent="." unique_id=247096844 instance=ExtResource("6_s3n3v")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=595440283 groups=["Camera"]]
+position = Vector2(572, 317)
+zoom = Vector2(1.93, 1.93)
+script = ExtResource("7_kgdm3")
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://buwfdrw4p5fjl"]
+
+[ext_resource type="Script" uid="uid://c17xtupvn2wkl" path="res://battle_frame/battle_ui/action_ui_manager.gd" id="1_f6cq7"]
+[ext_resource type="PackedScene" uid="uid://cl5ei4tosvxvu" path="res://battle_frame/battle_ui/ActionButton.tscn" id="2_hgylk"]
+
+[node name="ActionUIManager" type="Control" unique_id=1211023341]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f6cq7")
+action_button_scene = ExtResource("2_hgylk")
+
+[node name="APLabel" type="Label" parent="." unique_id=302960862]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1496.0
+offset_top = 182.0
+offset_right = -212.0
+offset_bottom = -829.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimelineContainer" type="HBoxContainer" parent="." unique_id=1929880461]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 293.5
+offset_top = 51.0
+offset_right = -293.5
+offset_bottom = -926.0
+grow_horizontal = 2
+
+[node name="PoolContainer" type="VBoxContainer" parent="." unique_id=1599450708]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1704.0
+offset_top = 76.5
+offset_right = -32.0
+offset_bottom = -76.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="SubmitButton" type="Button" parent="." unique_id=146256480]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 186.0
+offset_top = 204.0
+offset_right = 407.0
+offset_bottom = 300.0
+grow_horizontal = 2
+text = "END_TURN"

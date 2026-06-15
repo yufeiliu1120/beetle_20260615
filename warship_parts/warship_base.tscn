@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://rd5yi1kv32x8"]
+
+[ext_resource type="Script" uid="uid://djommwuv8jyxk" path="res://warship_parts/warship.gd" id="1_u6ec0"]
+[ext_resource type="Script" uid="uid://ck5cytt6grxaj" path="res://HexGridSystem/HexGridManager.gd" id="2_4yqac"]
+[ext_resource type="Script" uid="uid://b1hw61yxwrt8q" path="res://HexGridSystem/HexSlot.gd" id="3_uafs2"]
+[ext_resource type="Script" uid="uid://b1nwjo8kbisq" path="res://warship_parts/CombatEntity.gd" id="4_ew5mg"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/ActionData.gd" id="6_ew5mg"]
+[ext_resource type="Resource" uid="uid://bor2imqtxysa1" path="res://resources/BaseDodgeAction.tres" id="7_ew5mg"]
+
+[node name="warship" type="Node2D" unique_id=2018497211 node_paths=PackedStringArray("hexgridmanager", "combatentity") groups=["Ships"]]
+script = ExtResource("1_u6ec0")
+hexgridmanager = NodePath("HexGridManager")
+combatentity = NodePath("CombatEntity")
+
+[node name="HexGridManager" type="Node2D" parent="." unique_id=1976676368]
+script = ExtResource("2_4yqac")
+metadata/_custom_type_script = "uid://ck5cytt6grxaj"
+
+[node name="HexMount" type="Node2D" parent="HexGridManager" unique_id=1254720167]
+position = Vector2(-91, 15)
+script = ExtResource("3_uafs2")
+hex_coords = Vector2i(1, 0)
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="HexMount2" type="Node2D" parent="HexGridManager" unique_id=809976220]
+position = Vector2(89, 2)
+script = ExtResource("3_uafs2")
+metadata/_custom_type_script = "uid://b1hw61yxwrt8q"
+
+[node name="CombatEntity" type="Node2D" parent="." unique_id=1660673986]
+script = ExtResource("4_ew5mg")
+inherent_actions = Array[ExtResource("6_ew5mg")]([ExtResource("7_ew5mg")])
+metadata/_custom_type_script = "uid://b1nwjo8kbisq"
