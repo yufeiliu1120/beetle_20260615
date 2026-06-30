@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c5b8oeh327h3g" path="res://HexGridSystem/TileBase.gd" id="1_iyb5q"]
 [ext_resource type="Texture2D" uid="uid://bfwjlfigefpg1" path="res://assets/tiles/cannon/fire_sheets.png" id="2_33ewr"]
-[ext_resource type="Script" uid="uid://da2ylup2kah2r" path="res://resources/BaseAttackAction.gd" id="2_synvl"]
+[ext_resource type="Script" uid="uid://da2ylup2kah2r" path="res://resources/Actions/BaseAttackAction.gd" id="2_synvl"]
 [ext_resource type="Texture2D" uid="uid://brl1sr8cu7vkw" path="res://assets/tiles/cannon/tile_base.png" id="3_dp0wo"]
 [ext_resource type="Script" uid="uid://m2dpx7odauyw" path="res://HexGridSystem/state_machine.gd" id="3_synvl"]
 [ext_resource type="Script" uid="uid://b587eajalvh44" path="res://HexGridSystem/state_idle.gd" id="4_dp0wo"]
@@ -79,7 +79,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_33ewr")
 }],
-"loop": false,
+"loop": 0,
 "name": &"fire",
 "speed": 8.0
 }]
@@ -181,6 +181,7 @@ scale_max = 0.5
 color_ramp = SubResource("GradientTexture1D_x6t0x")
 
 [node name="Tile" type="Node2D" unique_id=1726283874 node_paths=PackedStringArray("tile_anim_player")]
+z_index = 1
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_iyb5q")
 tile_name = "加农炮地块"
@@ -191,7 +192,6 @@ entity_buffs = {
 "max_hp": 0
 }
 require_frontline = true
-provides_shield = true
 breaks_on_block = false
 
 [node name="base" type="Sprite2D" parent="." unique_id=900864189]

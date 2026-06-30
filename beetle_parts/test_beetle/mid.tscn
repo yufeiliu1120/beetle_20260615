@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dxe322nq0w0cp"]
+
+[ext_resource type="Shader" uid="uid://c2k6xvn26m7te" path="res://shaders/float_shader.gdshader" id="1_pqj7r"]
+[ext_resource type="Texture2D" uid="uid://bk1iv0skl61ki" path="res://assets/beetle_test_parts/new_chest.png" id="2_pqj7r"]
+[ext_resource type="Script" uid="uid://r2sxbtchp8iy" path="res://beetle_parts/beetle_part_base.gd" id="3_newx6"]
+[ext_resource type="Texture2D" uid="uid://c2s4efj5tglin" path="res://assets/beetle_test_parts/cover_chest_2.png" id="4_bnpgy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_slgyg"]
+shader = ExtResource("1_pqj7r")
+shader_parameter/theme_color = Color(0.13725491, 0.36078432, 0.7529412, 1)
+shader_parameter/decorative_color = Color(0.9, 0.8, 0.2, 1)
+shader_parameter/shadow_factor = 0.5
+shader_parameter/decor_shadow_factor = 0.5
+shader_parameter/decor_darkest_factor = 0.25
+shader_parameter/mask_theme_bright = Color(1, 0, 0, 1)
+shader_parameter/mask_theme_shadow = Color(0, 1, 0, 1)
+shader_parameter/mask_decor_bright = Color(0, 0, 1, 1)
+shader_parameter/mask_decor_shadow = Color(1, 1, 0, 1)
+shader_parameter/mask_decor_darkest = Color(1, 0, 1, 1)
+shader_parameter/tolerance = 0.1
+shader_parameter/progress = 1.10000002384186
+shader_parameter/mask_tex = ExtResource("4_bnpgy")
+shader_parameter/smoothness_level = 0.15
+shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u61mt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pqj7r")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=117003441]
+material = SubResource("ShaderMaterial_slgyg")
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_u61mt")
+script = ExtResource("3_newx6")
+target_socket_name = "mid"
+
+[node name="shadow" type="AnimatedSprite2D" parent="." unique_id=224694005]
+modulate = Color(0, 0, 0, 0.49411765)
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_u61mt")

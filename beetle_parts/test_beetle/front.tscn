@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://da2ovcj2rasoq"]
+
+[ext_resource type="Shader" uid="uid://c2k6xvn26m7te" path="res://shaders/float_shader.gdshader" id="1_vm87n"]
+[ext_resource type="Texture2D" uid="uid://c6cc2sl7sltx2" path="res://assets/beetle_test_parts/cover_neck_and_head_2.png" id="2_lxv0p"]
+[ext_resource type="Texture2D" uid="uid://cutvhec1mkpgr" path="res://assets/beetle_test_parts/new_part_head.png" id="2_vm87n"]
+[ext_resource type="Texture2D" uid="uid://djh0iw5xddykv" path="res://assets/beetle_test_parts/new_head_sheet.png" id="3_lxv0p"]
+[ext_resource type="Script" uid="uid://r2sxbtchp8iy" path="res://beetle_parts/beetle_part_base.gd" id="5_lxv0p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_04cyu"]
+shader = ExtResource("1_vm87n")
+shader_parameter/theme_color = Color(0.13725491, 0.36078432, 0.7529412, 1)
+shader_parameter/decorative_color = Color(0.9, 0.8, 0.2, 1)
+shader_parameter/shadow_factor = 0.5
+shader_parameter/decor_shadow_factor = 0.5
+shader_parameter/decor_darkest_factor = 0.25
+shader_parameter/mask_theme_bright = Color(1, 0, 0, 1)
+shader_parameter/mask_theme_shadow = Color(0, 1, 0, 1)
+shader_parameter/mask_decor_bright = Color(0, 0, 1, 1)
+shader_parameter/mask_decor_shadow = Color(1, 1, 0, 1)
+shader_parameter/mask_decor_darkest = Color(1, 0, 1, 1)
+shader_parameter/tolerance = 0.1
+shader_parameter/progress = 1.10000002384186
+shader_parameter/mask_tex = ExtResource("2_lxv0p")
+shader_parameter/smoothness_level = 0.15
+shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r81g"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(0, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73id7"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(111, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62krd"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(222, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytcmp"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(333, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41a2y"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(444, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3n2r"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(555, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xekkp"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(666, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf3e2"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(777, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omdb8"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(888, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifini"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(999, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oshq3"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(1110, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aantj"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(1221, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lseer"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(1332, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dku14"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(0, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ysd5"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(111, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpfqs"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(222, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_or2ao"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(333, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07s12"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(444, 0, 111, 262)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he7jg"]
+atlas = ExtResource("3_lxv0p")
+region = Rect2(555, 0, 111, 262)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qt7or"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vm87n")
+}],
+"loop": 0,
+"name": &"Float",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6r81g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73id7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62krd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytcmp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41a2y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3n2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xekkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf3e2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omdb8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifini")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oshq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aantj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lseer")
+}],
+"loop": 0,
+"name": &"Idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dku14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ysd5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpfqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or2ao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07s12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he7jg")
+}],
+"loop": 0,
+"name": &"hit",
+"speed": 8.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=460075060]
+material = SubResource("ShaderMaterial_04cyu")
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_qt7or")
+animation = &"Float"
+script = ExtResource("5_lxv0p")
+target_socket_name = "front"
+
+[node name="shadow" type="AnimatedSprite2D" parent="." unique_id=170983356]
+modulate = Color(0, 0, 0, 0.45882353)
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_qt7or")
+animation = &"Idle"
+frame = 12
+frame_progress = 1.0

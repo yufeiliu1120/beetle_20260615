@@ -3,7 +3,7 @@ class_name Warship
 @export var hexgridmanager:HexGridManager
 @export var combatentity:CombatEntity
 @export var is_player:bool
-@export var visual_controller: visual_controller
+@export var visual_controller: Node2D
 @export var animation_player:AnimationPlayer
 signal _excute_action
 func start_battle() -> void:

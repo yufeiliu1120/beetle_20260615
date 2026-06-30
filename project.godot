@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="海虫项目重构"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 
 [autoload]
 

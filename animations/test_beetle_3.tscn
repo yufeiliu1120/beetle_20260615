@@ -16,9 +16,9 @@
 [ext_resource type="Script" uid="uid://b1hw61yxwrt8q" path="res://HexGridSystem/HexSlot.gd" id="13_h24m6"]
 [ext_resource type="PackedScene" uid="uid://pqv5ivbwc77o" path="res://tiles/cannon/cannon_tile.tscn" id="15_uuqdi"]
 [ext_resource type="Script" uid="uid://b1nwjo8kbisq" path="res://warship_parts/CombatEntity.gd" id="15_yrlal"]
-[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/ActionData.gd" id="16_3lm1x"]
-[ext_resource type="Resource" uid="uid://bor2imqtxysa1" path="res://resources/BaseDodgeAction.tres" id="17_h20sp"]
-[ext_resource type="Resource" uid="uid://c31syiwdfduk2" path="res://resources/BaseAttackAction.tres" id="18_makwr"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionData.gd" id="16_3lm1x"]
+[ext_resource type="Resource" uid="uid://bor2imqtxysa1" path="res://resources/Actions/BaseDodgeAction.tres" id="17_h20sp"]
+[ext_resource type="Resource" uid="uid://c31syiwdfduk2" path="res://resources/Actions/BaseAttackAction.tres" id="18_makwr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uwd3d"]
 
@@ -29,7 +29,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VisualController/ShakeContainer/belly:position")
+tracks/0/path = NodePath("VisualController/ShakeContainer/back:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -41,7 +41,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("VisualController/ShakeContainer/chest:position")
+tracks/1/path = NodePath("VisualController/ShakeContainer/mid:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -53,7 +53,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("VisualController/ShakeContainer/head:position")
+tracks/2/path = NodePath("VisualController/ShakeContainer/front:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -115,7 +115,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("VisualController/ShakeContainer/head:rotation")
+tracks/7/path = NodePath("VisualController/ShakeContainer/front:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -186,7 +186,7 @@ step = 0.125
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VisualController/ShakeContainer/head")
+tracks/0/path = NodePath("VisualController/ShakeContainer/front")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -200,7 +200,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = false
-tracks/1/path = NodePath("VisualController/ShakeContainer/chest:position")
+tracks/1/path = NodePath("VisualController/ShakeContainer/mid:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -212,7 +212,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = false
-tracks/2/path = NodePath("VisualController/ShakeContainer/belly:position")
+tracks/2/path = NodePath("VisualController/ShakeContainer/back:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -224,7 +224,7 @@ tracks/2/keys = {
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("VisualController/ShakeContainer/head/shadow")
+tracks/3/path = NodePath("VisualController/ShakeContainer/front/shadow")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -241,7 +241,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VisualController/ShakeContainer/chest:position")
+tracks/0/path = NodePath("VisualController/ShakeContainer/mid:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -253,7 +253,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("VisualController/ShakeContainer/belly:position")
+tracks/1/path = NodePath("VisualController/ShakeContainer/back:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -265,7 +265,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("VisualController/ShakeContainer/head:position")
+tracks/2/path = NodePath("VisualController/ShakeContainer/front:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -313,7 +313,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("VisualController/ShakeContainer/head:rotation")
+tracks/6/path = NodePath("VisualController/ShakeContainer/front:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -659,8 +659,8 @@ animation_player = NodePath("VisualController/AnimationPlayer")
 material = SubResource("ShaderMaterial_uwd3d")
 use_parent_material = true
 script = ExtResource("2_uuqdi")
-body_nodes = [NodePath("ShakeContainer/belly"), NodePath("ShakeContainer/chest"), NodePath("ShakeContainer/head")]
-body_shadows = [NodePath("ShakeContainer/belly/shadow"), NodePath("ShakeContainer/chest/shadow"), NodePath("ShakeContainer/head/shadow")]
+body_nodes = [NodePath("ShakeContainer/back"), NodePath("ShakeContainer/mid"), NodePath("ShakeContainer/front")]
+body_shadows = [NodePath("ShakeContainer/back/shadow"), NodePath("ShakeContainer/mid/shadow"), NodePath("ShakeContainer/front/shadow")]
 particle_nodes = [NodePath("starting_dust1"), NodePath("starting_dust2")]
 animation_player = NodePath("AnimationPlayer")
 hit_particle = NodePath("hit_particle")
@@ -695,36 +695,36 @@ process_material = SubResource("ParticleProcessMaterial_rcob8")
 [node name="ShakeContainer" type="Node2D" parent="VisualController" unique_id=1641381197]
 use_parent_material = true
 
-[node name="belly" type="Sprite2D" parent="VisualController/ShakeContainer" unique_id=1344263692]
+[node name="back" type="Sprite2D" parent="VisualController/ShakeContainer" unique_id=1344263692]
 clip_children = 2
 material = SubResource("ShaderMaterial_jnsv8")
 scale = Vector2(1, -1)
 texture = ExtResource("6_pcb3h")
 
-[node name="shadow" type="Sprite2D" parent="VisualController/ShakeContainer/belly" unique_id=1859893259]
+[node name="shadow" type="Sprite2D" parent="VisualController/ShakeContainer/back" unique_id=1859893259]
 modulate = Color(0, 0, 0, 0.49411765)
 z_index = -1
 texture = ExtResource("6_qe5dt")
 
-[node name="chest" type="Sprite2D" parent="VisualController/ShakeContainer" unique_id=1829585139]
+[node name="mid" type="Sprite2D" parent="VisualController/ShakeContainer" unique_id=1829585139]
 material = SubResource("ShaderMaterial_gbix0")
 scale = Vector2(1, -1)
 texture = ExtResource("8_x8y2b")
 
-[node name="shadow" type="Sprite2D" parent="VisualController/ShakeContainer/chest" unique_id=1805091001]
+[node name="shadow" type="Sprite2D" parent="VisualController/ShakeContainer/mid" unique_id=1805091001]
 modulate = Color(0, 0, 0, 0.49411765)
 z_index = -1
 texture_filter = 1
 texture = SubResource("CompressedTexture2D_04cyu")
 
-[node name="head" type="AnimatedSprite2D" parent="VisualController/ShakeContainer" unique_id=158225720]
+[node name="front" type="AnimatedSprite2D" parent="VisualController/ShakeContainer" unique_id=158225720]
 material = SubResource("ShaderMaterial_04cyu")
 position = Vector2(0, -1)
 scale = Vector2(1, -1)
 sprite_frames = SubResource("SpriteFrames_qt7or")
 animation = &"Idle"
 
-[node name="shadow" type="AnimatedSprite2D" parent="VisualController/ShakeContainer/head" unique_id=345667835]
+[node name="shadow" type="AnimatedSprite2D" parent="VisualController/ShakeContainer/front" unique_id=345667835]
 modulate = Color(0, 0, 0, 0.49411765)
 z_index = -1
 sprite_frames = SubResource("SpriteFrames_qt7or")

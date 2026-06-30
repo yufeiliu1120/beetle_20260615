@@ -1,21 +1,13 @@
-[gd_scene format=3 uid="uid://bfnu8f368o6d2"]
+[gd_scene format=3 uid="uid://chmfbbxgrv2wy"]
 
-[ext_resource type="Script" uid="uid://csy7guyr8xbg8" path="res://animations/beetle_visual_controller.gd" id="1_04cyu"]
-[ext_resource type="Shader" uid="uid://c2k6xvn26m7te" path="res://shaders/float_shader.gdshader" id="1_jnsv8"]
-[ext_resource type="Script" uid="uid://djommwuv8jyxk" path="res://warship_parts/warship.gd" id="1_s8q8i"]
-[ext_resource type="Texture2D" uid="uid://c6cc2sl7sltx2" path="res://assets/beetle_test_parts/cover_neck_and_head_2.png" id="2_04cyu"]
-[ext_resource type="Texture2D" uid="uid://b2hwm2yk1se78" path="res://assets/beetle_test_parts/head-sheet.png" id="2_gbix0"]
-[ext_resource type="Texture2D" uid="uid://c3v6ejv7weyde" path="res://assets/beetle_test_parts/cover_belly_2.png" id="2_rs8ng"]
-[ext_resource type="Texture2D" uid="uid://d4d40alb1wkvn" path="res://assets/beetle_test_parts/belly.png" id="5_wmawh"]
-[ext_resource type="Texture2D" uid="uid://c2s4efj5tglin" path="res://assets/beetle_test_parts/cover_chest_2.png" id="6_g46bt"]
-[ext_resource type="Texture2D" uid="uid://40iwskthxgvv" path="res://assets/beetle_test_parts/chest.png" id="7_axqvr"]
-[ext_resource type="Texture2D" uid="uid://bmn1lnkllixcj" path="res://assets/beetle_test_parts/neck_and_head.png" id="8_lxhcj"]
-[ext_resource type="Script" uid="uid://ck5cytt6grxaj" path="res://HexGridSystem/HexGridManager.gd" id="10_lxhcj"]
-[ext_resource type="Script" uid="uid://b1nwjo8kbisq" path="res://warship_parts/CombatEntity.gd" id="11_s8q8i"]
-[ext_resource type="Texture2D" uid="uid://ncl07koug7cg" path="res://assets/beetle_test_parts/dust.png" id="11_uwd3d"]
-[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionData.gd" id="13_axqvr"]
-[ext_resource type="Resource" uid="uid://bor2imqtxysa1" path="res://resources/Actions/BaseDodgeAction.tres" id="14_uwd3d"]
-[ext_resource type="Resource" uid="uid://c31syiwdfduk2" path="res://resources/Actions/BaseAttackAction.tres" id="15_otp4t"]
+[ext_resource type="Script" uid="uid://djommwuv8jyxk" path="res://warship_parts/warship.gd" id="1_f0wve"]
+[ext_resource type="Script" uid="uid://yhe28rwfv20n" path="res://beetle_parts/visual_controller.gd" id="2_uf5rp"]
+[ext_resource type="Texture2D" uid="uid://ncl07koug7cg" path="res://assets/beetle_test_parts/dust.png" id="3_gs3lk"]
+[ext_resource type="Script" uid="uid://ck5cytt6grxaj" path="res://HexGridSystem/HexGridManager.gd" id="12_75ygj"]
+[ext_resource type="Script" uid="uid://b1nwjo8kbisq" path="res://warship_parts/CombatEntity.gd" id="13_rxvcr"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionData.gd" id="14_bmi0t"]
+[ext_resource type="Resource" uid="uid://bor2imqtxysa1" path="res://resources/Actions/BaseDodgeAction.tres" id="15_va51a"]
+[ext_resource type="Resource" uid="uid://c31syiwdfduk2" path="res://resources/Actions/BaseAttackAction.tres" id="16_6pvc8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uwd3d"]
 
@@ -184,12 +176,50 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(),
 "values": []
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("VisualController/ShakeContainer/front:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5, 0.625, 0.875, 1.375, 1.5, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.2199114857512859, 0.0, 0.0, -0.20943951023931956, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("VisualController/ShakeContainer/mid:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.5, 0.625, 0.75, 1.5, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.10995574287564296, 0.0, -0.13962634015954636, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_rcob8"]
 resource_name = "Idle"
 length = 1.75
 loop_mode = 1
 step = 0.125
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualController")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [NodePath("ShakeContainer/front"), "Idle"],
+"method": &"play_animation_from_body_part"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_u38ck"]
 length = 0.001
@@ -253,6 +283,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("VisualController/ShakeContainer/front:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("VisualController/ShakeContainer/mid:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yrteb"]
 _data = {
@@ -281,7 +335,7 @@ orbit_velocity_max = 0.1000001
 radial_velocity_min = -5.0000224
 radial_velocity_max = 4.9999776
 gravity = Vector3(0, 0, 0)
-scale_min = 2.0
+scale_min = 3.0
 scale_max = 3.0
 color_ramp = SubResource("GradientTexture1D_g46bt")
 
@@ -324,191 +378,6 @@ radial_velocity_max = -2.2351742e-05
 gravity = Vector3(0, -90, 0)
 scale_min = 0.5
 color_ramp = SubResource("GradientTexture1D_qt7or")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jnsv8"]
-shader = ExtResource("1_jnsv8")
-shader_parameter/progress = 1.10000002384186
-shader_parameter/mask_tex = ExtResource("2_rs8ng")
-shader_parameter/smoothness_level = 0.15
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbix0"]
-shader = ExtResource("1_jnsv8")
-shader_parameter/progress = 1.10000002384186
-shader_parameter/mask_tex = ExtResource("6_g46bt")
-shader_parameter/smoothness_level = 0.15
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_04cyu"]
-load_path = "res://.godot/imported/chest.png-920ec117cdda7d604d2e196bba4823e0.ctex"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_04cyu"]
-shader = ExtResource("1_jnsv8")
-shader_parameter/progress = 1.10000002384186
-shader_parameter/mask_tex = ExtResource("2_04cyu")
-shader_parameter/smoothness_level = 0.15
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rs8ng"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(0, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vvdib"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(111, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7v3tk"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(222, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jnsv8"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(333, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_04cyu"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(444, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g46bt"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(555, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lxhcj"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(666, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s8q8i"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(777, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wmawh"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(888, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1mdwx"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(999, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_axqvr"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(1110, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uwd3d"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(1221, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_otp4t"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(1332, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gbix0"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(0, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qt7or"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(111, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rcob8"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(222, 0, 111, 262)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u38ck"]
-atlas = ExtResource("2_gbix0")
-region = Rect2(333, 0, 111, 262)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qt7or"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_lxhcj")
-}],
-"loop": false,
-"name": &"Float",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rs8ng")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vvdib")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7v3tk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jnsv8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_04cyu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g46bt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lxhcj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s8q8i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wmawh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1mdwx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_axqvr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uwd3d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_otp4t")
-}],
-"loop": false,
-"name": &"Idle",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gbix0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qt7or")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rcob8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u38ck")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u38ck")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u38ck")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u38ck")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u38ck")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qt7or")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gbix0")
-}],
-"loop": false,
-"name": &"hit",
-"speed": 8.0
-}]
 
 [sub_resource type="Gradient" id="Gradient_uwd3d"]
 colors = PackedColorArray(1, 0.77005255, 0.5664478, 1, 1, 0.75960165, 0.7201427, 0)
@@ -556,18 +425,17 @@ scale_max = 0.79999995
 color_ramp = SubResource("GradientTexture1D_rcob8")
 
 [node name="warship" type="Node2D" unique_id=1544490133 node_paths=PackedStringArray("hexgridmanager", "combatentity", "visual_controller", "animation_player") groups=["Ships"]]
-script = ExtResource("1_s8q8i")
+script = ExtResource("1_f0wve")
 hexgridmanager = NodePath("VisualController/HexGridManager")
 combatentity = NodePath("CombatEntity")
 visual_controller = NodePath("VisualController")
 animation_player = NodePath("VisualController/AnimationPlayer")
 
-[node name="VisualController" type="Node2D" parent="." unique_id=1806200182 node_paths=PackedStringArray("body_nodes", "body_shadows", "particle_nodes", "animation_player", "hit_particle")]
+[node name="VisualController" type="Node2D" parent="." unique_id=1806200182 node_paths=PackedStringArray("body_nodes", "particle_nodes", "animation_player", "hit_particle")]
 material = SubResource("ShaderMaterial_uwd3d")
 use_parent_material = true
-script = ExtResource("1_04cyu")
-body_nodes = [NodePath("ShakeContainer/back"), NodePath("ShakeContainer/mid"), NodePath("ShakeContainer/front")]
-body_shadows = [NodePath("ShakeContainer/back/shadow"), NodePath("ShakeContainer/mid/shadow"), NodePath("ShakeContainer/front/shadow")]
+script = ExtResource("2_uf5rp")
+body_nodes = [NodePath("ShakeContainer/front"), NodePath("ShakeContainer/mid"), NodePath("ShakeContainer/back")]
 particle_nodes = [NodePath("starting_dust1"), NodePath("starting_dust2")]
 animation_player = NodePath("AnimationPlayer")
 hit_particle = NodePath("hit_particle")
@@ -595,48 +463,18 @@ z_index = -1
 position = Vector2(29, 16)
 emitting = false
 amount = 80
-texture = ExtResource("11_uwd3d")
+texture = ExtResource("3_gs3lk")
 explosiveness = 0.1
 process_material = SubResource("ParticleProcessMaterial_rcob8")
 
 [node name="ShakeContainer" type="Node2D" parent="VisualController" unique_id=1641381197]
 use_parent_material = true
 
-[node name="back" type="Sprite2D" parent="VisualController/ShakeContainer" unique_id=1344263692]
-clip_children = 2
-material = SubResource("ShaderMaterial_jnsv8")
-scale = Vector2(1, -1)
-texture = ExtResource("5_wmawh")
+[node name="front" type="Node2D" parent="VisualController/ShakeContainer" unique_id=795533325]
 
-[node name="shadow" type="Sprite2D" parent="VisualController/ShakeContainer/back" unique_id=1859893259]
-modulate = Color(0, 0, 0, 0.49411765)
-z_index = -1
-texture = ExtResource("5_wmawh")
+[node name="mid" type="Node2D" parent="VisualController/ShakeContainer" unique_id=1335048318]
 
-[node name="mid" type="Sprite2D" parent="VisualController/ShakeContainer" unique_id=1829585139]
-material = SubResource("ShaderMaterial_gbix0")
-scale = Vector2(1, -1)
-texture = ExtResource("7_axqvr")
-
-[node name="shadow" type="Sprite2D" parent="VisualController/ShakeContainer/mid" unique_id=1805091001]
-modulate = Color(0, 0, 0, 0.49411765)
-z_index = -1
-texture_filter = 1
-texture = SubResource("CompressedTexture2D_04cyu")
-
-[node name="front" type="AnimatedSprite2D" parent="VisualController/ShakeContainer" unique_id=158225720]
-material = SubResource("ShaderMaterial_04cyu")
-scale = Vector2(1, -1)
-sprite_frames = SubResource("SpriteFrames_qt7or")
-animation = &"Float"
-
-[node name="shadow" type="AnimatedSprite2D" parent="VisualController/ShakeContainer/front" unique_id=345667835]
-modulate = Color(0, 0, 0, 0.49411765)
-z_index = -1
-sprite_frames = SubResource("SpriteFrames_qt7or")
-animation = &"hit"
-frame = 9
-frame_progress = 1.0
+[node name="back" type="Node2D" parent="VisualController/ShakeContainer" unique_id=323553557]
 
 [node name="hit_particle" type="GPUParticles2D" parent="VisualController" unique_id=197593069]
 emitting = false
@@ -649,15 +487,15 @@ process_material = SubResource("ParticleProcessMaterial_u38ck")
 z_index = -1
 emitting = false
 amount = 320
-texture = ExtResource("11_uwd3d")
+texture = ExtResource("3_gs3lk")
 process_material = SubResource("ParticleProcessMaterial_yrteb")
 
 [node name="HexGridManager" type="Node2D" parent="VisualController" unique_id=153298630]
 use_parent_material = true
-script = ExtResource("10_lxhcj")
+script = ExtResource("12_75ygj")
 metadata/_custom_type_script = "uid://ck5cytt6grxaj"
 
 [node name="CombatEntity" type="Node2D" parent="." unique_id=495043276]
-script = ExtResource("11_s8q8i")
-inherent_actions = Array[ExtResource("13_axqvr")]([ExtResource("14_uwd3d"), ExtResource("15_otp4t")])
+script = ExtResource("13_rxvcr")
+inherent_actions = Array[ExtResource("14_bmi0t")]([ExtResource("15_va51a"), ExtResource("16_6pvc8")])
 metadata/_custom_type_script = "uid://b1nwjo8kbisq"

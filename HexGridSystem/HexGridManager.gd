@@ -124,7 +124,13 @@ func calculate_tile() -> void:
 				
 		var neighbors = buffer_tile.get_mount().get_neighbor_tiles()
 		for target_tile in neighbors:
-			buff_dependency_graph[target_tile]["adjacent"].append(buffer_tile)
+	# 【核心安全锁】：只有当这个邻居存在于当前的活跃字典中时，才给它注入 Buff！
+			if buff_dependency_graph.has(target_tile):
+				buff_dependency_graph[target_tile]["adjacent"].append(buffer_tile)
+			else:
+		# 这里的打印可以注释掉，仅供你确认机制生效
+				print("👻 过滤掉了一个无效或已报废的相邻地块: ", target_tile)
+				pass
 
 	# ==========================================
 	# 阶段 3：按照关系图，依次执行 Buff 逻辑

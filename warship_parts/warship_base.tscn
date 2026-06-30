@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://ck5cytt6grxaj" path="res://HexGridSystem/HexGridManager.gd" id="2_4yqac"]
 [ext_resource type="Script" uid="uid://b1hw61yxwrt8q" path="res://HexGridSystem/HexSlot.gd" id="3_uafs2"]
 [ext_resource type="Script" uid="uid://b1nwjo8kbisq" path="res://warship_parts/CombatEntity.gd" id="4_ew5mg"]
-[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/ActionData.gd" id="6_ew5mg"]
-[ext_resource type="Resource" uid="uid://bor2imqtxysa1" path="res://resources/BaseDodgeAction.tres" id="7_ew5mg"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionData.gd" id="6_ew5mg"]
+[ext_resource type="Resource" uid="uid://bor2imqtxysa1" path="res://resources/Actions/BaseDodgeAction.tres" id="7_ew5mg"]
 
 [node name="warship" type="Node2D" unique_id=2018497211 node_paths=PackedStringArray("hexgridmanager", "combatentity") groups=["Ships"]]
 script = ExtResource("1_u6ec0")

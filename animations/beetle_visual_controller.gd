@@ -40,6 +40,7 @@ func play_starting_animation():
 	play_emerge_animation()
 	await get_tree().create_timer(1).timeout
 	show_tiles()
+	
 func play_emerge_animation() -> void:
 	# 1. 创建一个 Tween，并设置为【并行模式】(set_parallel)
 	# 这会让接下来的所有 tween_property 同时执行，而不是排队执行

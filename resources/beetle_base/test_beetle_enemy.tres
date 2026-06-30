@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShipChassisData" format=3 uid="uid://c6tao1hnn065y"]
+
+[ext_resource type="PackedScene" uid="uid://chmfbbxgrv2wy" path="res://animations/test_beetle_4.tscn" id="1_8acay"]
+[ext_resource type="Script" uid="uid://dpqdgiafec16a" path="res://resources/beetle_base/beetle_base.gd" id="1_xwxn4"]
+[ext_resource type="PackedScene" uid="uid://dyodqyx5rkepg" path="res://beetle_parts/test_beetle/ship_back.tscn" id="2_owk5a"]
+[ext_resource type="PackedScene" uid="uid://da2ovcj2rasoq" path="res://beetle_parts/test_beetle/front.tscn" id="3_v2avx"]
+[ext_resource type="PackedScene" uid="uid://dxe322nq0w0cp" path="res://beetle_parts/test_beetle/mid.tscn" id="4_dyl88"]
+
+[resource]
+script = ExtResource("1_xwxn4")
+base_ship_scene = ExtResource("1_8acay")
+part_scenes = Array[PackedScene]([ExtResource("2_owk5a"), ExtResource("3_v2avx"), ExtResource("4_dyl88")])
+metadata/_custom_type_script = "uid://dpqdgiafec16a"

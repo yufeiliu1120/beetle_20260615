@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://ck8gwobidg082" path="res://battle_frame/ActionResolver.gd" id="3_6uqi0"]
 [ext_resource type="Shader" uid="uid://bif8bo2fq0lb7" path="res://shaders/desert_back_shader.tres" id="5_tbfq4"]
 [ext_resource type="PackedScene" uid="uid://buwfdrw4p5fjl" path="res://battle_frame/battle_ui/action_ui_manager.tscn" id="5_ykrsh"]
-[ext_resource type="PackedScene" uid="uid://bfnu8f368o6d2" path="res://animations/test_beetle_2.tscn" id="6_s3n3v"]
+[ext_resource type="PackedScene" uid="uid://chmfbbxgrv2wy" path="res://animations/test_beetle_4.tscn" id="7_aeque"]
 [ext_resource type="Script" uid="uid://rb0ehym35dqi" path="res://animations/camera.gd" id="7_kgdm3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s3n3v"]
@@ -40,6 +40,11 @@ offset_top = 142.0
 offset_right = 212.0
 offset_bottom = 187.0
 
+[node name="Button2" type="Button" parent="CanvasLayer" unique_id=226267325]
+offset_top = 64.0
+offset_right = 214.0
+offset_bottom = 105.0
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2062162472]
 z_index = -2
 material = SubResource("ShaderMaterial_s3n3v")
@@ -47,11 +52,13 @@ offset_right = 1150.0
 offset_bottom = 649.0
 mouse_filter = 2
 
-[node name="warship2" parent="." unique_id=247096844 instance=ExtResource("6_s3n3v")]
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=595440283 groups=["Camera"]]
 position = Vector2(572, 317)
 zoom = Vector2(1.93, 1.93)
 script = ExtResource("7_kgdm3")
+decay = 0.3
+
+[node name="warship2" parent="." unique_id=1544490133 instance=ExtResource("7_aeque")]
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]

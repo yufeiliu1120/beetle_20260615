@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bxggfrmkpor4r"]
+
+[ext_resource type="Shader" uid="uid://c2k6xvn26m7te" path="res://shaders/float_shader.gdshader" id="1_jlo1y"]
+[ext_resource type="Texture2D" uid="uid://d0c8cwdf6d6bw" path="res://assets/beetle_test_parts/new_part_belly.png" id="2_jlo1y"]
+[ext_resource type="Script" uid="uid://r2sxbtchp8iy" path="res://beetle_parts/beetle_part_base.gd" id="3_f8fnh"]
+[ext_resource type="Texture2D" uid="uid://c3v6ejv7weyde" path="res://assets/beetle_test_parts/cover_belly_2.png" id="4_g3an6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_slgyg"]
+shader = ExtResource("1_jlo1y")
+shader_parameter/theme_color = Color(0.13725491, 0.36078432, 0.7529412, 1)
+shader_parameter/decorative_color = Color(0.9, 0.8, 0.2, 1)
+shader_parameter/shadow_factor = 0.5
+shader_parameter/decor_shadow_factor = 0.5
+shader_parameter/decor_darkest_factor = 0.25
+shader_parameter/mask_theme_bright = Color(1, 0, 0, 1)
+shader_parameter/mask_theme_shadow = Color(0, 1, 0, 1)
+shader_parameter/mask_decor_bright = Color(0, 0, 1, 1)
+shader_parameter/mask_decor_shadow = Color(1, 1, 0, 1)
+shader_parameter/mask_decor_darkest = Color(1, 0, 1, 1)
+shader_parameter/tolerance = 0.1
+shader_parameter/progress = 1.10000002384186
+shader_parameter/mask_tex = ExtResource("4_g3an6")
+shader_parameter/smoothness_level = 0.15
+shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g3an6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jlo1y")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f8fnh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jlo1y")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=117003441]
+material = SubResource("ShaderMaterial_slgyg")
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_g3an6")
+script = ExtResource("3_f8fnh")
+target_socket_name = "back"
+
+[node name="shadow" type="AnimatedSprite2D" parent="." unique_id=224694005]
+modulate = Color(0, 0, 0, 0.49411765)
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_f8fnh")
