@@ -12,6 +12,7 @@
 
 [sub_resource type="Resource" id="Resource_dp0wo"]
 script = ExtResource("2_synvl")
+tags = Array[String](["cannon", "Attack"])
 action_name = "炮击"
 tile_anim_name = "fire"
 metadata/_custom_type_script = "uid://da2ylup2kah2r"

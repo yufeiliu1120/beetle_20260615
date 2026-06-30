@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://djommwuv8jyxk" path="res://warship_parts/warship.gd" id="1_f0wve"]
 [ext_resource type="Script" uid="uid://yhe28rwfv20n" path="res://beetle_parts/visual_controller.gd" id="2_uf5rp"]
 [ext_resource type="Texture2D" uid="uid://ncl07koug7cg" path="res://assets/beetle_test_parts/dust.png" id="3_gs3lk"]
+[ext_resource type="Resource" uid="uid://dra3sf6feoii4" path="res://resources/Actions/cannon_command_action.tres" id="9_8ivcm"]
 [ext_resource type="Script" uid="uid://ck5cytt6grxaj" path="res://HexGridSystem/HexGridManager.gd" id="12_75ygj"]
 [ext_resource type="Script" uid="uid://b1nwjo8kbisq" path="res://warship_parts/CombatEntity.gd" id="13_rxvcr"]
 [ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionData.gd" id="14_bmi0t"]
@@ -495,7 +496,8 @@ use_parent_material = true
 script = ExtResource("12_75ygj")
 metadata/_custom_type_script = "uid://ck5cytt6grxaj"
 
-[node name="CombatEntity" type="Node2D" parent="." unique_id=495043276]
+[node name="CombatEntity" type="Node2D" parent="." unique_id=495043276 node_paths=PackedStringArray("warship")]
 script = ExtResource("13_rxvcr")
-inherent_actions = Array[ExtResource("14_bmi0t")]([ExtResource("15_va51a"), ExtResource("16_6pvc8")])
+warship = NodePath("..")
+inherent_actions = Array[ExtResource("14_bmi0t")]([ExtResource("15_va51a"), ExtResource("16_6pvc8"), ExtResource("9_8ivcm")])
 metadata/_custom_type_script = "uid://b1nwjo8kbisq"

@@ -4,6 +4,8 @@ extends Node2D
 # ==========================================
 # 基础属性
 # ==========================================
+@export var warship = get_parent() as Warship
+
 @export var entity_name: String = "甲虫战舰"
 @export var max_hp: int = 100
 var current_hp: int

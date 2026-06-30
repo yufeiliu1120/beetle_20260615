@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ComboActionData" format=3 uid="uid://dra3sf6feoii4"]
+
+[ext_resource type="Script" uid="uid://dckryyg4w2nhj" path="res://resources/Actions/ComboActionData.gd" id="1_n5k5g"]
+
+[resource]
+script = ExtResource("1_n5k5g")
+trigger_tag = "cannon"
+tags = Array[String](["COMMAND"])
+action_name = "火炮齐射"
+metadata/_custom_type_script = "uid://dckryyg4w2nhj"
