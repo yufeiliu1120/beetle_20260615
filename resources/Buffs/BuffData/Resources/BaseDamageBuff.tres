@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://d0jaax24omr5r"]
+
+[ext_resource type="Script" uid="uid://m7j1ucrl4jjq" path="res://resources/Buffs/BuffLogic/Scripts/BaseBuffLogic.gd" id="1_cwdbh"]
+[ext_resource type="Texture2D" uid="uid://c017kj8cbifxn" path="res://assets/action_slot/Icon_test.png" id="1_dpnxq"]
+[ext_resource type="Script" uid="uid://bki31krefjn5s" path="res://resources/Buffs/BuffData/Scripts/BaseBuffData.gd" id="2_dpnxq"]
+[ext_resource type="Resource" uid="uid://cn0ci36utpa07" path="res://resources/Buffs/BuffLogic/Resources/BaseDamageLogic.tres" id="3_7ryk8"]
+
+[resource]
+script = ExtResource("2_dpnxq")
+buff_name = "力量+3"
+buff_icon = ExtResource("1_dpnxq")
+description = "所有攻击动作增加{0}点伤害"
+duration = -1
+buff_logics = Array[ExtResource("1_cwdbh")]([ExtResource("3_7ryk8")])
+metadata/_custom_type_script = "uid://bki31krefjn5s"

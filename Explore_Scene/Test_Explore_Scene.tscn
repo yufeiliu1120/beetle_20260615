@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bnyl1icrl7kvp"]
+
+[ext_resource type="Script" uid="uid://cbkqr4rebxhfo" path="res://Explore_Scene/test_explore_scene.gd" id="1_srh5k"]
+[ext_resource type="Script" uid="uid://bvetv36fp7vw2" path="res://resources/MapNodes/Scripts/MapNodeData.gd" id="2_i0fgn"]
+[ext_resource type="Resource" uid="uid://colt57jqo5xg5" path="res://resources/MapNodes/Resources/Test_Town.tres" id="3_8rfn0"]
+[ext_resource type="Resource" uid="uid://cbp6hi085t3vp" path="res://resources/MapNodes/Resources/Test_Battle_Node.tres" id="4_iqkrj"]
+[ext_resource type="Texture2D" uid="uid://bhqnjp03wv0yq" path="res://assets/explore/map_back.png" id="5_ii60q"]
+[ext_resource type="Texture2D" uid="uid://ycyg261ekpig" path="res://assets/explore/table.png" id="5_ld56e"]
+[ext_resource type="PackedScene" uid="uid://b2bluev0hm5oq" path="res://Explore_Scene/UI_layer.tscn" id="6_ld56e"]
+[ext_resource type="PackedScene" uid="uid://bu0p0okyf3fbn" path="res://Explore_Scene/player_map_icon.tscn" id="8_i0fgn"]
+[ext_resource type="Script" uid="uid://rb0ehym35dqi" path="res://battle_frame/camera.gd" id="9_8rfn0"]
+
+[node name="Node2D" type="Node2D" unique_id=887067895 node_paths=PackedStringArray("UI_layer", "MapNodesContainer", "player_node", "Center_Marker")]
+script = ExtResource("1_srh5k")
+UI_layer = NodePath("UI_Layer")
+MapNodesContainer = NodePath("MapNodesContainer")
+player_node = NodePath("PlayerMapIcon")
+Center_Marker = NodePath("Center_Marker")
+ring_spacing_x = 180.0
+ring_spacing_y = 120.0
+min_node_distance = 200.0
+max_spawn_attempts = 500
+nodes_pool = Array[ExtResource("2_i0fgn")]([ExtResource("3_8rfn0"), ExtResource("4_iqkrj")])
+pixels_per_supply = 250.0
+metadata/_edit_vertical_guides_ = [356.0, 929.0]
+
+[node name="UI_Layer" parent="." unique_id=1168187084 instance=ExtResource("6_ld56e")]
+
+[node name="visual" type="Node2D" parent="." unique_id=463445289]
+
+[node name="background" type="Sprite2D" parent="visual" unique_id=452441832]
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("5_ld56e")
+
+[node name="Map" type="Sprite2D" parent="." unique_id=2025718765]
+position = Vector2(961, 598.575)
+scale = Vector2(4, 4)
+texture = ExtResource("5_ii60q")
+
+[node name="MapNodesContainer" type="Node2D" parent="." unique_id=425174055]
+
+[node name="Center_Marker" type="Marker2D" parent="." unique_id=902850716]
+position = Vector2(930, 597)
+
+[node name="PlayerMapIcon" parent="." unique_id=1651850489 instance=ExtResource("8_i0fgn")]
+position = Vector2(930, 596.49)
+
+[node name="custom_camera" type="Camera2D" parent="." unique_id=184264265 groups=["Camera"]]
+position = Vector2(960, 543)
+script = ExtResource("9_8rfn0")
+metadata/_custom_type_script = "uid://rb0ehym35dqi"

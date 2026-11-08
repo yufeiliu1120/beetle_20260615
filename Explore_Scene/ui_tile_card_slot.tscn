@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bldmnnwogcl46"]
+
+[ext_resource type="Script" uid="uid://ce25tw6pk7kyr" path="res://Explore_Scene/ui_tile_card_slot.gd" id="1_pn6mo"]
+[ext_resource type="Texture2D" uid="uid://dpbkmnqxhl61l" path="res://assets/explore/tile_card_slot_panel.png" id="2_pn6mo"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ha3sf"]
+texture = ExtResource("2_pn6mo")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="Theme" id="Theme_hvm3u"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_ha3sf")
+
+[node name="Control" type="Control" unique_id=1422030132 node_paths=PackedStringArray("card_position")]
+custom_minimum_size = Vector2(0, 136)
+layout_mode = 3
+anchors_preset = 0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pn6mo")
+card_position = NodePath("PanelContainer/Control")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1133533893]
+custom_minimum_size = Vector2(0, 132)
+layout_mode = 0
+offset_right = 563.0
+offset_bottom = 132.0
+theme = SubResource("Theme_hvm3u")
+
+[node name="Control" type="Control" parent="PanelContainer" unique_id=1304747693]
+layout_mode = 2

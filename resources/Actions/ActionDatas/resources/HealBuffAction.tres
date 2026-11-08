@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ActionData" format=3 uid="uid://bb0uy2l3dvxme"]
+
+[ext_resource type="Script" uid="uid://c4nryiyhmuqrd" path="res://resources/Actions/Effects/Scripts/BaseActionEffect.gd" id="1_sh88n"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionDatas/Scripts/ActionData.gd" id="2_8lhn0"]
+[ext_resource type="Resource" uid="uid://cdmoy5c4dqb30" path="res://resources/Actions/Effects/Resources/BaseBuffEffect.tres" id="2_jqg1w"]
+[ext_resource type="Texture2D" uid="uid://bv2miqt5hp6ta" path="res://assets/action_slot/Icon_buff.png" id="3_qtq8j"]
+
+[resource]
+script = ExtResource("2_8lhn0")
+action_name = "持续治疗"
+action_icon = ExtResource("3_qtq8j")
+description = "给予持续治疗效果"
+action_effects = Array[ExtResource("1_sh88n")]([ExtResource("2_jqg1w")])
+metadata/_custom_type_script = "uid://ybacxqsnbg5a"

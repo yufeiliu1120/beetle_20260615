@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BaseDefendEffect" format=3 uid="uid://srrcsk7fr2bq"]
+
+[ext_resource type="Script" uid="uid://44vp38bvfxrf" path="res://resources/Actions/Effects/Scripts/BaseDefendEffect.gd" id="1_ekoum"]
+
+[resource]
+script = ExtResource("1_ekoum")
+base_count = 3
+metadata/_custom_type_script = "uid://44vp38bvfxrf"

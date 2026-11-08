@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://k82s55ljk28q"]
+
+[ext_resource type="Script" uid="uid://s6y88dhsxmxb" path="res://battle_frame/battle_ui/timeline_action_container_slot.gd" id="1_m0ldn"]
+[ext_resource type="PackedScene" uid="uid://b1huxxudihl1j" path="res://battle_frame/battle_ui/action_slot_container.tscn" id="3_f4idy"]
+
+[node name="HBoxContainer" type="HBoxContainer" unique_id=584641499 node_paths=PackedStringArray("enemy_drop_zone", "player_drop_zone", "enemy_base", "player_base")]
+custom_minimum_size = Vector2(0, 110)
+offset_right = 573.0
+offset_bottom = 110.0
+theme_override_constants/separation = 4
+script = ExtResource("1_m0ldn")
+enemy_drop_zone = NodePath("MarginContainer/ActionDropZone")
+player_drop_zone = NodePath("p/ActionDropZone")
+enemy_base = NodePath("MarginContainer")
+player_base = NodePath("p")
+metadata/_edit_horizontal_guides_ = [111.0]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1188073748]
+layout_mode = 2
+
+[node name="ActionDropZone" parent="MarginContainer" unique_id=1599426063 instance=ExtResource("3_f4idy")]
+layout_mode = 2
+
+[node name="p" type="MarginContainer" parent="." unique_id=1905261458]
+layout_mode = 2
+
+[node name="ActionDropZone" parent="p" unique_id=1671837337 instance=ExtResource("3_f4idy")]
+layout_mode = 2

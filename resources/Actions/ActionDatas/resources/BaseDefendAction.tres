@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ActionData" format=3 uid="uid://balfos6chpdvt"]
+
+[ext_resource type="Script" uid="uid://c4nryiyhmuqrd" path="res://resources/Actions/Effects/Scripts/BaseActionEffect.gd" id="1_755wk"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionDatas/Scripts/ActionData.gd" id="2_iiu1p"]
+[ext_resource type="Script" uid="uid://44vp38bvfxrf" path="res://resources/Actions/Effects/Scripts/BaseDefendEffect.gd" id="2_qu48e"]
+[ext_resource type="Texture2D" uid="uid://cqadc3x3bkiv7" path="res://assets/action_slot/defend_buff.png" id="2_ye5wa"]
+
+[sub_resource type="Resource" id="Resource_y5nq6"]
+script = ExtResource("2_qu48e")
+base_count = 3
+metadata/_custom_type_script = "uid://44vp38bvfxrf"
+
+[resource]
+script = ExtResource("2_iiu1p")
+action_name = "防御"
+action_icon = ExtResource("2_ye5wa")
+description = "抵挡{0}点伤害"
+tags = Array[String](["Defend"])
+base_cooldown = 1
+action_effects = Array[ExtResource("1_755wk")]([SubResource("Resource_y5nq6")])
+metadata/_custom_type_script = "uid://ybacxqsnbg5a"

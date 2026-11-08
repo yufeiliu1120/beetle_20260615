@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://tdin4ryr7u7j"]
+
+[ext_resource type="Texture2D" uid="uid://c017kj8cbifxn" path="res://assets/action_slot/Icon_test.png" id="1_c1yri"]
+[ext_resource type="Script" uid="uid://bki31krefjn5s" path="res://resources/Buffs/BuffData/Scripts/BaseBuffData.gd" id="2_2rdv0"]
+[ext_resource type="Script" uid="uid://m7j1ucrl4jjq" path="res://resources/Buffs/BuffLogic/Scripts/BaseBuffLogic.gd" id="2_c1yri"]
+[ext_resource type="Resource" uid="uid://dwg6ju3l5jogs" path="res://resources/Buffs/BuffLogic/Resources/heal_buff_logic.tres" id="3_c4k3a"]
+
+[resource]
+script = ExtResource("2_2rdv0")
+buff_name = "治疗"
+buff_icon = ExtResource("1_c1yri")
+description = "每回合恢复{0}生命值"
+stack_mode = 1
+duration = 3
+buff_logics = Array[ExtResource("2_c1yri")]([ExtResource("3_c4k3a")])
+metadata/_custom_type_script = "uid://bki31krefjn5s"

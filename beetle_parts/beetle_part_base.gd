@@ -1,7 +1,12 @@
 extends AnimatedSprite2D
 class_name beetle_part_base
 var shadow
+@export var tamed_scene:PackedScene  #用来表示驯服后的场景，会在捕获野生甲虫后自动更换为这个场景
 @export var target_socket_name: String = ""
+@export var base_ap:int = 0 #用来表示部件会给予战舰的AP值
+@export var base_hp:int = 0 #部件会给予战舰的HP值
+@export var base_supply:int = 0 #部件会给予战舰的补给值
+@export var actions:Array[ActionData] #该部件会给予的动作
 func _ready() -> void:
 	# 更安全的节点获取方式，避免由于拼写错误导致引擎底层崩溃
 	shadow = get_node_or_null("shadow")

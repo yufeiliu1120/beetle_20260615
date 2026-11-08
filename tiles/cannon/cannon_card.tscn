@@ -1,23 +1,34 @@
 [gd_scene format=3 uid="uid://fjqp7ntsl7sf"]
 
-[ext_resource type="Texture2D" uid="uid://qels6ix02gdt" path="res://assets/test_card.png" id="1_qw365"]
-[ext_resource type="Script" uid="uid://d1c0bvodwcdtr" path="res://AssemblyHub/card.gd" id="2_gve3b"]
+[ext_resource type="Texture2D" uid="uid://187e7jffaceb" path="res://assets/tiles/cannon/Icon.png" id="1_qw365"]
+[ext_resource type="Script" uid="uid://d1c0bvodwcdtr" path="res://AssemblyHub/card/card.gd" id="2_gve3b"]
 [ext_resource type="PackedScene" uid="uid://pqv5ivbwc77o" path="res://tiles/cannon/cannon_tile.tscn" id="3_ucdqn"]
+[ext_resource type="PackedScene" uid="uid://blto5a6vbmt7i" path="res://AssemblyHub/card/card_menu.tscn" id="4_gve3b"]
 
 [node name="CannonCard" type="TextureRect" unique_id=699468790]
+z_index = 1
 anchors_preset = -1
-anchor_right = 0.05
-anchor_bottom = 0.119
-offset_right = -56.0
-offset_bottom = -88.520004
+offset_left = -63.0
+offset_top = -63.0
+offset_right = 189.0
+offset_bottom = 189.0
+scale = Vector2(0.5, 0.5)
 mouse_filter = 0
 texture = ExtResource("1_qw365")
+stretch_mode = 4
 script = ExtResource("2_gve3b")
 tile_scene = ExtResource("3_ucdqn")
+metadata/_edit_horizontal_guides_ = [31.0]
 
-[node name="Label" type="Label" parent="." unique_id=1574231202]
+[node name="Control" parent="." unique_id=1706194184 instance=ExtResource("4_gve3b")]
+visible = false
 layout_mode = 0
-offset_left = 20.0
-offset_right = 94.0
-offset_bottom = 39.0
-text = "Cannon"
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 615.0
+offset_top = -234.0
+offset_right = 615.0
+offset_bottom = -234.0
+card_theme = "pirate"
+card_rarity = "normal"

@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://b0r2vxjdvory7"]
+
+[ext_resource type="Texture2D" uid="uid://b50r0moylvjca" path="res://assets/General/AP_Icon_sheet.png" id="1_sa8nd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sa8nd"]
+resource_local_to_scene = true
+atlas = ExtResource("1_sa8nd")
+region = Rect2(0, 0, 38, 42)
+
+[sub_resource type="Animation" id="Animation_k3lyv"]
+resource_name = "Idle"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(7.727501e-05, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 38, 42), Rect2(38, 0, 38, 42), Rect2(76, 0, 38, 42), Rect2(114, 0, 38, 42), Rect2(152, 0, 38, 42), Rect2(190, 0, 38, 42), Rect2(228, 0, 38, 42), Rect2(266, 0, 38, 42)]
+}
+
+[sub_resource type="Animation" id="Animation_wolvt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 38, 42)]
+}
+
+[sub_resource type="Animation" id="Animation_02gu2"]
+resource_name = "out"
+length = 0.5
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(304, 0, 38, 42), Rect2(342, 0, 38, 42), Rect2(380, 0, 38, 42), Rect2(418, 0, 38, 42)]
+}
+
+[sub_resource type="Animation" id="Animation_5vtkv"]
+resource_name = "recover"
+length = 0.5
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(418, 0, 38, 42), Rect2(380, 0, 38, 42), Rect2(342, 0, 38, 42), Rect2(304, 0, 38, 42)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.375),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Idle", -1, 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wmf6x"]
+_data = {
+&"Idle": SubResource("Animation_k3lyv"),
+&"RESET": SubResource("Animation_wolvt"),
+&"out": SubResource("Animation_02gu2"),
+&"recover": SubResource("Animation_5vtkv")
+}
+
+[node name="TextureRect" type="TextureRect" unique_id=1025724803]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_sa8nd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=792505071]
+libraries/ = SubResource("AnimationLibrary_wmf6x")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://2wl8fej73gpr"]
+
+[ext_resource type="Script" uid="uid://bikjd6kfp1c3i" path="res://warship_parts/buff_shield_text_node.gd" id="1_26gmf"]
+
+[node name="Marker2D" type="Marker2D" unique_id=1143578696]
+script = ExtResource("1_26gmf")
+
+[node name="Label" type="Label" parent="." unique_id=403330384]
+offset_left = -86.0
+offset_top = -12.0
+offset_right = 86.0
+offset_bottom = 11.0
+text = "TstTTTTTTTTTT"
+horizontal_alignment = 1

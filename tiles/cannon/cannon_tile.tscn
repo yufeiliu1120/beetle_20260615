@@ -2,20 +2,33 @@
 
 [ext_resource type="Script" uid="uid://c5b8oeh327h3g" path="res://HexGridSystem/TileBase.gd" id="1_iyb5q"]
 [ext_resource type="Texture2D" uid="uid://bfwjlfigefpg1" path="res://assets/tiles/cannon/fire_sheets.png" id="2_33ewr"]
-[ext_resource type="Script" uid="uid://da2ylup2kah2r" path="res://resources/Actions/BaseAttackAction.gd" id="2_synvl"]
+[ext_resource type="Script" uid="uid://c4nryiyhmuqrd" path="res://resources/Actions/Effects/Scripts/BaseActionEffect.gd" id="2_x6t0x"]
 [ext_resource type="Texture2D" uid="uid://brl1sr8cu7vkw" path="res://assets/tiles/cannon/tile_base.png" id="3_dp0wo"]
+[ext_resource type="Script" uid="uid://da2ylup2kah2r" path="res://resources/Actions/Effects/Scripts/BaseAttackEffect.gd" id="3_ln4v5"]
 [ext_resource type="Script" uid="uid://m2dpx7odauyw" path="res://HexGridSystem/state_machine.gd" id="3_synvl"]
+[ext_resource type="Texture2D" uid="uid://doydjgnbv3sg2" path="res://assets/action_slot/Icon_attackt.png" id="4_6hrkk"]
 [ext_resource type="Script" uid="uid://b587eajalvh44" path="res://HexGridSystem/state_idle.gd" id="4_dp0wo"]
 [ext_resource type="Script" uid="uid://cdppfa2ge5fd2" path="res://HexGridSystem/state_dragging.gd" id="5_3itfs"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionDatas/Scripts/ActionData.gd" id="5_24vk2"]
 [ext_resource type="Script" uid="uid://2uea10b1ion5" path="res://HexGridSystem/state_placed.gd" id="6_my4ub"]
 [ext_resource type="Texture2D" uid="uid://ncl07koug7cg" path="res://assets/beetle_test_parts/dust.png" id="9_dp0wo"]
 
-[sub_resource type="Resource" id="Resource_dp0wo"]
-script = ExtResource("2_synvl")
-tags = Array[String](["cannon", "Attack"])
-action_name = "炮击"
-tile_anim_name = "fire"
+[sub_resource type="Resource" id="Resource_jfeat"]
+script = ExtResource("3_ln4v5")
+effect_name = "Attack"
+base_count = 3
 metadata/_custom_type_script = "uid://da2ylup2kah2r"
+
+[sub_resource type="Resource" id="Resource_8gmn3"]
+script = ExtResource("5_24vk2")
+action_name = "炮击"
+action_icon = ExtResource("4_6hrkk")
+description = "造成{0}点伤害"
+tags = Array[String](["Attack", "Cannon"])
+base_cooldown = 1
+tile_anim_name = "fire"
+action_effects = Array[ExtResource("2_x6t0x")]([SubResource("Resource_jfeat")])
+metadata/_custom_type_script = "uid://ybacxqsnbg5a"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_33ewr"]
 atlas = ExtResource("2_33ewr")
@@ -51,18 +64,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_33ewr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_33ewr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_33ewr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_33ewr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_33ewr")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_synvl")
 }, {
 "duration": 1.0,
@@ -84,6 +85,38 @@ animations = [{
 "name": &"fire",
 "speed": 8.0
 }]
+
+[sub_resource type="Animation" id="Animation_dp0wo"]
+resource_name = "Combo"
+step = 0.125
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"trigger_impact"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.125),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"pause"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_3itfs"]
 length = 0.001
@@ -125,44 +158,118 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.8666667),
+"times": PackedFloat32Array(0.25),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"trigger_impact"
 }]
 }
-tracks/2/type = "method"
+tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("GPUParticles2D:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.75),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [0.25],
-"method": &"shake_camera"
-}]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("GPUParticles2D:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.875),
+"times": PackedFloat32Array(0.25),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.125),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"restart"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [10.0, 0.5],
+"method": &"apply_shake"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_x6t0x"]
+resource_name = "fire_visual"
+step = 0.125
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"fire", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [10.0, 0.5],
+"method": &"apply_shake"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.125),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"restart"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6hrkk"]
 _data = {
+&"Combo": SubResource("Animation_dp0wo"),
 &"RESET": SubResource("Animation_3itfs"),
-&"fire": SubResource("Animation_ln4v5")
+&"fire": SubResource("Animation_ln4v5"),
+&"fire_visual": SubResource("Animation_x6t0x")
 }
 
 [sub_resource type="Gradient" id="Gradient_my4ub"]
@@ -186,23 +293,31 @@ z_index = 1
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_iyb5q")
 tile_name = "加农炮地块"
-base_action = SubResource("Resource_dp0wo")
+base_action = SubResource("Resource_8gmn3")
+description = "提供炮击动作"
 tile_anim_player = NodePath("AnimationPlayer")
+theme = "pirate"
+rarity = "normal"
 entity_buffs = {
-"max_ap": 2,
-"max_hp": 0
+"max_ap": 1,
+"max_hp": 1,
+"max_supply": 1
 }
 require_frontline = true
 breaks_on_block = false
+metadata/_edit_vertical_guides_ = [9.0]
 
 [node name="base" type="Sprite2D" parent="." unique_id=900864189]
+z_index = -1
 texture = ExtResource("3_dp0wo")
 
+[node name="deco1" type="Sprite2D" parent="." unique_id=612138500]
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=818047113]
-position = Vector2(-3, -1)
+position = Vector2(-4, -2)
 sprite_frames = SubResource("SpriteFrames_pkatj")
 animation = &"fire"
-frame = 11
+frame = 7
 frame_progress = 1.0
 
 [node name="StateMachine" type="Node" parent="." unique_id=51638195 node_paths=PackedStringArray("initial_state")]

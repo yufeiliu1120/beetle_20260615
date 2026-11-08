@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://c3ifts83us7jd"]
+
+[ext_resource type="Texture2D" uid="uid://cyl4vu5gnv4ke" path="res://assets/action_slot/icon_panel.png" id="1_4v14j"]
+[ext_resource type="Script" uid="uid://cuol4ep1g6hf5" path="res://General_UI_parts/action_slot/action_slot.gd" id="1_ga0v6"]
+[ext_resource type="Texture2D" uid="uid://eovn7qig4bul" path="res://assets/action_slot/text_panel.png" id="2_pvngn"]
+[ext_resource type="Texture2D" uid="uid://d0rq5whyeale2" path="res://assets/assumblyHub/scroll.png" id="3_wpcib"]
+[ext_resource type="Texture2D" uid="uid://btnjnkvl85lk5" path="res://assets/assumblyHub/scroll_highlight.png" id="4_5nhcq"]
+[ext_resource type="Texture2D" uid="uid://bqns34ul56auk" path="res://assets/assumblyHub/scroll_pressed.png" id="5_ej6by"]
+
+[sub_resource type="Shader" id="Shader_1flx1"]
+code = "shader_type canvas_item;
+
+uniform float flash_amount : hint_range(0.0, 1.0) = 0.0;
+uniform vec4 flash_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+
+uniform sampler2D noise_tex;
+uniform float dissolve_amount : hint_range(0.0, 1.0) = 0.0;
+
+// 定义一个 varying 变量用来接收节点的 modulate 颜色
+varying vec4 mod_color;
+
+void vertex() {
+    // 在顶点阶段捕获节点的 modulate / self_modulate 颜色和透明度
+    mod_color = COLOR;
+}
+
+void fragment() {
+    vec4 tex_color = texture(TEXTURE, UV);
+    
+    // 1. 闪烁混合
+    vec3 final_color = mix(tex_color.rgb, flash_color.rgb, flash_amount);
+    
+    // 2. 像素风消散
+    float noise_val = texture(noise_tex, UV).r;
+    float alpha = tex_color.a * step(dissolve_amount, noise_val);
+    
+    // 3. 输出最终颜色，并乘以 mod_color 使得节点的 modulate 重新恢复作用
+    COLOR = vec4(final_color, alpha) * mod_color;
+}"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lmosj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4qbry"]
+noise = SubResource("FastNoiseLite_lmosj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1flx1"]
+shader = SubResource("Shader_1flx1")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_4qbry")
+shader_parameter/dissolve_amount = 0.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qsuaf"]
+texture = ExtResource("2_pvngn")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="Theme" id="Theme_khhxn"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_qsuaf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nonhh"]
+texture = ExtResource("3_wpcib")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0i4km"]
+texture = ExtResource("4_5nhcq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ej6by"]
+texture = ExtResource("5_ej6by")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t67js"]
+bg_color = Color(0.23031491, 0.23031494, 0.23031485, 0.4627451)
+border_width_left = 8
+border_color = Color(0.03839716, 0.038397178, 0.0383971, 0.41568628)
+
+[sub_resource type="Theme" id="Theme_0i4km"]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_nonhh")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_0i4km")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_ej6by")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_t67js")
+
+[node name="Control" type="Control" unique_id=1250475174 node_paths=PackedStringArray("Icon_rect", "Name_Panel", "Text_Panel", "Name_Label", "Text_Label", "tag_container", "hbox_container", "Icon_Panel")]
+material = SubResource("ShaderMaterial_1flx1")
+custom_minimum_size = Vector2(500, 110)
+custom_maximum_size = Vector2(500, -1)
+layout_mode = 3
+anchor_right = 0.273
+anchor_bottom = 0.143
+offset_right = -13.160034
+offset_bottom = -0.44000244
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_ga0v6")
+Icon_rect = NodePath("VBoxContainer/HBoxContainer/Icon_Panel/Icon")
+Name_Panel = NodePath("VBoxContainer/HBoxContainer/Name")
+Text_Panel = NodePath("VBoxContainer/HBoxContainer/Text")
+Name_Label = NodePath("VBoxContainer/HBoxContainer/Name/MarginContainer/Label")
+Text_Label = NodePath("VBoxContainer/HBoxContainer/Text/MarginContainer/RichTextLabel")
+tag_container = NodePath("VBoxContainer/Tag_Container")
+hbox_container = NodePath("VBoxContainer/HBoxContainer")
+Icon_Panel = NodePath("VBoxContainer/HBoxContainer/Icon_Panel")
+anim_duration = 0.3
+metadata/_edit_vertical_guides_ = [567.0, 504.0, 250.0, 573.0]
+metadata/_edit_horizontal_guides_ = [319.0]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=693447218]
+use_parent_material = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = -1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1938368991]
+use_parent_material = true
+custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(570, 64)
+clip_contents = true
+layout_mode = 2
+theme_override_constants/separation = -30
+
+[node name="Icon_Panel" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1189206504]
+z_index = 6
+use_parent_material = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_4v14j")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/HBoxContainer/Icon_Panel" unique_id=1461165019]
+use_parent_material = true
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Name" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=747255212]
+use_parent_material = true
+custom_minimum_size = Vector2(150, 64)
+custom_maximum_size = Vector2(150, -1)
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_khhxn")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/Name" unique_id=1115529932]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 30
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Name/MarginContainer" unique_id=1185243619]
+use_parent_material = true
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 16
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Text" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1454688984]
+use_parent_material = true
+custom_minimum_size = Vector2(350, 64)
+custom_maximum_size = Vector2(350, 64)
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_khhxn")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/Text" unique_id=242522082]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/margin_left = -2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/Text/MarginContainer" unique_id=1357038656]
+use_parent_material = true
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_0i4km")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+
+[node name="Tag_Container" type="HBoxContainer" parent="VBoxContainer" unique_id=1752706908]
+use_parent_material = true
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/Tag_Container" unique_id=1086670114]
+custom_minimum_size = Vector2(14.33, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

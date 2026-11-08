@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://doud7ljb4r1mh"]
+
+[ext_resource type="Shader" uid="uid://c2k6xvn26m7te" path="res://shaders/float_shader.gdshader" id="1_nkd7j"]
+[ext_resource type="Texture2D" uid="uid://c74y6mwrdoaxh" path="res://assets/beetles/beetle_1/beetle1_untamed_front.png" id="2_5ubar"]
+[ext_resource type="Texture2D" uid="uid://sdx3rwtytllw" path="res://assets/beetles/beetle_1/cover_beetle1_untamed_front.png" id="2_nkd7j"]
+[ext_resource type="Script" uid="uid://r2sxbtchp8iy" path="res://beetle_parts/beetle_part_base.gd" id="3_btl6j"]
+[ext_resource type="Texture2D" uid="uid://cjhevf57x2y4x" path="res://assets/beetles/beetle_1/beetle1_front_idle1.png" id="4_j11oj"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionDatas/Scripts/ActionData.gd" id="5_btl6j"]
+[ext_resource type="Texture2D" uid="uid://vy2tq7j45xmp" path="res://assets/beetles/beetle_1/beetle1_front_idle2.png" id="5_onpew"]
+[ext_resource type="Texture2D" uid="uid://dqqmp3edot2xu" path="res://assets/beetles/beetle_1/beetle1_front_idle3.png" id="6_gnkf0"]
+[ext_resource type="Resource" uid="uid://dx2imwq4o84mu" path="res://resources/Actions/ActionDatas/resources/Strike.tres" id="6_xop8b"]
+[ext_resource type="Texture2D" uid="uid://c6sl1tbsx0vyk" path="res://assets/beetles/beetle_1/beetle1_front_idle4.png" id="7_e0xot"]
+[ext_resource type="Texture2D" uid="uid://c8ifpcnekyjre" path="res://assets/beetles/beetle_1/beetle1_front_idle5.png" id="8_i7xqh"]
+[ext_resource type="Texture2D" uid="uid://cv3srlvs5wdco" path="res://assets/beetles/beetle_1/beetle1_front_idle6.png" id="9_p4i5j"]
+[ext_resource type="Texture2D" uid="uid://ep1d5g6omd8t" path="res://assets/beetles/beetle_1/beetle1_front_idle7.png" id="10_nyrk6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_32wxk"]
+shader = ExtResource("1_nkd7j")
+shader_parameter/theme_color = Color(0, 0.5686275, 0.9647059, 1)
+shader_parameter/decorative_color = Color(0.8627451, 0.7490196, 0.101960786, 1)
+shader_parameter/shadow_factor = 0.5
+shader_parameter/decor_shadow_factor = 0.5
+shader_parameter/decor_darkest_factor = 0.25
+shader_parameter/mask_theme_bright = Color(1, 0, 0, 1)
+shader_parameter/mask_theme_shadow = Color(0, 1, 0, 1)
+shader_parameter/mask_decor_bright = Color(0, 0, 1, 1)
+shader_parameter/mask_decor_shadow = Color(1, 1, 0, 1)
+shader_parameter/mask_decor_darkest = Color(1, 0, 1, 1)
+shader_parameter/tolerance = 0.1
+shader_parameter/progress = 1.10000002384186
+shader_parameter/mask_tex = ExtResource("2_nkd7j")
+shader_parameter/smoothness_level = 0.15
+shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i1rvc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5ubar")
+}],
+"loop": 1,
+"name": &"Float",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_j11oj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_onpew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gnkf0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e0xot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_i7xqh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_p4i5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nyrk6")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 8.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=117003441]
+material = SubResource("ShaderMaterial_32wxk")
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_i1rvc")
+animation = &"Idle"
+frame_progress = 0.19739628
+script = ExtResource("3_btl6j")
+target_socket_name = "front"
+actions = Array[ExtResource("5_btl6j")]([ExtResource("6_xop8b"), ExtResource("6_xop8b"), ExtResource("6_xop8b"), ExtResource("6_xop8b")])
+
+[node name="shadow" type="AnimatedSprite2D" parent="." unique_id=224694005]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_i1rvc")
+animation = &"Float"
+
+[node name="Mounts" type="Node2D" parent="." unique_id=1201138640]

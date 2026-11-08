@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://31toydo82wnv"]
+
+[ext_resource type="Script" uid="uid://c5ry4aj1g630q" path="res://Town_Scene/Start_Scene/start_scene.gd" id="1_bmsa7"]
+[ext_resource type="Texture2D" uid="uid://fpavsnkcrbgd" path="res://assets/other/tree_inside_under.png" id="3_m06bx"]
+[ext_resource type="PackedScene" uid="uid://bdo7t8i76v0lr" path="res://Town_Scene/Start_Scene/start_scene_ui.tscn" id="3_na6xp"]
+[ext_resource type="Texture2D" uid="uid://ncnmhlldtwq3" path="res://assets/other/tree_insied_cover.png" id="4_fvfai"]
+[ext_resource type="Script" uid="uid://rb0ehym35dqi" path="res://battle_frame/camera.gd" id="5_na6xp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5plpj"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(0, 0, 67, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jk6j0"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(67, 0, 67, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bl0b"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(134, 0, 67, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgin6"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(201, 0, 67, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4mbr"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(268, 0, 67, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scn78"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(335, 0, 67, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rk1r"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(402, 0, 67, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7l7n6"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(469, 0, 67, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uchwe"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(536, 0, 67, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt1ks"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(603, 0, 67, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tb1s"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(670, 0, 67, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mji0r"]
+atlas = ExtResource("3_m06bx")
+region = Rect2(737, 0, 67, 67)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1fef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5plpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jk6j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bl0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgin6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4mbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scn78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rk1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7l7n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uchwe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt1ks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tb1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mji0r")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s1fef"]
+radius = 150.16324
+
+[node name="Node2D" type="Node2D" unique_id=1377235355 node_paths=PackedStringArray("ui_layer", "start_button_area", "button_sprite", "center_marker")]
+script = ExtResource("1_bmsa7")
+ui_layer = NodePath("CanvasLayer/Control")
+start_button_area = NodePath("Area2D")
+button_sprite = NodePath("AnimatedSprite2D")
+center_marker = NodePath("center_marker")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1091141394]
+position = Vector2(945.99994, 535)
+scale = Vector2(5.581395, 5.625)
+sprite_frames = SubResource("SpriteFrames_s1fef")
+autoplay = "default"
+frame_progress = 0.47358084
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=216693594]
+position = Vector2(960, 540)
+scale = Vector2(5.5813947, 5.6250005)
+texture = ExtResource("4_fvfai")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1771793680]
+
+[node name="Control" parent="CanvasLayer" unique_id=1582117557 node_paths=PackedStringArray("current_scene") instance=ExtResource("3_na6xp")]
+current_scene = NodePath("../..")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=815314541]
+z_index = 4
+position = Vector2(945, 536)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1322568823]
+position = Vector2(11, 2)
+shape = SubResource("CircleShape2D_s1fef")
+
+[node name="center_marker" type="Marker2D" parent="." unique_id=40662932]
+position = Vector2(946, 534)
+
+[node name="custom_camera" type="Camera2D" parent="." unique_id=1349990814 groups=["Camera"]]
+position = Vector2(960, 540)
+script = ExtResource("5_na6xp")
+metadata/_custom_type_script = "uid://rb0ehym35dqi"

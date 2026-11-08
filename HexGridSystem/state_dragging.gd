@@ -30,13 +30,14 @@ func do(delta):
 		#在吸附状态下点击鼠标左键
 		if Input.is_action_just_pressed("mouse_left"):
 			#触发放置地块逻辑
-			current_snap_mount.attach_tile(actor)
+			if current_snap_mount:
+				current_snap_mount.attach_tile(actor)
 			
 			# 【撕下标签】：安全落地，移除组标签，解锁卡牌界面的点击！
-			actor.remove_from_group("DraggingTile") 
+				actor.remove_from_group("DraggingTile") 
 			
-			actor.tile_placed.emit()
-			emit_signal("state_finished","Placed")
+				actor.tile_placed.emit()
+				emit_signal("state_finished","Placed")
 	else:
 		# 状态 B：未吸附。平滑跟随鼠标位置
 		actor.global_position = actor.global_position.lerp(mouse_world_pos, follow_speed * delta)
@@ -53,23 +54,49 @@ func _find_nearest_empty_mount() -> HexMount:
 	var nearest_mount: HexMount = null
 	var min_dist = INF
 	
-	# 假设你的网格管理器叫 grid_manager，这里获取所有的挂点
-	var all_mounts = get_tree().get_nodes_in_group("HexMount") 
-	
+	# 获取所有的挂点，并顺藤摸瓜拿到网格管理器
+	var all_mounts = get_tree().get_nodes_in_group("HexMount")
+	var grid_manager = null
+	if all_mounts.size() > 0:
+		grid_manager = all_mounts[0].get_parent() 
+		
+	if not grid_manager: return null
+
 	for mount in all_mounts:
-		# 1. 如果挂点上已经有地块了，跳过
-		if mount.get_tile() != null:
-			continue
+		# ==========================================
+		# 【全新升级 1】：全域碰撞与越界预检
+		# ==========================================
+		var can_fit: bool = true
+		var base_coord = mount.hex_coords
+		
+		# 尝试获取大地块的形状，如果没有则默认为单格 [Vector2i(0, 0)]
+		var offsets: Array = [Vector2i.ZERO]
+		if "shape_offsets" in actor:
+			offsets = actor.shape_offsets
+			
+		for offset in offsets:
+			var target_coord = base_coord + offset
+			var target_mount = grid_manager.get_mount_at(target_coord)
+			
+			# 一票否决：如果目标坐标根本没有挂点（越界），或者挂点上已经有地块了，直接判定塞不下！
+			if target_mount == null or target_mount.get_tile() != null:
+				can_fit = false
+				break # 跳出内层循环
+				
+		if not can_fit:
+			continue # 形状冲突，直接跳过这个主挂点，不产生吸附引力
 			
 		# ==========================================
-		# 【新增过滤】：拓扑规则判定
+		# 【规则判定 2】：前排战术限制
 		# ==========================================
 		if actor.get("require_frontline") == true:
-			# 如果这个地块必须放前排，但当前挂点不是前排，直接跳过！不产生引力！
+			# 这里采用宽容判定：只要玩家捏着的“主锚点”在前排，就算合法
 			if not mount.is_frontline():
 				continue
 				
-		# 2. 距离计算（你原有的逻辑）
+		# ==========================================
+		# 距离计算：寻找最近的合法落点
+		# ==========================================
 		var dist = actor.global_position.distance_to(mount.global_position)
 		if dist < snap_distance and dist < min_dist:
 			min_dist = dist

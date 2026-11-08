@@ -30,7 +30,7 @@ animations = [{
 "texture": ExtResource("2_pqj7r")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"Idle",
 "speed": 5.0
 }]
 
@@ -38,10 +38,13 @@ animations = [{
 material = SubResource("ShaderMaterial_slgyg")
 scale = Vector2(1, -1)
 sprite_frames = SubResource("SpriteFrames_u61mt")
+animation = &"Idle"
 script = ExtResource("3_newx6")
 target_socket_name = "mid"
+base_hp = 20
 
 [node name="shadow" type="AnimatedSprite2D" parent="." unique_id=224694005]
 modulate = Color(0, 0, 0, 0.49411765)
 z_index = -1
 sprite_frames = SubResource("SpriteFrames_u61mt")
+animation = &"Idle"

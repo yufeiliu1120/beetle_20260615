@@ -1,0 +1,293 @@
+[gd_scene format=3 uid="uid://bdo7t8i76v0lr"]
+
+[ext_resource type="Script" uid="uid://b43a8eks8bcxl" path="res://Town_Scene/Start_Scene/start_scene_ui.gd" id="1_wop5d"]
+[ext_resource type="Texture2D" uid="uid://du5slvfh7hv5a" path="res://assets/other/top_panel.png" id="1_x3tsk"]
+[ext_resource type="Texture2D" uid="uid://bqdxo0b77aed8" path="res://assets/other/left_panel.png" id="2_42dia"]
+[ext_resource type="PackedScene" uid="uid://m8d6s487unxc" path="res://General_UI_parts/beetles_menu/beetle_slot.tscn" id="3_nwitk"]
+[ext_resource type="Script" uid="uid://dxo1aqfemb4p4" path="res://Town_Scene/Start_Scene/beetles_panel.gd" id="4_k1enu"]
+[ext_resource type="Texture2D" uid="uid://crido6i0l1x84" path="res://assets/battle_ui/action_panel.png" id="5_0v8xw"]
+[ext_resource type="Script" uid="uid://bbjaijqn442t8" path="res://General_UI_parts/beetles_menu/right_panel.gd" id="6_gdqa2"]
+[ext_resource type="Texture2D" uid="uid://bfl6k13iy8bym" path="res://assets/General/beetle_menu_info_container.png" id="7_0v8xw"]
+[ext_resource type="Texture2D" uid="uid://d0rq5whyeale2" path="res://assets/assumblyHub/scroll.png" id="8_tmnac"]
+[ext_resource type="Texture2D" uid="uid://btnjnkvl85lk5" path="res://assets/assumblyHub/scroll_highlight.png" id="9_5k2sd"]
+[ext_resource type="Texture2D" uid="uid://bqns34ul56auk" path="res://assets/assumblyHub/scroll_pressed.png" id="10_vxen5"]
+[ext_resource type="Script" uid="uid://tdhqe7eqecfv" path="res://AssemblyHub/action_slot_container.gd" id="11_0org2"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x3tsk"]
+load_path = "res://.godot/imported/Finish_Button_hover.png-f65e029819508badc2e5a632786ae239.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_42dia"]
+texture = SubResource("CompressedTexture2D_x3tsk")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nwitk"]
+load_path = "res://.godot/imported/Finish_Button.png-77cc2397101555d01b40e8cee33052ee.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k1enu"]
+texture = SubResource("CompressedTexture2D_nwitk")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wop5d"]
+load_path = "res://.godot/imported/Finish_Button_pressed.png-aa8008fca234371c880e7291716ca4ce.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_88471"]
+texture = SubResource("CompressedTexture2D_wop5d")
+
+[sub_resource type="Theme" id="Theme_linmw"]
+Button/styles/hover = SubResource("StyleBoxTexture_42dia")
+Button/styles/normal = SubResource("StyleBoxTexture_k1enu")
+Button/styles/pressed = SubResource("StyleBoxTexture_88471")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wop5d"]
+texture = ExtResource("5_0v8xw")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="Theme" id="Theme_88471"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_wop5d")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_linmw"]
+load_path = "res://.godot/imported/scroll.png-49ff1e68329903b41f997c9e5e3c1d19.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5m4yc"]
+texture = SubResource("CompressedTexture2D_linmw")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n7adi"]
+load_path = "res://.godot/imported/scroll_highlight.png-a600c382b3f068a521d76d81edb763c0.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8kelp"]
+texture = SubResource("CompressedTexture2D_n7adi")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0o5yl"]
+load_path = "res://.godot/imported/scroll_pressed.png-6528976dc0388ed5e157e6e3830c788f.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kpyvs"]
+texture = SubResource("CompressedTexture2D_0o5yl")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_480g2"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0)
+border_width_left = 21
+border_color = Color(0.16862746, 0.16862746, 0.16862746, 0)
+
+[sub_resource type="Theme" id="Theme_s2ksq"]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_5m4yc")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_8kelp")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_kpyvs")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_480g2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6jjnh"]
+texture = ExtResource("8_tmnac")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t67js"]
+texture = ExtResource("9_5k2sd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kk54x"]
+texture = ExtResource("10_vxen5")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8w617"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0)
+border_width_left = 21
+border_color = Color(0.16862746, 0.16862746, 0.16862746, 0)
+
+[sub_resource type="Theme" id="Theme_ykykb"]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_6jjnh")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_t67js")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_kk54x")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_8w617")
+
+[node name="Control" type="Control" unique_id=1582117557 node_paths=PackedStringArray("beetle_panel", "preview_beetle_slot", "right_panel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_wop5d")
+beetle_panel = NodePath("beetle_panel")
+preview_beetle_slot = NodePath("TextureRect2/MarginContainer/VBoxContainer/TextureRect")
+right_panel = NodePath("right_panel")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1962391622]
+z_index = 1
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 96.0
+texture = ExtResource("1_x3tsk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect" unique_id=1206500022]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 48.0
+offset_right = 1841.0
+offset_bottom = 84.0
+
+[node name="change_beetle" type="Button" parent="TextureRect/HBoxContainer" unique_id=418437088]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme = SubResource("Theme_linmw")
+text = "Change Beetle"
+
+[node name="change_tile" type="Button" parent="TextureRect/HBoxContainer" unique_id=2068475676]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme = SubResource("Theme_linmw")
+text = "Change carried Tiles"
+
+[node name="load_previous_selections" type="Button" parent="TextureRect/HBoxContainer" unique_id=1086243719]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme = SubResource("Theme_linmw")
+text = "Load previous selections"
+
+[node name="space" type="Control" parent="TextureRect/HBoxContainer" unique_id=418902339]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="return_to_town" type="Button" parent="TextureRect/HBoxContainer" unique_id=136270735]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme = SubResource("Theme_linmw")
+text = "Return to Town"
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=413127581]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 136.0
+offset_right = 256.0
+offset_bottom = 1006.0
+texture = ExtResource("2_42dia")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect2" unique_id=1301000686]
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 634.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect2/MarginContainer" unique_id=822161922]
+layout_mode = 2
+
+[node name="TextureRect" parent="TextureRect2/MarginContainer/VBoxContainer" unique_id=232552610 instance=ExtResource("3_nwitk")]
+layout_mode = 2
+
+[node name="beetle_panel" type="PanelContainer" parent="." unique_id=1199642468 node_paths=PackedStringArray("container", "right_panel")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -536.0
+offset_top = -450.0
+offset_right = 267.0
+offset_bottom = -75.0
+grow_horizontal = 2
+theme = SubResource("Theme_88471")
+script = ExtResource("4_k1enu")
+container = NodePath("MarginContainer/ScrollContainer/HFlowContainer")
+right_panel = NodePath("../right_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="beetle_panel" unique_id=605465557]
+custom_minimum_size = Vector2(0, 355)
+layout_mode = 2
+theme_override_constants/margin_left = -10
+theme_override_constants/margin_top = -13
+theme_override_constants/margin_right = -9
+theme_override_constants/margin_bottom = -9
+
+[node name="ScrollContainer" type="ScrollContainer" parent="beetle_panel/MarginContainer" unique_id=1541499619]
+layout_mode = 2
+theme = SubResource("Theme_s2ksq")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="beetle_panel/MarginContainer/ScrollContainer" unique_id=1068989715]
+custom_minimum_size = Vector2(760, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 36
+theme_override_constants/v_separation = 20
+
+[node name="TextureRect" parent="beetle_panel/MarginContainer/ScrollContainer/HFlowContainer" unique_id=944213767 instance=ExtResource("3_nwitk")]
+layout_mode = 2
+
+[node name="TextureRect2" parent="beetle_panel/MarginContainer/ScrollContainer/HFlowContainer" unique_id=193464915 instance=ExtResource("3_nwitk")]
+layout_mode = 2
+
+[node name="TextureRect3" parent="beetle_panel/MarginContainer/ScrollContainer/HFlowContainer" unique_id=384432876 instance=ExtResource("3_nwitk")]
+layout_mode = 2
+
+[node name="TextureRect4" parent="beetle_panel/MarginContainer/ScrollContainer/HFlowContainer" unique_id=1815860771 instance=ExtResource("3_nwitk")]
+layout_mode = 2
+
+[node name="right_panel" type="Control" parent="." unique_id=1981585896 node_paths=PackedStringArray("hp_label", "ap_label", "supply_label", "action_slot_container", "name_label")]
+anchors_preset = 0
+offset_left = 800.0
+offset_right = 840.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("6_gdqa2")
+hp_label = NodePath("bars/Label")
+ap_label = NodePath("bars/Label2")
+supply_label = NodePath("bars/Label3")
+action_slot_container = NodePath("ScrollContainer/VBoxContainer")
+name_label = NodePath("bars/Label4")
+
+[node name="TextureRect" type="TextureRect" parent="right_panel" unique_id=1824512252]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 1199.0
+offset_top = 108.0
+offset_right = 1880.0
+offset_bottom = 952.5913
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_0v8xw")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="right_panel" unique_id=1074308986]
+layout_mode = 0
+offset_left = 1293.0
+offset_top = 408.0
+offset_right = 1917.0
+offset_bottom = 903.0
+mouse_filter = 2
+theme = SubResource("Theme_ykykb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="right_panel/ScrollContainer" unique_id=1674964120]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("11_0org2")
+
+[node name="bars" type="VBoxContainer" parent="right_panel" unique_id=2017754221]
+layout_mode = 0
+offset_left = 1299.0
+offset_top = 160.0
+offset_right = 1856.0
+offset_bottom = 341.0
+
+[node name="Label4" type="Label" parent="right_panel/bars" unique_id=2023931200]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="right_panel/bars" unique_id=679531771]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "HP"
+
+[node name="Label2" type="Label" parent="right_panel/bars" unique_id=1100088309]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "AP"
+
+[node name="Label3" type="Label" parent="right_panel/bars" unique_id=660185595]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "SUPPLY"
+
+[connection signal="pressed" from="TextureRect/HBoxContainer/change_beetle" to="." method="_on_change_beetle_pressed"]
+[connection signal="pressed" from="TextureRect/HBoxContainer/return_to_town" to="." method="_on_return_to_town_pressed"]

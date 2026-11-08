@@ -1,17 +1,75 @@
 [gd_scene format=3 uid="uid://cb0i2te2wruf"]
 
 [ext_resource type="Script" uid="uid://b0nv5nkm3nusb" path="res://tiles/battery_test/battery.gd" id="1_xb3ua"]
-[ext_resource type="Texture2D" uid="uid://dkv8nkmakecgg" path="res://assets/test_tile.png" id="2_bbo4k"]
+[ext_resource type="Resource" uid="uid://c471eakydbilk" path="res://resources/Actions/ActionDatas/resources/CannonBuffAction.tres" id="2_bbo4k"]
+[ext_resource type="Texture2D" uid="uid://brl1sr8cu7vkw" path="res://assets/tiles/cannon/tile_base.png" id="2_xb3ua"]
 [ext_resource type="Script" uid="uid://m2dpx7odauyw" path="res://HexGridSystem/state_machine.gd" id="3_71dw3"]
 [ext_resource type="Script" uid="uid://b587eajalvh44" path="res://HexGridSystem/state_idle.gd" id="4_uib6m"]
 [ext_resource type="Script" uid="uid://cdppfa2ge5fd2" path="res://HexGridSystem/state_dragging.gd" id="5_qfy18"]
 [ext_resource type="Script" uid="uid://2uea10b1ion5" path="res://HexGridSystem/state_placed.gd" id="6_npty6"]
 
-[node name="Node2D" type="Node2D" unique_id=1726283874]
+[sub_resource type="Animation" id="Animation_dp0wo"]
+resource_name = "Combo"
+step = 0.125
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.125),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"trigger_impact"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"pause"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_3itfs"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_ln4v5"]
+resource_name = "fire"
+length = 1.5
+step = 0.125
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xb3ua"]
+_data = {
+&"Combo": SubResource("Animation_dp0wo"),
+&"RESET": SubResource("Animation_3itfs"),
+&"fire": SubResource("Animation_ln4v5")
+}
+
+[node name="Node2D" type="Node2D" unique_id=1726283874 node_paths=PackedStringArray("tile_anim_player")]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_xb3ua")
+base_action = ExtResource("2_bbo4k")
+tile_anim_player = NodePath("AnimationPlayer")
+theme = "pirate"
+rarity = "rare"
+entity_buffs = {
+"max_ap": 0,
+"max_hp": 0,
+"max_supply": 5
+}
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1912889814]
-texture = ExtResource("2_bbo4k")
+texture = ExtResource("2_xb3ua")
 
 [node name="StateMachine" type="Node" parent="." unique_id=51638195 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_71dw3")
@@ -27,8 +85,12 @@ script = ExtResource("5_qfy18")
 script = ExtResource("6_npty6")
 
 [node name="Label" type="Label" parent="." unique_id=2051515837]
-offset_left = -32.0
-offset_top = -16.0
-offset_right = 32.0
-offset_bottom = 15.0
+offset_left = -11.0
+offset_top = -4.0
+offset_right = 14.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 6
 text = "Battery"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1855424806]
+libraries/ = SubResource("AnimationLibrary_xb3ua")

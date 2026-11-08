@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://2kqgcbhn3o2w"]
+
+[ext_resource type="Texture2D" uid="uid://bvnk2q1b2u137" path="res://assets/battle_ui/next_action_slot.png" id="1_ycoe1"]
+[ext_resource type="Script" uid="uid://cbgd8env75wwr" path="res://battle_frame/battle_ui/action_append_zone.gd" id="2_mesf0"]
+
+[node name="MarginContainer" type="MarginContainer" unique_id=685690205]
+custom_minimum_size = Vector2(500, 60)
+custom_maximum_size = Vector2(500, 60)
+offset_right = 500.0
+offset_bottom = 68.0
+script = ExtResource("2_mesf0")
+metadata/_edit_vertical_guides_ = [500.0]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=540692295]
+layout_mode = 2
+texture = ExtResource("1_ycoe1")
+
+[node name="Label" type="Label" parent="." unique_id=747331217]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "ADD A NEW ACTION"
+horizontal_alignment = 1
+vertical_alignment = 1

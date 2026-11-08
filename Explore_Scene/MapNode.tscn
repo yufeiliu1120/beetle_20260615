@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://chsvohkblvtdf"]
+
+[ext_resource type="Script" uid="uid://bnhjbhqkorr0y" path="res://Explore_Scene/MapNode.gd" id="1_8751q"]
+[ext_resource type="PackedScene" uid="uid://4eel8cu1oe5j" path="res://Explore_Scene/MapNodeMenu.tscn" id="2_8751q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1fef"]
+size = Vector2(28.666668, 30)
+
+[sub_resource type="Animation" id="Animation_8dbxq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pstne"]
+resource_name = "start"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ssxl3"]
+_data = {
+&"RESET": SubResource("Animation_8dbxq"),
+&"start": SubResource("Animation_pstne")
+}
+
+[node name="Node2D" type="Node2D" unique_id=856449890 node_paths=PackedStringArray("icon_sprite")]
+z_index = 3
+scale = Vector2(3, 3)
+script = ExtResource("1_8751q")
+menu_scene = ExtResource("2_8751q")
+icon_sprite = NodePath("Visuals/Sprite2D")
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=3879994]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=1084910380]
+shape = SubResource("RectangleShape2D_s1fef")
+
+[node name="Visuals" type="Node2D" parent="." unique_id=1048564160]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=992072412]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1443975640]
+libraries/ = SubResource("AnimationLibrary_ssxl3")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=617849097]
+position = Vector2(20, -80)

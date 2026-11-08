@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b81tmynxij34g"]
+
+[ext_resource type="Script" uid="uid://ca6yf57kyuibx" path="res://AssemblyHub/assembly_slot_manager.gd" id="1_xp2o7"]
+[ext_resource type="PackedScene" uid="uid://b0exixo4gygmq" path="res://AssemblyHub/card/card_slots/1-1.tscn" id="2_4eiov"]
+
+[node name="AssemblySlotManager" type="Node2D" unique_id=977587642]
+y_sort_enabled = true
+script = ExtResource("1_xp2o7")
+slot_scene = ExtResource("2_4eiov")

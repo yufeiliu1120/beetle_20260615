@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://blo643gxeulfj"]
+
+[ext_resource type="Script" uid="uid://d1c0bvodwcdtr" path="res://AssemblyHub/card/card.gd" id="1_28q8v"]
+[ext_resource type="Texture2D" uid="uid://cxul4rkjeem6d" path="res://assets/tiles/test_icons/tile_icon_1-5.png" id="2_28q8v"]
+[ext_resource type="PackedScene" uid="uid://bratpph61onlu" path="res://tiles/test_large_tile/large_tile.tscn" id="2_n7f6m"]
+[ext_resource type="PackedScene" uid="uid://blto5a6vbmt7i" path="res://AssemblyHub/card/card_menu.tscn" id="3_64e6s"]
+
+[node name="Control" type="Control" unique_id=1423746519]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_28q8v")
+tile_scene = ExtResource("2_n7f6m")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1494550299]
+layout_mode = 0
+offset_right = 203.0
+offset_bottom = 60.0
+texture = ExtResource("2_28q8v")
+
+[node name="Control" parent="." unique_id=1706194184 instance=ExtResource("3_64e6s")]
+layout_mode = 1
+offset_left = 654.0
+offset_top = -252.0
+offset_right = 654.7999
+offset_bottom = -252.0

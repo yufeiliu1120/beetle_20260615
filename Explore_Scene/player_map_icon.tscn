@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bu0p0okyf3fbn"]
+
+[ext_resource type="Shader" uid="uid://ccdr7mvp1ts82" path="res://shaders/pure_color.gdshader" id="1_0yxbr"]
+[ext_resource type="Script" uid="uid://bjg645skprtno" path="res://Explore_Scene/player_map_icon.gd" id="1_wy3w0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wy3w0"]
+shader = ExtResource("1_0yxbr")
+shader_parameter/icon_color = Color(0.51, 0.38182, 0.2448, 1)
+
+[sub_resource type="Animation" id="Animation_0yxbr"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.35, 0.35)]
+}
+
+[sub_resource type="Animation" id="Animation_gsbd8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_24k1b"]
+_data = {
+&"Idle": SubResource("Animation_0yxbr"),
+&"RESET": SubResource("Animation_gsbd8")
+}
+
+[node name="PlayerMapIcon" type="Sprite2D" unique_id=1651850489]
+z_index = 4
+material = SubResource("ShaderMaterial_wy3w0")
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_wy3w0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=277482954]
+libraries/ = SubResource("AnimationLibrary_24k1b")
+autoplay = &"Idle"

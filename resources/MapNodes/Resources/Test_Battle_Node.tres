@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MapNodeData" format=3 uid="uid://cbp6hi085t3vp"]
+
+[ext_resource type="Script" uid="uid://bvetv36fp7vw2" path="res://resources/MapNodes/Scripts/MapNodeData.gd" id="1_dj6oq"]
+[ext_resource type="PackedScene" uid="uid://b1frb0wop6hk8" path="res://enemys/worm1.tscn" id="1_x4him"]
+[ext_resource type="Texture2D" uid="uid://corg0nty7scqp" path="res://assets/explore/button_pirate.png" id="2_0y1r2"]
+[ext_resource type="PackedScene" uid="uid://cd12rcvn5y6ng" path="res://battle_frame/background_base.tscn" id="4_iramd"]
+
+[resource]
+script = ExtResource("1_dj6oq")
+node_type = 1
+icon = ExtResource("2_0y1r2")
+description = "测试用战斗场景"
+target_scene = ExtResource("4_iramd")
+enemy_scene = ExtResource("1_x4him")
+metadata/_custom_type_script = "uid://bvetv36fp7vw2"

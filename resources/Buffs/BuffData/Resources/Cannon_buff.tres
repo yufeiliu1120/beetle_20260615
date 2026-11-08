@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://ddtqlw7usr2bg"]
+
+[ext_resource type="Script" uid="uid://m7j1ucrl4jjq" path="res://resources/Buffs/BuffLogic/Scripts/BaseBuffLogic.gd" id="1_fdqyl"]
+[ext_resource type="Resource" uid="uid://cfddfm24wpa1g" path="res://resources/Buffs/BuffLogic/Resources/cannon_buff_logic.tres" id="2_7gfcq"]
+[ext_resource type="Script" uid="uid://bki31krefjn5s" path="res://resources/Buffs/BuffData/Scripts/BaseBuffData.gd" id="2_803wk"]
+
+[resource]
+script = ExtResource("2_803wk")
+buff_name = "火炮buff"
+description = "增加{0}点伤害"
+duration = 4
+buff_logics = Array[ExtResource("1_fdqyl")]([ExtResource("2_7gfcq")])
+metadata/_custom_type_script = "uid://bki31krefjn5s"

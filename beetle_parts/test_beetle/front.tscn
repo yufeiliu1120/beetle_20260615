@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cutvhec1mkpgr" path="res://assets/beetle_test_parts/new_part_head.png" id="2_vm87n"]
 [ext_resource type="Texture2D" uid="uid://djh0iw5xddykv" path="res://assets/beetle_test_parts/new_head_sheet.png" id="3_lxv0p"]
 [ext_resource type="Script" uid="uid://r2sxbtchp8iy" path="res://beetle_parts/beetle_part_base.gd" id="5_lxv0p"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionDatas/Scripts/ActionData.gd" id="6_73id7"]
+[ext_resource type="Resource" uid="uid://dx2imwq4o84mu" path="res://resources/Actions/ActionDatas/resources/Strike.tres" id="7_73id7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_04cyu"]
 shader = ExtResource("1_vm87n")
@@ -185,6 +187,9 @@ sprite_frames = SubResource("SpriteFrames_qt7or")
 animation = &"Float"
 script = ExtResource("5_lxv0p")
 target_socket_name = "front"
+base_ap = 3
+base_hp = 10
+actions = Array[ExtResource("6_73id7")]([ExtResource("7_73id7"), ExtResource("7_73id7")])
 
 [node name="shadow" type="AnimatedSprite2D" parent="." unique_id=170983356]
 modulate = Color(0, 0, 0, 0.45882353)

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ActionData" format=3 uid="uid://cyill57wckw6e"]
+
+[ext_resource type="Script" uid="uid://c4nryiyhmuqrd" path="res://resources/Actions/Effects/Scripts/BaseActionEffect.gd" id="1_mbnod"]
+[ext_resource type="Script" uid="uid://da2ylup2kah2r" path="res://resources/Actions/Effects/Scripts/BaseAttackEffect.gd" id="2_jfeat"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionDatas/Scripts/ActionData.gd" id="2_y5a5v"]
+[ext_resource type="Texture2D" uid="uid://doydjgnbv3sg2" path="res://assets/action_slot/Icon_attackt.png" id="3_jfeat"]
+
+[sub_resource type="Resource" id="Resource_jfeat"]
+script = ExtResource("2_jfeat")
+effect_name = "Attack"
+base_count = 3
+metadata/_custom_type_script = "uid://da2ylup2kah2r"
+
+[resource]
+script = ExtResource("2_y5a5v")
+action_name = "炮击"
+action_icon = ExtResource("3_jfeat")
+description = "造成{0}点伤害"
+tags = Array[String](["Attack", "Cannon"])
+base_cooldown = 1
+tile_anim_name = "fire"
+action_effects = Array[ExtResource("1_mbnod")]([SubResource("Resource_jfeat")])
+metadata/_custom_type_script = "uid://ybacxqsnbg5a"

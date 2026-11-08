@@ -16,14 +16,34 @@ config/features=PackedStringArray("4.7", "Forward Plus")
 [autoload]
 
 SignalAutoload="*uid://b34lreca0fxbn"
-PlayerInventory="*uid://dpu5dsjukyiw3"
-PlayerBlueprintManager="*uid://dibspkwvggaoj"
+BlueprintManager="*uid://dibspkwvggaoj"
+PlayerData="*uid://jllygw6vlgrb"
+SceneManager="*uid://c15tp4ax6t2l3"
+RewardPool="*uid://ccpgispyspcab"
+ExploreData="*uid://ca42qn5slq2cf"
+MouseManager="*uid://jxkrnnrxn2p7"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=4
+window/stretch/mode="viewport"
+mouse_cursor/custom_image="uid://rhhqrrfrj7i2"
 
 [global_group]
 
 HexMount=""
 Ships=""
 Camera=""
+Assumbly_Scene=""
+card_menu_position=""
+PlayerShip=""
+enemy_position=""
+player_position=""
+town_ui_confirm_box=""
+action_zone=""
+drop_zones=""
 
 [input]
 

@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://cg1hm33mv3djq"]
+
+[ext_resource type="Script" uid="uid://e3yw8k2lsedc" path="res://battle_frame/battle_ui/timeline_panel.gd" id="2_tmhb4"]
+[ext_resource type="Texture2D" uid="uid://d0rq5whyeale2" path="res://assets/assumblyHub/scroll.png" id="2_v77k0"]
+[ext_resource type="Texture2D" uid="uid://btnjnkvl85lk5" path="res://assets/assumblyHub/scroll_highlight.png" id="3_tmhb4"]
+[ext_resource type="Texture2D" uid="uid://bqns34ul56auk" path="res://assets/assumblyHub/scroll_pressed.png" id="4_0k4vu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gm0f1"]
+
+[sub_resource type="Theme" id="Theme_s1fef"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_gm0f1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6jjnh"]
+texture = ExtResource("2_v77k0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t67js"]
+texture = ExtResource("3_tmhb4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kk54x"]
+texture = ExtResource("4_0k4vu")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8w617"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0)
+border_width_left = 21
+border_color = Color(0.16862746, 0.16862746, 0.16862746, 0)
+
+[sub_resource type="Theme" id="Theme_r7r30"]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_6jjnh")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_t67js")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_kk54x")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_8w617")
+
+[node name="Timeline" type="PanelContainer" unique_id=1226680723 node_paths=PackedStringArray("timeline")]
+custom_maximum_size = Vector2(622, -1)
+clip_contents = true
+offset_right = 30.0
+offset_bottom = 732.0
+theme = SubResource("Theme_s1fef")
+script = ExtResource("2_tmhb4")
+timeline = NodePath("ScrollContainer/MarginContainer/timeline")
+metadata/_edit_vertical_guides_ = [419.0]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=467363996]
+layout_mode = 2
+theme = SubResource("Theme_r7r30")
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=2128173629]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="timeline" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=221468567]
+layout_mode = 2

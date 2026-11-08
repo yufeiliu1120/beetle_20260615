@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CannonBuffLogic" format=3 uid="uid://cfddfm24wpa1g"]
+
+[ext_resource type="Script" uid="uid://ddafhs5vtomxh" path="res://resources/Buffs/BuffLogic/Scripts/CannonIncreaseBuffLogic.gd" id="1_ucj8n"]
+
+[resource]
+script = ExtResource("1_ucj8n")
+logic_name = "火炮加伤"
+count = 2
+metadata/_custom_type_script = "uid://ddafhs5vtomxh"

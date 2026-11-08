@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://b1huxxudihl1j"]
+
+[ext_resource type="Texture2D" uid="uid://cyl4vu5gnv4ke" path="res://assets/action_slot/icon_panel.png" id="1_4raxc"]
+[ext_resource type="Shader" uid="uid://8ytaila28cim" path="res://shaders/slot_blink_and_disappear.gdshader" id="1_mmy0u"]
+[ext_resource type="Script" uid="uid://dqjn6u1s1ry8r" path="res://battle_frame/battle_ui/action_drop_zone.gd" id="1_qxf3r"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qvswc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_di6wd"]
+noise = SubResource("FastNoiseLite_qvswc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8mog3"]
+shader = ExtResource("1_mmy0u")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_di6wd")
+shader_parameter/dissolve_amount = 0.0
+
+[node name="Control" type="Control" unique_id=1599426063 groups=["drop_zones"]]
+material = SubResource("ShaderMaterial_8mog3")
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 3
+anchor_right = 0.033
+anchor_bottom = 0.059000004
+offset_right = 0.6399994
+offset_bottom = 0.27999496
+script = ExtResource("1_qxf3r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1066639136]
+use_parent_material = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1243798002]
+use_parent_material = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_4raxc")

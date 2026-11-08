@@ -2,34 +2,47 @@ extends Node2D
 class_name Warship
 @export var hexgridmanager:HexGridManager
 @export var combatentity:CombatEntity
-@export var is_player:bool
+@export var is_player: bool = false:
+	set(value):
+		is_player = value
+		
+		# 当被标记为玩家时，自动加入全局分组
+		if is_player:
+			add_to_group("PlayerShip")
+		else:
+			# 如果取消了标记，安全地从分组中移除
+			if is_in_group("PlayerShip"):
+				remove_from_group("PlayerShip")
 @export var visual_controller: Node2D
 @export var animation_player:AnimationPlayer
+@export var ship_name:String
+
 signal _excute_action
+
 func start_battle() -> void:
-	# 显式地将管理器传给实体，避免在实体里用 get_parent() 这种容易因为改层级而报错的代码
-	combatentity.init_aciont_pool(hexgridmanager)
+	combatentity.start_battle() #生成动作池
 	if is_player:
 		scale.x = 1
 		scale.y = 1
 	else:
 		scale.x = -1
 		scale.y = 1
+		
 # 必须加上 async/await，确保战斗结算器能“等”动画播完
 func excute_action(action: ActionData) -> void:
 	print("触发动作：", action.action_name)
+	if combatentity.has_method("start_cooldown"):
+		print("动作进入冷却")
+		combatentity.start_cooldown(action)
 	
-	if action in hexgridmanager.action_to_tile_map:
+	# 【核心修改】：先确保 hexgridmanager 存在，再去查找字典
+	if hexgridmanager and action in hexgridmanager.action_to_tile_map:
 		# 分支 A：地块动作
 		await hexgridmanager.excute_action_from_tile(action, combatentity)
 	else:
-		# ==========================================
-		# 分支 B：自带动作 (闭包引用传递修复版)
-		# ==========================================
+		# 分支 B：自带动作 (一体化 Boss 和怪物全靠这里输出)
 		var anim_played = false
-		
-		# 【核心修复】：使用字典作为状态容器，强行逼迫 Godot 进行引用传递！
-		var exec_state = {"is_done": false} 
+		var exec_state = {"is_done": false}
 		
 		# 定义闭包逻辑
 		var apply_damage = func():
@@ -61,7 +74,7 @@ func excute_action(action: ActionData) -> void:
 				push_warning("⚠️ 未找到动画: " + action.ship_anim_name)
 				
 		if not anim_played:
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(1).timeout
 			
 		# 兜底判定：无论前面发生了什么，最后都 call 一次。
 		# 如果关键帧已经触发过了，字典里的 is_done 就是 true，这里就不会再扣血了。

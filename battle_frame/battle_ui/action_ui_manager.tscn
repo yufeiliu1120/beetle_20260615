@@ -1,9 +1,131 @@
 [gd_scene format=3 uid="uid://buwfdrw4p5fjl"]
 
 [ext_resource type="Script" uid="uid://c17xtupvn2wkl" path="res://battle_frame/battle_ui/action_ui_manager.gd" id="1_f6cq7"]
-[ext_resource type="PackedScene" uid="uid://cl5ei4tosvxvu" path="res://battle_frame/battle_ui/ActionButton.tscn" id="2_hgylk"]
+[ext_resource type="PackedScene" uid="uid://k82s55ljk28q" path="res://battle_frame/battle_ui/timeline_action_container_slot.tscn" id="2_31efh"]
+[ext_resource type="PackedScene" uid="uid://c3ifts83us7jd" path="res://General_UI_parts/action_slot/action_slot.tscn" id="2_gkyab"]
+[ext_resource type="Texture2D" uid="uid://bqdjhbpjvo2a8" path="res://assets/battle_ui/frame.png" id="3_gkyab"]
+[ext_resource type="PackedScene" uid="uid://v20sekosjaxx" path="res://battle_frame/battle_ui/game_over_scene.tscn" id="4_2x0d6"]
+[ext_resource type="PackedScene" uid="uid://2kqgcbhn3o2w" path="res://battle_frame/battle_ui/new_action_slot.tscn" id="4_tedy8"]
+[ext_resource type="PackedScene" uid="uid://dec0yp68axwni" path="res://battle_frame/battle_ui/status_bar.tscn" id="4_vqa1k"]
+[ext_resource type="Texture2D" uid="uid://h3uglfscfgoy" path="res://assets/assumblyHub/right_dec2.png" id="5_gm0f1"]
+[ext_resource type="Texture2D" uid="uid://bcmpqi2gmn7oe" path="res://assets/assumblyHub/Finish_Button_hover.png" id="6_xaqea"]
+[ext_resource type="Texture2D" uid="uid://blwx8hjmainx" path="res://assets/assumblyHub/Finish_Button.png" id="7_kylxi"]
+[ext_resource type="Texture2D" uid="uid://cijv84f2susjx" path="res://assets/assumblyHub/Finish_Button_pressed.png" id="8_c3pur"]
+[ext_resource type="Texture2D" uid="uid://crido6i0l1x84" path="res://assets/battle_ui/action_panel.png" id="9_vqa1k"]
+[ext_resource type="Texture2D" uid="uid://d0rq5whyeale2" path="res://assets/assumblyHub/scroll.png" id="10_kylxi"]
+[ext_resource type="Texture2D" uid="uid://btnjnkvl85lk5" path="res://assets/assumblyHub/scroll_highlight.png" id="11_c3pur"]
+[ext_resource type="Texture2D" uid="uid://bqns34ul56auk" path="res://assets/assumblyHub/scroll_pressed.png" id="12_31efh"]
+[ext_resource type="PackedScene" uid="uid://cg1hm33mv3djq" path="res://battle_frame/battle_ui/timeline_panel.tscn" id="13_c3pur"]
+[ext_resource type="PackedScene" uid="uid://o8fwdtc1ky7x" path="res://battle_frame/battle_ui/status_bar_enemy.tscn" id="16_r7r30"]
 
-[node name="ActionUIManager" type="Control" unique_id=1211023341]
+[sub_resource type="AtlasTexture" id="AtlasTexture_31efh"]
+atlas = ExtResource("5_gm0f1")
+region = Rect2(0, 0, 25, 25)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_khhxn"]
+texture = ExtResource("6_xaqea")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qsuaf"]
+texture = ExtResource("7_kylxi")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wb4oo"]
+texture = ExtResource("8_c3pur")
+
+[sub_resource type="Theme" id="Theme_tedy8"]
+Button/styles/hover = SubResource("StyleBoxTexture_khhxn")
+Button/styles/normal = SubResource("StyleBoxTexture_qsuaf")
+Button/styles/pressed = SubResource("StyleBoxTexture_wb4oo")
+
+[sub_resource type="Animation" id="Animation_joax2"]
+resource_name = "Idle"
+length = 0.75
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("submit_button_panel/dec:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 25, 25), Rect2(25, 0, 25, 25), Rect2(50, 0, 25, 25), Rect2(75, 0, 25, 25), Rect2(100, 0, 25, 25), Rect2(125, 0, 25, 25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("submit_button_panel/dec2:texture:region")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 25, 25), Rect2(25, 0, 25, 25), Rect2(50, 0, 25, 25), Rect2(75, 0, 25, 25), Rect2(100, 0, 25, 25), Rect2(125, 0, 25, 25)]
+}
+
+[sub_resource type="Animation" id="Animation_ibfm0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("submit_button_panel/dec:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 25, 25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("submit_button_panel/dec2:texture:region")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 25, 25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r7r30"]
+_data = {
+&"Idle": SubResource("Animation_joax2"),
+&"RESET": SubResource("Animation_ibfm0")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c3pur"]
+texture = ExtResource("9_vqa1k")
+
+[sub_resource type="Theme" id="Theme_s1fef"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_c3pur")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_31efh"]
+texture = ExtResource("10_kylxi")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tedy8"]
+texture = ExtResource("11_c3pur")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r7r30"]
+texture = ExtResource("12_31efh")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2x0d6"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0)
+border_width_left = 21
+border_color = Color(0.16862746, 0.16862746, 0.16862746, 0)
+
+[sub_resource type="Theme" id="Theme_r7r30"]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_31efh")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_tedy8")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_r7r30")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_2x0d6")
+
+[node name="ActionUIManager" type="Control" unique_id=1211023341 node_paths=PackedStringArray("player_status_bar", "enemy_status_bar", "pool_container", "submit_button", "pool_container_panel", "timeline_container_panel", "ui_blocker")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +133,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f6cq7")
-action_button_scene = ExtResource("2_hgylk")
+timeline_row_scene = ExtResource("2_31efh")
+action_button_scene = ExtResource("2_gkyab")
+game_over_pack = ExtResource("4_2x0d6")
+append_zone_scene = ExtResource("4_tedy8")
+player_status_bar = NodePath("player_status_bar")
+enemy_status_bar = NodePath("enemy_status_bar")
+pool_container = NodePath("Pool/MarginContainer/ScrollContainer/PoolContainer")
+submit_button = NodePath("submit_button_panel/Next_turn_button")
+pool_container_panel = NodePath("Pool")
+timeline_container_panel = NodePath("Timeline")
+ui_blocker = NodePath("ui_blocker")
+metadata/_edit_vertical_guides_ = [124.0, 633.0]
+metadata/_edit_horizontal_guides_ = [125.0]
 
 [node name="APLabel" type="Label" parent="." unique_id=302960862]
 layout_mode = 1
@@ -36,26 +170,98 @@ offset_right = -293.5
 offset_bottom = -926.0
 grow_horizontal = 2
 
-[node name="PoolContainer" type="VBoxContainer" parent="." unique_id=1599450708]
+[node name="Timeline" parent="." unique_id=1226680723 instance=ExtResource("13_c3pur")]
+z_index = -2
+custom_maximum_size = Vector2(1500, -1)
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1704.0
-offset_top = 76.5
-offset_right = -32.0
-offset_bottom = -76.5
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="SubmitButton" type="Button" parent="." unique_id=146256480]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 186.0
-offset_top = 204.0
-offset_right = 407.0
-offset_bottom = 300.0
+offset_left = 11.0
+offset_top = 42.0
+offset_right = -1208.0
+offset_bottom = 10.0
 grow_horizontal = 2
-text = "END_TURN"
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="frame" type="TextureRect" parent="." unique_id=1360030889]
+z_index = -9
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = ExtResource("3_gkyab")
+
+[node name="player_status_bar" parent="." unique_id=782601690 instance=ExtResource("4_vqa1k")]
+layout_mode = 0
+offset_left = 1211.0
+offset_top = 731.0
+offset_right = 1875.0
+offset_bottom = 1061.0
+
+[node name="enemy_status_bar" parent="." unique_id=392226917 instance=ExtResource("16_r7r30")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 827.0
+offset_right = 709.0
+offset_bottom = 1063.0
+
+[node name="submit_button_panel" type="HBoxContainer" parent="." unique_id=136460772]
+layout_mode = 0
+offset_left = 739.0
+offset_top = 986.0
+offset_right = 1181.0
+offset_bottom = 1071.0
+
+[node name="dec" type="TextureRect" parent="submit_button_panel" unique_id=673779136]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+texture = SubResource("AtlasTexture_31efh")
+
+[node name="Next_turn_button" type="Button" parent="submit_button_panel" unique_id=1722634585]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tedy8")
+theme_override_font_sizes/font_size = 50
+text = "End Turn"
+
+[node name="dec2" type="TextureRect" parent="submit_button_panel" unique_id=1265410348]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+texture = SubResource("AtlasTexture_31efh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=228463273]
+libraries/ = SubResource("AnimationLibrary_r7r30")
+autoplay = &"Idle"
+
+[node name="Pool" type="PanelContainer" parent="." unique_id=804156873]
+clip_contents = true
+layout_mode = 0
+offset_left = 1343.0
+offset_top = 41.0
+offset_right = 1912.0
+offset_bottom = 711.0
+theme = SubResource("Theme_s1fef")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pool" unique_id=1204504341]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 38
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Pool/MarginContainer" unique_id=1174964811]
+layout_mode = 2
+theme = SubResource("Theme_r7r30")
+
+[node name="PoolContainer" type="VBoxContainer" parent="Pool/MarginContainer/ScrollContainer" unique_id=1599450708]
+layout_mode = 2
+
+[node name="ui_blocker" type="Control" parent="." unique_id=377177662]
+visible = false
+anchors_preset = 0
+offset_left = 746.0
+offset_top = 974.0
+offset_right = 1160.0
+offset_bottom = 1076.0

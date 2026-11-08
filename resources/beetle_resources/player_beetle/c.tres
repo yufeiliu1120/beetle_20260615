@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BeetleChassisData" format=3]
+
+[ext_resource type="PackedScene" path="res://warship_parts/base.tscn" id="1_s3gom"]
+[ext_resource type="PackedScene" path="res://beetle_parts/beetle_1_parts/untamed_front.tscn" id="2_rgv26"]
+[ext_resource type="PackedScene" path="res://beetle_parts/beetle_1_parts/untamed_mid.tscn" id="3_26hby"]
+[ext_resource type="PackedScene" path="res://beetle_parts/beetle_1_parts/untamed_back.tscn" id="4_lrd05"]
+[ext_resource type="Script" path="res://resources/beetle_resources/enemy_beetle/beetle_base.gd" id="5_faukw"]
+
+[resource]
+script = ExtResource("5_faukw")
+ship_color = {
+"decorative_color": Color(0.5298947, 0.52320176, 0, 1),
+"theme_color": Color(0.33179522, 0.48685497, 1, 1)
+}
+ship_name = "c"
+base_ship_scene = ExtResource("1_s3gom")
+part_scenes = Array[PackedScene]([ExtResource("2_rgv26"), ExtResource("3_26hby"), ExtResource("4_lrd05")])

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BaseAttackAction" format=3 uid="uid://chikep28sca5m"]
+
+[ext_resource type="Script" uid="uid://da2ylup2kah2r" path="res://resources/Actions/Effects/Scripts/BaseAttackEffect.gd" id="1_tbu0i"]
+
+[resource]
+script = ExtResource("1_tbu0i")
+effect_name = "Attack"
+base_count = 3
+metadata/_custom_type_script = "uid://da2ylup2kah2r"

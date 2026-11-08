@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://5let3h51h4d"]
+
+[ext_resource type="Shader" uid="uid://c2k6xvn26m7te" path="res://shaders/float_shader.gdshader" id="1_33qt7"]
+[ext_resource type="Texture2D" uid="uid://dua0nae0g68de" path="res://assets/beetles/beetle_1/cover_beetle1_untamed_backt.png" id="2_aovow"]
+[ext_resource type="Texture2D" uid="uid://cy5gdtahg8p1i" path="res://assets/beetles/beetle_1/beetle1_untamed_back.png" id="2_mgmv8"]
+[ext_resource type="Script" uid="uid://r2sxbtchp8iy" path="res://beetle_parts/beetle_part_base.gd" id="3_aovow"]
+[ext_resource type="Texture2D" uid="uid://bklkcyjne8i1i" path="res://assets/beetles/beetle_1/beetle1_untamed_back_idle.png" id="4_aovow"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qhmk2"]
+shader = ExtResource("1_33qt7")
+shader_parameter/theme_color = Color(1.6749502e-05, 0.57025236, 0.965751, 1)
+shader_parameter/decorative_color = Color(0.8627451, 0.7490196, 0.101960786, 1)
+shader_parameter/shadow_factor = 0.5
+shader_parameter/decor_shadow_factor = 0.5
+shader_parameter/decor_darkest_factor = 0.25
+shader_parameter/mask_theme_bright = Color(1, 0, 0, 1)
+shader_parameter/mask_theme_shadow = Color(0, 1, 0, 1)
+shader_parameter/mask_decor_bright = Color(0, 0, 1, 1)
+shader_parameter/mask_decor_shadow = Color(1, 1, 0, 1)
+shader_parameter/mask_decor_darkest = Color(1, 0, 1, 1)
+shader_parameter/tolerance = 0.1
+shader_parameter/progress = 1.10000002384186
+shader_parameter/mask_tex = ExtResource("2_aovow")
+shader_parameter/smoothness_level = 0.15
+shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhmk2"]
+atlas = ExtResource("4_aovow")
+region = Rect2(0, 0, 151, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4blx"]
+atlas = ExtResource("4_aovow")
+region = Rect2(151, 0, 151, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij0e6"]
+atlas = ExtResource("4_aovow")
+region = Rect2(302, 0, 151, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m4e0"]
+atlas = ExtResource("4_aovow")
+region = Rect2(453, 0, 151, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgo1i"]
+atlas = ExtResource("4_aovow")
+region = Rect2(604, 0, 151, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i4ko"]
+atlas = ExtResource("4_aovow")
+region = Rect2(755, 0, 151, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxeqo"]
+atlas = ExtResource("4_aovow")
+region = Rect2(906, 0, 151, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge62d"]
+atlas = ExtResource("4_aovow")
+region = Rect2(1057, 0, 151, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtxw3"]
+atlas = ExtResource("4_aovow")
+region = Rect2(1208, 0, 151, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r6o4"]
+atlas = ExtResource("4_aovow")
+region = Rect2(1359, 0, 151, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xu58"]
+atlas = ExtResource("4_aovow")
+region = Rect2(1510, 0, 151, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jscu2"]
+atlas = ExtResource("4_aovow")
+region = Rect2(1661, 0, 151, 540)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v4blx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mgmv8")
+}],
+"loop": 1,
+"name": &"Float",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhmk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4blx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ij0e6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m4e0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgo1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7i4ko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxeqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge62d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtxw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2r6o4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xu58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jscu2")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 8.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=117003441]
+material = SubResource("ShaderMaterial_qhmk2")
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_v4blx")
+animation = &"Idle"
+frame_progress = 0.5170123
+script = ExtResource("3_aovow")
+target_socket_name = "back"
+base_ap = 3
+base_hp = 70
+
+[node name="shadow" type="AnimatedSprite2D" parent="." unique_id=224694005]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_v4blx")
+animation = &"Float"
+
+[node name="Mounts" type="Node2D" parent="." unique_id=1201138640]

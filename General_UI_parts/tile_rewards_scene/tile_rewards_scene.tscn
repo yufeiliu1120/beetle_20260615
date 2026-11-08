@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://c2fcw46owtfn5"]
+
+[ext_resource type="Script" uid="uid://ctvy88n0a4nsv" path="res://General_UI_parts/tile_rewards_scene/tile_rewards_scene.gd" id="1_gg4fp"]
+
+[node name="Control" type="Control" unique_id=2035185201 node_paths=PackedStringArray("card_positions", "card_attachment_point")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_gg4fp")
+card_positions = [NodePath("MarginContainer/VBoxContainer/HBoxContainer/Position1"), NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Position2"), NodePath("MarginContainer/VBoxContainer/HBoxContainer3/Position3"), NodePath("MarginContainer/VBoxContainer/HBoxContainer/Position4"), NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Position5"), NodePath("MarginContainer/VBoxContainer/HBoxContainer3/Position6")]
+card_attachment_point = NodePath("card_attachment_point")
+
+[node name="Panel" type="Panel" parent="." unique_id=1535441899]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2012305732]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1860585690]
+layout_mode = 2
+theme_override_constants/separation = 150
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1352021615]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Position1" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1698538234]
+custom_minimum_size = Vector2(950, 200)
+layout_mode = 2
+
+[node name="Position4" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1540727853]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1760908398]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Position2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1926334883]
+custom_minimum_size = Vector2(950, 200)
+layout_mode = 2
+
+[node name="Position5" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1629645304]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=3003460]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Position3" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1059742940]
+custom_minimum_size = Vector2(950, 200)
+layout_mode = 2
+
+[node name="Position6" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1810749388]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="card_attachment_point" type="Control" parent="." unique_id=1961293564]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

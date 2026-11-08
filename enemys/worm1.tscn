@@ -1,0 +1,495 @@
+[gd_scene format=3 uid="uid://b1frb0wop6hk8"]
+
+[ext_resource type="Script" uid="uid://djommwuv8jyxk" path="res://warship_parts/warship.gd" id="1_3ach2"]
+[ext_resource type="Script" uid="uid://b1nwjo8kbisq" path="res://warship_parts/CombatEntity.gd" id="2_vb3uu"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionDatas/Scripts/ActionData.gd" id="3_1it63"]
+[ext_resource type="Resource" uid="uid://dx2imwq4o84mu" path="res://resources/Actions/ActionDatas/resources/Strike.tres" id="4_hy8e0"]
+[ext_resource type="Resource" uid="uid://balfos6chpdvt" path="res://resources/Actions/ActionDatas/resources/BaseDefendAction.tres" id="5_j2luf"]
+[ext_resource type="Script" uid="uid://yhe28rwfv20n" path="res://warship_parts/visual_controller.gd" id="5_vb3uu"]
+[ext_resource type="Resource" uid="uid://0kcm58uw81yr" path="res://resources/Actions/ActionDatas/resources/DamageBuffAction.tres" id="6_5e340"]
+[ext_resource type="Texture2D" uid="uid://bw7wfovgh0i6q" path="res://assets/monsters/Worm1.png" id="7_1it63"]
+[ext_resource type="Texture2D" uid="uid://cn1lt2wncc5pp" path="res://assets/monsters/worm1_idle.png" id="8_hy8e0"]
+
+[sub_resource type="Animation" id="Animation_1it63"]
+resource_name = "Attack"
+length = 1.3000100193716586
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualController/ShakeContainer/AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Attack", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualController/ShakeContainer/Shadow")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Attack", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VisualController")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"trigger_impact"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_3ach2"]
+resource_name = "Combo"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"pause"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"trigger_impact"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_hy8e0"]
+resource_name = "Die"
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_rlans"]
+resource_name = "Idle"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualController/ShakeContainer/AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Idle", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualController/ShakeContainer/Shadow")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Idle", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vb3uu"]
+_data = {
+&"Attack": SubResource("Animation_1it63"),
+&"Combo": SubResource("Animation_3ach2"),
+&"Die": SubResource("Animation_hy8e0"),
+&"Idle": SubResource("Animation_rlans")
+}
+
+[sub_resource type="Shader" id="Shader_j2luf"]
+code = "shader_type canvas_item;
+
+// ==========================================
+// 1. 动态变色系统变量 (Palette Swapping)[cite: 6]
+// ==========================================
+uniform vec4 theme_color : source_color = vec4(0.8, 0.3, 0.2, 1.0);
+uniform vec4 decorative_color : source_color = vec4(0.9, 0.8, 0.2, 1.0);
+
+uniform float shadow_factor : hint_range(0.1, 1.0) = 0.5;
+uniform float decor_shadow_factor : hint_range(0.1, 1.0) = 0.5;
+uniform float decor_darkest_factor : hint_range(0.0, 1.0) = 0.25;
+
+uniform vec4 mask_theme_bright : source_color = vec4(1.0, 0.0, 0.0, 1.0);
+uniform vec4 mask_theme_shadow : source_color = vec4(0.0, 1.0, 0.0, 1.0);
+uniform vec4 mask_decor_bright : source_color = vec4(0.0, 0.0, 1.0, 1.0);
+uniform vec4 mask_decor_shadow : source_color = vec4(1.0, 1.0, 0.0, 1.0);
+uniform vec4 mask_decor_darkest : source_color = vec4(1.0, 0.0, 1.0, 1.0);
+
+uniform float tolerance : hint_range(0.0, 0.5) = 0.1;
+
+// ==========================================
+// 2. 沙子浮出登场特效变量 (Dissolve)[cite: 6]
+// ==========================================
+uniform float progress : hint_range(-0.1, 1.1) = -0.1;
+uniform sampler2D mask_tex : filter_nearest, hint_default_white;
+uniform sampler2D noise_tex : repeat_enable, filter_nearest;
+uniform float smoothness_level : hint_range(0.0, 0.5) = 0.15;
+
+// ==========================================
+// 3. 战斗受击特效变量 (Hit Flash)[cite: 6]
+// ==========================================
+uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
+
+// ==========================================
+// 4. 【新增】：死亡消散特效变量 (Death Dissolve)
+// ==========================================
+// 设置最大值为 1.1 确保噪点边缘完全越过 1.0
+uniform float death_progress : hint_range(0.0, 1.1) = 0.0; 
+
+void fragment() {
+    vec4 tex_color = texture(TEXTURE, UV);
+    vec4 final_color = tex_color;
+    
+    if (tex_color.a > 0.0) {
+        
+        // ------------------------------------------
+        // 阶段 A：沙子浮出 / 溶解逻辑[cite: 6]
+        // ------------------------------------------
+        float mask_val = texture(mask_tex, UV).r;
+        float noise_offset = texture(noise_tex, UV * 4.0).r;
+        
+        float final_mask = mask_val + (noise_offset - 0.5) * smoothness_level;
+        
+        if (final_mask > progress) {
+            final_color.a = 0.0;
+        }
+        
+        // ------------------------------------------
+        // 阶段 B：动态变色遮罩替换[cite: 6]
+        // ------------------------------------------
+        if (final_color.a > 0.0) {
+            vec3 gen_theme_shadow = theme_color.rgb * shadow_factor;
+            vec3 gen_decor_shadow = decorative_color.rgb * decor_shadow_factor;
+            vec3 gen_decor_darkest = decorative_color.rgb * decor_darkest_factor;
+            
+            if (distance(tex_color.rgb, mask_theme_bright.rgb) < tolerance) {
+                final_color.rgb = theme_color.rgb;
+            }
+            else if (distance(tex_color.rgb, mask_theme_shadow.rgb) < tolerance) {
+                final_color.rgb = gen_theme_shadow;
+            }
+            else if (distance(tex_color.rgb, mask_decor_bright.rgb) < tolerance) {
+                final_color.rgb = decorative_color.rgb;
+            }
+            else if (distance(tex_color.rgb, mask_decor_shadow.rgb) < tolerance) {
+                final_color.rgb = gen_decor_shadow;
+            }
+            else if (distance(tex_color.rgb, mask_decor_darkest.rgb) < tolerance) {
+                final_color.rgb = gen_decor_darkest;
+            }
+            
+            // ------------------------------------------
+            // 阶段 C：后期叠加受击闪白效果[cite: 6]
+            // ------------------------------------------
+            final_color.rgb = mix(final_color.rgb, vec3(1.0), flash_modifier);
+            
+            // ------------------------------------------
+            // 阶段 D：【新增】基于噪声的死亡侵蚀与闪白
+            // ------------------------------------------
+            // 只要 progress 大于 0，才激活该功能，不会消耗平时运行的性能
+            if (death_progress > 0.0) {
+                // 复用你的噪波图，乘以 3.0 改变纹理密度，使其和出场时的沙子表现拉开差异
+                float death_noise = texture(noise_tex, UV * 3.0).r; 
+                
+                // 消散边缘“白化层”的厚度
+                float edge_thickness = 0.15; 
+                
+                // 1. 如果噪点值已经被进度吞没，该像素彻底消散
+                if (death_noise < death_progress) {
+                    final_color.a = 0.0; 
+                } 
+                // 2. 如果噪点处于“即将被吞没”的边缘范围内，计算一个渐变的纯白叠加
+                else if (death_noise < death_progress + edge_thickness) {
+                    // 算出当前像素在白边中的比例 (0.0 到 1.0)
+                    float white_mix = 1.0 - ((death_noise - death_progress) / edge_thickness);
+                    // 越靠近侵蚀边缘，白色越强烈
+                    final_color.rgb = mix(final_color.rgb, vec3(1.0), white_mix);
+                }
+            }
+        }
+    }
+    
+    COLOR = final_color;
+}"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_j2luf"]
+noise_type = 0
+frequency = 0.039
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hy8e0"]
+noise = SubResource("FastNoiseLite_j2luf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hy8e0"]
+shader = SubResource("Shader_j2luf")
+shader_parameter/theme_color = Color(0.13725491, 0.36078432, 0.7529412, 1)
+shader_parameter/decorative_color = Color(0.9019608, 1, 0.2, 1)
+shader_parameter/shadow_factor = 0.5
+shader_parameter/decor_shadow_factor = 0.5
+shader_parameter/decor_darkest_factor = 0.25
+shader_parameter/mask_theme_bright = Color(1, 0, 0, 1)
+shader_parameter/mask_theme_shadow = Color(0, 1, 0, 1)
+shader_parameter/mask_decor_bright = Color(0, 0, 1, 1)
+shader_parameter/mask_decor_shadow = Color(1, 1, 0, 1)
+shader_parameter/mask_decor_darkest = Color(1, 0, 1, 1)
+shader_parameter/tolerance = 0.1
+shader_parameter/progress = 1.10000002384186
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_hy8e0")
+shader_parameter/smoothness_level = 0.15
+shader_parameter/flash_modifier = 0.0
+shader_parameter/death_progress = 0.0
+
+[sub_resource type="Gradient" id="Gradient_1it63"]
+colors = PackedColorArray(1, 0.77005255, 0.5664478, 1, 1, 0.75960165, 0.7201427, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hy8e0"]
+gradient = SubResource("Gradient_1it63")
+
+[sub_resource type="Curve" id="Curve_j2luf"]
+_limits = [0.0, 15.0, 0.0, 1.0]
+_data = [Vector2(0, 11.460675), 0.0, 0.0, 0, 0, Vector2(1, 14.325844), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5e340"]
+curve = SubResource("Curve_j2luf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_43gwx"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 97.08, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(1, -0.2, 0)
+initial_velocity_min = 538.47
+initial_velocity_max = 569.23
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_5e340")
+color_ramp = SubResource("GradientTexture1D_hy8e0")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hy8e0"]
+atlas = ExtResource("7_1it63")
+region = Rect2(0, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2luf"]
+atlas = ExtResource("7_1it63")
+region = Rect2(424, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5e340"]
+atlas = ExtResource("7_1it63")
+region = Rect2(848, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43gwx"]
+atlas = ExtResource("7_1it63")
+region = Rect2(1272, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kriqg"]
+atlas = ExtResource("7_1it63")
+region = Rect2(1696, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h43qx"]
+atlas = ExtResource("7_1it63")
+region = Rect2(2120, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tb0wc"]
+atlas = ExtResource("7_1it63")
+region = Rect2(2544, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1g46"]
+atlas = ExtResource("7_1it63")
+region = Rect2(2968, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1o4i"]
+atlas = ExtResource("7_1it63")
+region = Rect2(3392, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p4iq"]
+atlas = ExtResource("7_1it63")
+region = Rect2(3816, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7ceq"]
+atlas = ExtResource("7_1it63")
+region = Rect2(4240, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj1uk"]
+atlas = ExtResource("7_1it63")
+region = Rect2(4664, 0, 424, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7tuc"]
+atlas = ExtResource("8_hy8e0")
+region = Rect2(0, 0, 122, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8xfb"]
+atlas = ExtResource("8_hy8e0")
+region = Rect2(122, 0, 122, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ai5ue"]
+atlas = ExtResource("8_hy8e0")
+region = Rect2(244, 0, 122, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8db2t"]
+atlas = ExtResource("8_hy8e0")
+region = Rect2(366, 0, 122, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iokxw"]
+atlas = ExtResource("8_hy8e0")
+region = Rect2(488, 0, 122, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkxdv"]
+atlas = ExtResource("8_hy8e0")
+region = Rect2(610, 0, 122, 147)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_khhxn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hy8e0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2luf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5e340")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43gwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kriqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h43qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tb0wc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1g46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1o4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p4iq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7ceq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj1uk")
+}],
+"loop": 0,
+"name": &"Attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7tuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8xfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ai5ue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8db2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iokxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkxdv")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 8.0
+}]
+
+[node name="Warship" type="Node2D" unique_id=1665988842 node_paths=PackedStringArray("combatentity", "visual_controller", "animation_player") groups=["Ships"]]
+script = ExtResource("1_3ach2")
+combatentity = NodePath("CombatEntity")
+visual_controller = NodePath("VisualController")
+animation_player = NodePath("AnimationPlayer")
+ship_name = "虫"
+metadata/_custom_type_script = "uid://djommwuv8jyxk"
+metadata/_edit_vertical_guides_ = [318.0]
+
+[node name="CombatEntity" type="Node2D" parent="." unique_id=1526215705 node_paths=PackedStringArray("warship")]
+script = ExtResource("2_vb3uu")
+warship = NodePath("..")
+base_max_hp = 10
+base_max_ap = 2
+inherent_actions = Array[ExtResource("3_1it63")]([ExtResource("4_hy8e0"), ExtResource("4_hy8e0"), ExtResource("5_j2luf"), ExtResource("5_j2luf"), ExtResource("6_5e340")])
+metadata/_custom_type_script = "uid://b1nwjo8kbisq"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=179014975]
+libraries/ = SubResource("AnimationLibrary_vb3uu")
+
+[node name="VisualController" type="Node2D" parent="." unique_id=1799490457 node_paths=PackedStringArray("particle_nodes", "animation_player", "hit_particle")]
+material = SubResource("ShaderMaterial_hy8e0")
+script = ExtResource("5_vb3uu")
+particle_nodes = [null, null]
+animation_player = NodePath("../AnimationPlayer")
+hit_particle = NodePath("hit_particle")
+use_sand_emerge = false
+
+[node name="hit_particle" type="GPUParticles2D" parent="VisualController" unique_id=963039341]
+emitting = false
+amount = 150
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_43gwx")
+
+[node name="ShakeContainer" type="Node2D" parent="VisualController" unique_id=1715708353]
+use_parent_material = true
+
+[node name="Shadow" type="AnimatedSprite2D" parent="VisualController/ShakeContainer" unique_id=959602416]
+modulate = Color(0, 0, 0, 0.42352942)
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(13.03, 31.145832)
+scale = Vector2(1.5, 1.0549479)
+sprite_frames = SubResource("SpriteFrames_khhxn")
+animation = &"Idle"
+frame_progress = 0.1933193
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VisualController/ShakeContainer" unique_id=1912026966]
+modulate = Color(1, 1, 1, 0.4627451)
+use_parent_material = true
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_khhxn")
+animation = &"Attack"
+frame = 11
+frame_progress = 1.0

@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://dec0yp68axwni"]
+
+[ext_resource type="Texture2D" uid="uid://cqpcmnyabnkr8" path="res://assets/battle_ui/status_bar_2.png" id="1_gxqbh"]
+[ext_resource type="Script" uid="uid://7aqmtkr8egk0" path="res://battle_frame/battle_ui/status_bar.gd" id="2_gxqbh"]
+[ext_resource type="PackedScene" uid="uid://gl7mn0q7xkng" path="res://General_UI_parts/bars/HP_bar.tscn" id="3_po8l0"]
+[ext_resource type="PackedScene" uid="uid://cbdftglk4vyqu" path="res://General_UI_parts/bars/supply_bar.tscn" id="4_fswvp"]
+[ext_resource type="PackedScene" uid="uid://dhkr4a3x5tbdm" path="res://General_UI_parts/bars/ap_container.tscn" id="4_gxqbh"]
+[ext_resource type="Script" uid="uid://dajpwu0hcobfu" path="res://battle_frame/battle_ui/buff_container.gd" id="5_po8l0"]
+
+[node name="TextureRect" type="TextureRect" unique_id=392226917 node_paths=PackedStringArray("hp_bar", "ap_container", "title", "buff_container", "supply_bar")]
+clip_contents = true
+offset_top = -330.0
+offset_right = 664.0
+texture = ExtResource("1_gxqbh")
+script = ExtResource("2_gxqbh")
+hp_bar = NodePath("VBoxContainer/HBoxContainer")
+ap_container = NodePath("VBoxContainer/HBoxContainer2")
+title = NodePath("Title")
+buff_container = NodePath("BuffContainer")
+supply_bar = NodePath("VBoxContainer/HBoxContainer3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1415393017]
+custom_minimum_size = Vector2(596, 0)
+custom_maximum_size = Vector2(596, 146.8)
+layout_mode = 0
+offset_left = 34.0
+offset_top = 162.0
+offset_right = 630.0
+offset_bottom = 295.0
+
+[node name="HBoxContainer" parent="VBoxContainer" unique_id=1141623102 instance=ExtResource("3_po8l0")]
+layout_mode = 2
+
+[node name="HBoxContainer3" parent="VBoxContainer" unique_id=95941842 instance=ExtResource("4_fswvp")]
+layout_mode = 2
+
+[node name="HBoxContainer2" parent="VBoxContainer" unique_id=1250987719 instance=ExtResource("4_gxqbh")]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="." unique_id=2059267166]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 88.0
+offset_right = 581.0
+offset_bottom = 133.0
+theme_override_font_sizes/normal_font_size = 28
+text = "TestTestTestTestTestTestTest"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuffContainer" type="VBoxContainer" parent="." unique_id=1529219929]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 1.0
+offset_right = 653.0
+offset_bottom = 75.0
+script = ExtResource("5_po8l0")
+max_slots_per_row = 13
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BuffContainer" unique_id=50841679]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="BuffContainer" unique_id=81517394]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2

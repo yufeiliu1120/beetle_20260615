@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://o8fwdtc1ky7x"]
+
+[ext_resource type="Texture2D" uid="uid://004jyeypbj7c" path="res://assets/battle_ui/status_bar_container_enemy.png" id="1_8smn1"]
+[ext_resource type="Script" uid="uid://7aqmtkr8egk0" path="res://battle_frame/battle_ui/status_bar.gd" id="2_wdtcp"]
+[ext_resource type="PackedScene" uid="uid://gl7mn0q7xkng" path="res://General_UI_parts/bars/HP_bar.tscn" id="3_12xs2"]
+[ext_resource type="PackedScene" uid="uid://dhkr4a3x5tbdm" path="res://General_UI_parts/bars/ap_container.tscn" id="4_sn4l0"]
+[ext_resource type="Script" uid="uid://dajpwu0hcobfu" path="res://battle_frame/battle_ui/buff_container.gd" id="5_djo2d"]
+
+[node name="TextureRect" type="TextureRect" unique_id=392226917 node_paths=PackedStringArray("hp_bar", "ap_container", "title", "buff_container")]
+clip_contents = true
+offset_top = -238.0
+offset_right = 664.0
+offset_bottom = -2.0
+texture = ExtResource("1_8smn1")
+script = ExtResource("2_wdtcp")
+hp_bar = NodePath("VBoxContainer/HBoxContainer")
+ap_container = NodePath("VBoxContainer/HBoxContainer2")
+title = NodePath("Title")
+buff_container = NodePath("BuffContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1415393017]
+custom_minimum_size = Vector2(596, 0)
+custom_maximum_size = Vector2(596, 126)
+layout_mode = 0
+offset_left = 34.0
+offset_top = 171.0
+offset_right = 630.0
+offset_bottom = 265.0
+
+[node name="HBoxContainer" parent="VBoxContainer" unique_id=1141623102 instance=ExtResource("3_12xs2")]
+layout_mode = 2
+
+[node name="HBoxContainer2" parent="VBoxContainer" unique_id=1250987719 instance=ExtResource("4_sn4l0")]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="." unique_id=2059267166]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 99.0
+offset_right = 580.0
+offset_bottom = 141.0
+theme_override_font_sizes/normal_font_size = 28
+text = "TestTestTestTestTestTestTest"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuffContainer" type="VBoxContainer" parent="." unique_id=1529219929]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 13.0
+offset_right = 653.0
+offset_bottom = 87.0
+script = ExtResource("5_djo2d")
+max_slots_per_row = 13
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BuffContainer" unique_id=50841679]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="BuffContainer" unique_id=81517394]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2

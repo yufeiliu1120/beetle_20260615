@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://d121lijwdf224"]
+
+[ext_resource type="Texture2D" uid="uid://cg20x5kx0fuqx" path="res://assets/action_slot/tag_panel_new.png" id="1_0xf61"]
+[ext_resource type="Script" uid="uid://3tfms77jc31" path="res://General_UI_parts/action_slot/tag_panel.gd" id="2_6wbr2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kvj2d"]
+texture = ExtResource("1_0xf61")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="Theme" id="Theme_6wbr2"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_kvj2d")
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1263403857 node_paths=PackedStringArray("label")]
+use_parent_material = true
+custom_minimum_size = Vector2(80, 32)
+custom_maximum_size = Vector2(120, 46)
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_6wbr2")
+script = ExtResource("2_6wbr2")
+label = NodePath("MarginContainer/Label")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1760921203]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1183156789]
+layout_mode = 2
+text = "TestTest"
+horizontal_alignment = 1
+vertical_alignment = 1

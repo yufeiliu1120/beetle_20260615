@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://v20sekosjaxx"]
+
+[ext_resource type="Script" uid="uid://d2ctia3vfmlgm" path="res://battle_frame/battle_ui/game_over_scene.gd" id="1_y0pdw"]
+
+[sub_resource type="Gradient" id="Gradient_y0pdw"]
+colors = PackedColorArray(0, 0, 0, 1, 0.59, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_khhxn"]
+gradient = SubResource("Gradient_y0pdw")
+fill_from = Vector2(1, 0.9569892)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m6ll6"]
+load_path = "res://.godot/imported/Finish_Button_hover.png-f65e029819508badc2e5a632786ae239.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_guqba"]
+texture = SubResource("CompressedTexture2D_m6ll6")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y0pdw"]
+load_path = "res://.godot/imported/Finish_Button.png-77cc2397101555d01b40e8cee33052ee.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jvgxg"]
+texture = SubResource("CompressedTexture2D_y0pdw")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j1vmt"]
+load_path = "res://.godot/imported/Finish_Button_pressed.png-aa8008fca234371c880e7291716ca4ce.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y4ne5"]
+texture = SubResource("CompressedTexture2D_j1vmt")
+
+[sub_resource type="Theme" id="Theme_6yjor"]
+Button/styles/hover = SubResource("StyleBoxTexture_guqba")
+Button/styles/normal = SubResource("StyleBoxTexture_jvgxg")
+Button/styles/pressed = SubResource("StyleBoxTexture_y4ne5")
+
+[node name="Control" type="Control" unique_id=1339363218]
+z_index = 999
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y0pdw")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=676511107]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_khhxn")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect" unique_id=2053371881]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 350
+theme_override_constants/margin_top = 250
+theme_override_constants/margin_right = 350
+theme_override_constants/margin_bottom = 250
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer" unique_id=469116400]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=2090706831]
+self_modulate = Color(0.55, 0, 0, 1)
+custom_minimum_size = Vector2(150, 300)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 160
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=449559404]
+z_index = 2
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme = SubResource("Theme_6yjor")
+theme_override_font_sizes/font_size = 80
+text = "Return To Your City"
+
+[connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

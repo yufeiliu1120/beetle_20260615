@@ -1,0 +1,351 @@
+[gd_scene format=3 uid="uid://dxh2em58hgs45"]
+
+[ext_resource type="Texture2D" uid="uid://crido6i0l1x84" path="res://assets/battle_ui/action_panel.png" id="1_8v10o"]
+[ext_resource type="Script" uid="uid://cyl36kynv2sqm" path="res://General_UI_parts/beetles_menu/beetles_menu.gd" id="1_x6ea0"]
+[ext_resource type="Texture2D" uid="uid://bfl6k13iy8bym" path="res://assets/General/beetle_menu_info_container.png" id="2_8ofdn"]
+[ext_resource type="Texture2D" uid="uid://d0rq5whyeale2" path="res://assets/assumblyHub/scroll.png" id="3_5m4yc"]
+[ext_resource type="Script" uid="uid://bbjaijqn442t8" path="res://General_UI_parts/beetles_menu/right_panel.gd" id="3_x6ea0"]
+[ext_resource type="Texture2D" uid="uid://btnjnkvl85lk5" path="res://assets/assumblyHub/scroll_highlight.png" id="4_i6dju"]
+[ext_resource type="Texture2D" uid="uid://bqns34ul56auk" path="res://assets/assumblyHub/scroll_pressed.png" id="5_8kelp"]
+[ext_resource type="Script" uid="uid://tdhqe7eqecfv" path="res://AssemblyHub/action_slot_container.gd" id="6_f5j7b"]
+[ext_resource type="Texture2D" uid="uid://c7ptxf5pyqxtp" path="res://assets/other/right_above_panel.png" id="9_8ofdn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_khhxn"]
+texture = ExtResource("1_8v10o")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="Theme" id="Theme_s1fef"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_khhxn")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8ofdn"]
+load_path = "res://.godot/imported/scroll.png-49ff1e68329903b41f997c9e5e3c1d19.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5m4yc"]
+texture = SubResource("CompressedTexture2D_8ofdn")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i6dju"]
+load_path = "res://.godot/imported/scroll_highlight.png-a600c382b3f068a521d76d81edb763c0.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8kelp"]
+texture = SubResource("CompressedTexture2D_i6dju")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f5j7b"]
+load_path = "res://.godot/imported/scroll_pressed.png-6528976dc0388ed5e157e6e3830c788f.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kpyvs"]
+texture = SubResource("CompressedTexture2D_f5j7b")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_480g2"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0)
+border_width_left = 21
+border_color = Color(0.16862746, 0.16862746, 0.16862746, 0)
+
+[sub_resource type="Theme" id="Theme_260eh"]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_5m4yc")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_8kelp")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_kpyvs")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_480g2")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x6ea0"]
+load_path = "res://.godot/imported/Finish_Button_hover.png-f65e029819508badc2e5a632786ae239.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ofdn"]
+texture = SubResource("CompressedTexture2D_x6ea0")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5m4yc"]
+load_path = "res://.godot/imported/Finish_Button.png-77cc2397101555d01b40e8cee33052ee.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i6dju"]
+texture = SubResource("CompressedTexture2D_5m4yc")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8kelp"]
+load_path = "res://.godot/imported/Finish_Button_pressed.png-aa8008fca234371c880e7291716ca4ce.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f5j7b"]
+texture = SubResource("CompressedTexture2D_8kelp")
+
+[sub_resource type="Theme" id="Theme_kpyvs"]
+Button/styles/hover = SubResource("StyleBoxTexture_8ofdn")
+Button/styles/normal = SubResource("StyleBoxTexture_i6dju")
+Button/styles/pressed = SubResource("StyleBoxTexture_f5j7b")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6jjnh"]
+texture = ExtResource("3_5m4yc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t67js"]
+texture = ExtResource("4_i6dju")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kk54x"]
+texture = ExtResource("5_8kelp")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8w617"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0)
+border_width_left = 21
+border_color = Color(0.16862746, 0.16862746, 0.16862746, 0)
+
+[sub_resource type="Theme" id="Theme_ec212"]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_6jjnh")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_t67js")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_kk54x")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_8w617")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kpyvs"]
+load_path = "res://.godot/imported/Finish_Button_hover.png-f65e029819508badc2e5a632786ae239.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_480g2"]
+texture = SubResource("CompressedTexture2D_kpyvs")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_260eh"]
+load_path = "res://.godot/imported/Finish_Button.png-77cc2397101555d01b40e8cee33052ee.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ec212"]
+texture = SubResource("CompressedTexture2D_260eh")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4135"]
+load_path = "res://.godot/imported/Finish_Button_pressed.png-aa8008fca234371c880e7291716ca4ce.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gyomi"]
+texture = SubResource("CompressedTexture2D_v4135")
+
+[sub_resource type="Theme" id="Theme_cu53f"]
+Button/styles/hover = SubResource("StyleBoxTexture_480g2")
+Button/styles/normal = SubResource("StyleBoxTexture_ec212")
+Button/styles/pressed = SubResource("StyleBoxTexture_gyomi")
+
+[node name="Control" type="Control" unique_id=123872482 node_paths=PackedStringArray("slot_container", "right_panel", "cancel_button", "breede_button", "beetle_confirm_box", "name_confirm_box")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x6ea0")
+slot_container = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/HFlowContainer")
+right_panel = NodePath("right_panel")
+cancel_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Button")
+breede_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Button2")
+beetle_confirm_box = NodePath("VBoxContainer")
+name_confirm_box = NodePath("Name")
+metadata/_edit_vertical_guides_ = [1931.0]
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1836609852]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.295
+offset_top = -990.0
+offset_right = 109.79492
+offset_bottom = -561.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_s1fef")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=414387689]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=1837377679]
+custom_minimum_size = Vector2(0, 355)
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = -4
+theme_override_constants/margin_bottom = 15
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/MarginContainer" unique_id=765883449]
+layout_mode = 2
+theme = SubResource("Theme_260eh")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer" unique_id=110077291]
+custom_minimum_size = Vector2(1020, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 36
+theme_override_constants/v_separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=568499294]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1416719592]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_kpyvs")
+theme_override_font_sizes/font_size = 34
+text = "CANCEL"
+
+[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=2063967513]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1214453449]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_kpyvs")
+theme_override_font_sizes/font_size = 34
+text = "Breed"
+
+[node name="right_panel" type="Control" parent="." unique_id=420228139 node_paths=PackedStringArray("hp_label", "ap_label", "supply_label", "action_slot_container", "name_label")]
+anchors_preset = 0
+offset_left = 800.0
+offset_right = 840.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("3_x6ea0")
+hp_label = NodePath("bars/Label")
+ap_label = NodePath("bars/Label2")
+supply_label = NodePath("bars/Label3")
+action_slot_container = NodePath("ScrollContainer/VBoxContainer")
+name_label = NodePath("bars/Label4")
+
+[node name="TextureRect" type="TextureRect" parent="right_panel" unique_id=1752866308]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 1199.0
+offset_top = 108.0
+offset_right = 1880.0
+offset_bottom = 952.5913
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_8ofdn")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="right_panel" unique_id=606706687]
+layout_mode = 0
+offset_left = 1293.0
+offset_top = 408.0
+offset_right = 1917.0
+offset_bottom = 903.0
+mouse_filter = 2
+theme = SubResource("Theme_ec212")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="right_panel/ScrollContainer" unique_id=2106513787]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("6_f5j7b")
+
+[node name="bars" type="VBoxContainer" parent="right_panel" unique_id=399130386]
+layout_mode = 0
+offset_left = 1299.0
+offset_top = 160.0
+offset_right = 1856.0
+offset_bottom = 341.0
+
+[node name="Label4" type="Label" parent="right_panel/bars" unique_id=1441100905]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="right_panel/bars" unique_id=625407851]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "HP"
+
+[node name="Label2" type="Label" parent="right_panel/bars" unique_id=804514884]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "HP"
+
+[node name="Label3" type="Label" parent="right_panel/bars" unique_id=869451956]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "HP"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1772143432]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -340.01
+offset_right = 273.0
+offset_bottom = -176.00989
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="sell_button" type="Button" parent="VBoxContainer" unique_id=1116552356]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme = SubResource("Theme_kpyvs")
+theme_override_font_sizes/font_size = 50
+text = "SELL"
+
+[node name="confirm_button" type="Button" parent="VBoxContainer" unique_id=1818728360]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme = SubResource("Theme_kpyvs")
+theme_override_font_sizes/font_size = 40
+text = "NAME AND GET"
+
+[node name="Name" type="VBoxContainer" parent="." unique_id=1674195115]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -90.0
+offset_right = 246.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Name" unique_id=899714492]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Name it"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Name" unique_id=425026842]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+alignment = 1
+max_length = 16
+
+[node name="confirm_button" type="Button" parent="Name" unique_id=1297638439]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme = SubResource("Theme_kpyvs")
+theme_override_font_sizes/font_size = 40
+text = "Confirm"
+
+[node name="Timer" type="Timer" parent="." unique_id=249856753]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=641269341]
+layout_mode = 0
+offset_left = 1358.3416
+offset_right = 1919.9999
+offset_bottom = 101.0
+texture = ExtResource("9_8ofdn")
+
+[node name="Button" type="Button" parent="TextureRect" unique_id=538867774]
+layout_mode = 0
+offset_left = 193.65845
+offset_top = 27.0
+offset_right = 504.65845
+offset_bottom = 92.0
+theme = SubResource("Theme_cu53f")
+theme_override_font_sizes/font_size = 24
+text = "RETURN TO TOWN"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/sell_button" to="." method="_on_sell_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/confirm_button" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="Name/confirm_button" to="." method="_on_name_confirm_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="TextureRect/Button" to="." method="_on_return_button_pressed"]

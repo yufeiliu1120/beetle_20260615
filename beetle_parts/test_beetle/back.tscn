@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d0c8cwdf6d6bw" path="res://assets/beetle_test_parts/new_part_belly.png" id="2_jlo1y"]
 [ext_resource type="Script" uid="uid://r2sxbtchp8iy" path="res://beetle_parts/beetle_part_base.gd" id="3_f8fnh"]
 [ext_resource type="Texture2D" uid="uid://c3v6ejv7weyde" path="res://assets/beetle_test_parts/cover_belly_2.png" id="4_g3an6"]
+[ext_resource type="PackedScene" uid="uid://dyodqyx5rkepg" path="res://beetle_parts/test_beetle/ship_back.tscn" id="5_f8fnh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_slgyg"]
 shader = ExtResource("1_jlo1y")
@@ -30,7 +31,7 @@ animations = [{
 "texture": ExtResource("2_jlo1y")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"Idle",
 "speed": 5.0
 }]
 
@@ -49,10 +50,14 @@ animations = [{
 material = SubResource("ShaderMaterial_slgyg")
 scale = Vector2(1, -1)
 sprite_frames = SubResource("SpriteFrames_g3an6")
+animation = &"Idle"
 script = ExtResource("3_f8fnh")
+tamed_scene = ExtResource("5_f8fnh")
 target_socket_name = "back"
+base_hp = 20
 
 [node name="shadow" type="AnimatedSprite2D" parent="." unique_id=224694005]
 modulate = Color(0, 0, 0, 0.49411765)
 z_index = -1
+position = Vector2(-5.54, 0.665)
 sprite_frames = SubResource("SpriteFrames_f8fnh")

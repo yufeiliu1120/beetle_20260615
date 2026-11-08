@@ -1,0 +1,444 @@
+[gd_scene format=3 uid="uid://c8bls3qdosvc"]
+
+[ext_resource type="Script" uid="uid://bm0fnkyt6v1fh" path="res://Town_Scene/town.gd" id="1_2th4y"]
+[ext_resource type="Texture2D" uid="uid://088ytv1bpilr" path="res://assets/other/town_back.png" id="1_8oe7m"]
+[ext_resource type="Shader" uid="uid://k5lqo5b5sa0g" path="res://shaders/outline.gdshader" id="2_h5vsl"]
+[ext_resource type="Texture2D" uid="uid://rrtyue1al2le" path="res://assets/other/factory.png" id="2_q0fbg"]
+[ext_resource type="Resource" path="res://resources/beetle_resources/player_beetle/test_beetle_player.tres" id="2_rh2lc"]
+[ext_resource type="Texture2D" uid="uid://di76q3y47ylui" path="res://assets/other/palace.png" id="3_h5vsl"]
+[ext_resource type="Script" uid="uid://b6mtids6e3j66" path="res://Town_Scene/building_base.gd" id="3_hnmo8"]
+[ext_resource type="Texture2D" uid="uid://dpyhf370sxn4r" path="res://assets/other/temple.png" id="4_hnmo8"]
+[ext_resource type="PackedScene" uid="uid://cn8obsv64b2g1" path="res://Town_Scene/Palace_Scene/Palace_Scene.tscn" id="7_hmyrm"]
+[ext_resource type="Texture2D" uid="uid://b57gfjlderi3a" path="res://assets/other/tree.png" id="8_efqpi"]
+[ext_resource type="PackedScene" uid="uid://bjbddkrwwle83" path="res://Town_Scene/Beetle Breeding Facility/Beetle Breeding Facility.tscn" id="8_rh2lc"]
+[ext_resource type="PackedScene" uid="uid://31toydo82wnv" path="res://Town_Scene/Start_Scene/start_scene.tscn" id="10_1imgp"]
+[ext_resource type="Script" uid="uid://u0fnxm2rkyde" path="res://Town_Scene/town_confirm_box.gd" id="12_1imgp"]
+[ext_resource type="Script" uid="uid://rb0ehym35dqi" path="res://battle_frame/camera.gd" id="14_8mog3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61th8"]
+shader = ExtResource("2_h5vsl")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0
+shader_parameter/pixel_style = true
+
+[sub_resource type="Shader" id="Shader_h5vsl"]
+code = "shader_type canvas_item;
+
+uniform vec4 outline_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform int outline_width : hint_range(0, 10) = 1;
+// 开启后为经典像素画的十字/菱形轮廓；关闭则为方形轮廓
+uniform bool pixel_style = true; 
+
+void fragment() {
+    vec4 original_color = texture(TEXTURE, UV);
+    
+    // 1. 如果当前像素已经是完全不透明的主体，直接保留原图
+    // (为了防止浮点数精度误差，这里使用 > 0.99 而不是 == 1.0)
+    if (original_color.a > 0.99) {
+        COLOR = original_color;
+    } else {
+        // 2. 当前像素为透明或半透明（例如阴影）时，探测其周围的像素
+        bool is_outline = false;
+        
+        for (int x = -outline_width; x <= outline_width; x++) {
+            for (int y = -outline_width; y <= outline_width; y++) {
+                if (x == 0 && y == 0) continue;
+                
+                // 像素画菱形轮廓判定
+                if (pixel_style && (abs(x) + abs(y) > outline_width)) {
+                    continue;
+                }
+                
+                vec2 sample_uv = UV + vec2(float(x), float(y)) * TEXTURE_PIXEL_SIZE;
+                vec4 sample_color = texture(TEXTURE, sample_uv);
+                
+                // 【核心逻辑】：只有探测到了透明度严格为 1 的像素，才会被视为碰到了主体
+                if (sample_color.a > 0.99) {
+                    is_outline = true;
+                    break;
+                }
+            }
+            if (is_outline) break;
+        }
+        
+        // 3. 最终输出
+        if (is_outline) {
+            // 如果挨着主体，将其覆盖为纯色轮廓
+            COLOR = outline_color;
+        } else {
+            // 如果没挨着主体（比如向外延伸的阴影区，或纯透明背景），原样输出
+            COLOR = original_color;
+        }
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hnmo8"]
+shader = SubResource("Shader_h5vsl")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0
+shader_parameter/pixel_style = true
+
+[sub_resource type="Shader" id="Shader_pwn6r"]
+code = "shader_type canvas_item;
+
+uniform vec4 outline_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform int outline_width : hint_range(0, 10) = 1;
+// 开启后为经典像素画的十字/菱形轮廓；关闭则为方形轮廓
+uniform bool pixel_style = true; 
+
+void fragment() {
+    vec4 original_color = texture(TEXTURE, UV);
+    
+    // 1. 如果当前像素已经是完全不透明的主体，直接保留原图
+    // (为了防止浮点数精度误差，这里使用 > 0.99 而不是 == 1.0)
+    if (original_color.a > 0.99) {
+        COLOR = original_color;
+    } else {
+        // 2. 当前像素为透明或半透明（例如阴影）时，探测其周围的像素
+        bool is_outline = false;
+        
+        for (int x = -outline_width; x <= outline_width; x++) {
+            for (int y = -outline_width; y <= outline_width; y++) {
+                if (x == 0 && y == 0) continue;
+                
+                // 像素画菱形轮廓判定
+                if (pixel_style && (abs(x) + abs(y) > outline_width)) {
+                    continue;
+                }
+                
+                vec2 sample_uv = UV + vec2(float(x), float(y)) * TEXTURE_PIXEL_SIZE;
+                vec4 sample_color = texture(TEXTURE, sample_uv);
+                
+                // 【核心逻辑】：只有探测到了透明度严格为 1 的像素，才会被视为碰到了主体
+                if (sample_color.a > 0.99) {
+                    is_outline = true;
+                    break;
+                }
+            }
+            if (is_outline) break;
+        }
+        
+        // 3. 最终输出
+        if (is_outline) {
+            // 如果挨着主体，将其覆盖为纯色轮廓
+            COLOR = outline_color;
+        } else {
+            // 如果没挨着主体（比如向外延伸的阴影区，或纯透明背景），原样输出
+            COLOR = original_color;
+        }
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_efqpi"]
+shader = SubResource("Shader_pwn6r")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0
+shader_parameter/pixel_style = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0fbg"]
+atlas = ExtResource("4_hnmo8")
+region = Rect2(0, 0, 104, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5vsl"]
+atlas = ExtResource("4_hnmo8")
+region = Rect2(104, 0, 104, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnmo8"]
+atlas = ExtResource("4_hnmo8")
+region = Rect2(208, 0, 104, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwn6r"]
+atlas = ExtResource("4_hnmo8")
+region = Rect2(312, 0, 104, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efqpi"]
+atlas = ExtResource("4_hnmo8")
+region = Rect2(416, 0, 104, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2th4y"]
+atlas = ExtResource("4_hnmo8")
+region = Rect2(520, 0, 104, 103)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1fef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0fbg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5vsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnmo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwn6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efqpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2th4y")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="Shader" id="Shader_efqpi"]
+code = "shader_type canvas_item;
+
+uniform vec4 outline_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform int outline_width : hint_range(0, 10) = 1;
+// 开启后为经典像素画的十字/菱形轮廓；关闭则为方形轮廓
+uniform bool pixel_style = true; 
+
+void fragment() {
+    vec4 original_color = texture(TEXTURE, UV);
+    
+    // 1. 如果当前像素已经是完全不透明的主体，直接保留原图
+    // (为了防止浮点数精度误差，这里使用 > 0.99 而不是 == 1.0)
+    if (original_color.a > 0.99) {
+        COLOR = original_color;
+    } else {
+        // 2. 当前像素为透明或半透明（例如阴影）时，探测其周围的像素
+        bool is_outline = false;
+        
+        for (int x = -outline_width; x <= outline_width; x++) {
+            for (int y = -outline_width; y <= outline_width; y++) {
+                if (x == 0 && y == 0) continue;
+                
+                // 像素画菱形轮廓判定
+                if (pixel_style && (abs(x) + abs(y) > outline_width)) {
+                    continue;
+                }
+                
+                vec2 sample_uv = UV + vec2(float(x), float(y)) * TEXTURE_PIXEL_SIZE;
+                vec4 sample_color = texture(TEXTURE, sample_uv);
+                
+                // 【核心逻辑】：只有探测到了透明度严格为 1 的像素，才会被视为碰到了主体
+                if (sample_color.a > 0.99) {
+                    is_outline = true;
+                    break;
+                }
+            }
+            if (is_outline) break;
+        }
+        
+        // 3. 最终输出
+        if (is_outline) {
+            // 如果挨着主体，将其覆盖为纯色轮廓
+            COLOR = outline_color;
+        } else {
+            // 如果没挨着主体（比如向外延伸的阴影区，或纯透明背景），原样输出
+            COLOR = original_color;
+        }
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2th4y"]
+shader = SubResource("Shader_efqpi")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0
+shader_parameter/pixel_style = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rh2lc"]
+load_path = "res://.godot/imported/Finish_Button_hover.png-f65e029819508badc2e5a632786ae239.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1imgp"]
+texture = SubResource("CompressedTexture2D_rh2lc")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hmyrm"]
+load_path = "res://.godot/imported/Finish_Button.png-77cc2397101555d01b40e8cee33052ee.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8mog3"]
+texture = SubResource("CompressedTexture2D_hmyrm")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_di6wd"]
+load_path = "res://.godot/imported/Finish_Button_pressed.png-aa8008fca234371c880e7291716ca4ce.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qvswc"]
+texture = SubResource("CompressedTexture2D_di6wd")
+
+[sub_resource type="Theme" id="Theme_h3o40"]
+Button/styles/hover = SubResource("StyleBoxTexture_1imgp")
+Button/styles/normal = SubResource("StyleBoxTexture_8mog3")
+Button/styles/pressed = SubResource("StyleBoxTexture_qvswc")
+
+[sub_resource type="Gradient" id="Gradient_hmyrm"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s1fef"]
+gradient = SubResource("Gradient_hmyrm")
+
+[sub_resource type="Gradient" id="Gradient_8mog3"]
+colors = PackedColorArray(1, 0.905, 0.7, 1, 1, 0.9372549, 0.8, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_di6wd"]
+gradient = SubResource("Gradient_8mog3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qvswc"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(150, 100, 1)
+spread = 25.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+damping_min = 0.5
+damping_max = 1.0
+scale_min = 2.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_di6wd")
+turbulence_enabled = true
+turbulence_noise_scale = 4.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.010000001
+
+[node name="Town" type="Node2D" unique_id=1074535414]
+scale = Vector2(7.06, 7.059)
+script = ExtResource("1_2th4y")
+current_beetle_resource = ExtResource("2_rh2lc")
+
+[node name="back" type="Sprite2D" parent="." unique_id=1057534046]
+position = Vector2(135.97734, 76.498085)
+texture = ExtResource("1_8oe7m")
+
+[node name="Factory" type="Node2D" parent="." unique_id=165298492 node_paths=PackedStringArray("area")]
+material = SubResource("ShaderMaterial_61th8")
+position = Vector2(193.745, 124.335)
+script = ExtResource("3_hnmo8")
+area = NodePath("Area2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Factory" unique_id=227675456]
+use_parent_material = true
+position = Vector2(-0.42494202, -5.666525)
+texture = ExtResource("2_q0fbg")
+
+[node name="Area2D" type="Area2D" parent="Factory" unique_id=2079915851]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Factory/Area2D" unique_id=192762316]
+position = Vector2(-192.49292, -121.830284)
+polygon = PackedVector2Array(151.13315, 131.18005, 157.08215, 112.19719, 172.66289, 104.12239, 205.66573, 92.081024, 226.77054, 97.74755, 237.39377, 121.830284, 186.54391, 149.31293)
+
+[node name="Palace" type="Node2D" parent="." unique_id=1636691638 node_paths=PackedStringArray("area")]
+material = SubResource("ShaderMaterial_hnmo8")
+position = Vector2(126.325, 77.785)
+script = ExtResource("3_hnmo8")
+area = NodePath("Area2D")
+to_scene = ExtResource("7_hmyrm")
+desc_text = "Your Palace"
+
+[node name="Sprite2D" type="Sprite2D" parent="Palace" unique_id=1546663593]
+use_parent_material = true
+position = Vector2(2.124649, -4.249893)
+texture = ExtResource("3_h5vsl")
+
+[node name="Area2D" type="Area2D" parent="Palace" unique_id=245106247]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Palace/Area2D" unique_id=1117532842]
+position = Vector2(-193.0595, -115.31378)
+polygon = PackedVector2Array(165.58073, 123.530235, 167.84702, 115.03045, 172.66289, 104.12239, 191.7847, 88.114456, 205.80737, 103.697395, 215.29745, 109.22226, 220.82153, 94.91428, 225.35411, 125.796844, 192.20963, 142.0881)
+
+[node name="Temple" type="Node2D" parent="." unique_id=1639264295 node_paths=PackedStringArray("area")]
+material = SubResource("ShaderMaterial_efqpi")
+position = Vector2(36.805, 90.545)
+script = ExtResource("3_hnmo8")
+area = NodePath("Area2D")
+to_scene = ExtResource("8_rh2lc")
+desc_text = "进入神殿，繁育甲虫"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Temple" unique_id=2060305468]
+use_parent_material = true
+position = Vector2(1.9830017, -0.14165497)
+sprite_frames = SubResource("SpriteFrames_s1fef")
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="Temple" unique_id=1646844428]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Temple/Area2D" unique_id=1741539792]
+position = Vector2(-192.63455, -111.06389)
+polygon = PackedVector2Array(163.88103, 126.646835, 167.84702, 115.03045, 172.66289, 104.12239, 193.62607, 82.5896, 205.80737, 103.697395, 215.29745, 109.22226, 220.82153, 94.91428, 225.35411, 125.796844, 194.051, 141.23813)
+
+[node name="Tree" type="Node2D" parent="." unique_id=2129104393 node_paths=PackedStringArray("area")]
+material = SubResource("ShaderMaterial_2th4y")
+position = Vector2(232, 20)
+script = ExtResource("3_hnmo8")
+area = NodePath("Area2D")
+to_scene = ExtResource("10_1imgp")
+desc_text = "向树木祈祷，开始新的冒险"
+
+[node name="Sprite2D" type="Sprite2D" parent="Tree" unique_id=428251944]
+use_parent_material = true
+position = Vector2(-96.034, 56.38201)
+texture = ExtResource("8_efqpi")
+
+[node name="Area2D" type="Area2D" parent="Tree" unique_id=736385576]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tree/Area2D" unique_id=1650526181]
+position = Vector2(-94.90085, 55.815357)
+polygon = PackedVector2Array(83.00284, -76.498085, 64.16431, -59.9235, 79.74504, -58.790195, 75.920685, -51.70704, 83.56941, -45.3322, 86.11899, -38.95736, 101.13315, -44.76555, 106.940506, -39.80734, 121.6714, -31.307549, 121.954666, -41.648956, 129.46175, -48.023796, 134.5609, -53.690323, 134.98582, -75.931435)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=726195448]
+
+[node name="confirm_box" type="VBoxContainer" parent="CanvasLayer" unique_id=2053910512 node_paths=PackedStringArray("text_label", "confirm_button") groups=["town_ui_confirm_box"]]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -701.0
+offset_top = -534.0
+offset_right = 701.0
+offset_bottom = -257.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_1imgp")
+text_label = NodePath("RichTextLabel")
+confirm_button = NodePath("HBoxContainer/Button")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/confirm_box" unique_id=2123378664]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 60
+text = "TESTSTESDTESDTESTESTSTESDTES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/confirm_box" unique_id=1435657664]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/confirm_box/HBoxContainer" unique_id=976967098]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/confirm_box/HBoxContainer" unique_id=2003373357]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_h3o40")
+theme_override_font_sizes/font_size = 48
+text = "ENTER"
+
+[node name="Control2" type="Control" parent="CanvasLayer/confirm_box/HBoxContainer" unique_id=644868943]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+
+[node name="transfer_cover" type="TextureRect" parent="CanvasLayer" unique_id=198509508]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1936.0
+offset_bottom = 1101.0
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_s1fef")
+
+[node name="custom_camera" type="Camera2D" parent="." unique_id=1417231541 groups=["Camera"]]
+position = Vector2(136, 76.5)
+script = ExtResource("14_8mog3")
+metadata/_custom_type_script = "uid://rb0ehym35dqi"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=264323616]
+z_index = 999
+position = Vector2(135.41077, 81.03131)
+amount = 150
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_qvswc")

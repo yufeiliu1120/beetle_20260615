@@ -1,0 +1,414 @@
+[gd_scene format=3 uid="uid://cf38dc0hg2vf2"]
+
+[ext_resource type="Script" uid="uid://dvhamhxs4rjwq" path="res://test/assumbly_hub_test.gd" id="1_2yvg1"]
+[ext_resource type="PackedScene" uid="uid://gu34hkbe6ddk" path="res://AssemblyHub/AssemblyHub.tscn" id="1_hixtp"]
+[ext_resource type="Texture2D" uid="uid://xn24y8gakaf3" path="res://assets/assumblyHub/port_sheet_new.png" id="3_t67js"]
+[ext_resource type="PackedScene" uid="uid://b81tmynxij34g" path="res://AssemblyHub/assembly_slot_manager.tscn" id="4_swwbo"]
+[ext_resource type="Shader" uid="uid://bif8bo2fq0lb7" path="res://shaders/desert_back_shader.tres" id="5_xhth4"]
+[ext_resource type="Texture2D" uid="uid://b4qvytcdv50pd" path="res://assets/assumblyHub/right_panel.png" id="6_tdksl"]
+[ext_resource type="Texture2D" uid="uid://moutsfchj1ik" path="res://assets/assumblyHub/right_dec1.png" id="7_kvj2d"]
+[ext_resource type="Texture2D" uid="uid://h3uglfscfgoy" path="res://assets/assumblyHub/right_dec2.png" id="8_m2nop"]
+[ext_resource type="Texture2D" uid="uid://bcmpqi2gmn7oe" path="res://assets/assumblyHub/Finish_Button_hover.png" id="9_6jjnh"]
+[ext_resource type="Texture2D" uid="uid://blwx8hjmainx" path="res://assets/assumblyHub/Finish_Button.png" id="10_t67js"]
+[ext_resource type="Texture2D" uid="uid://cijv84f2susjx" path="res://assets/assumblyHub/Finish_Button_pressed.png" id="11_8w617"]
+[ext_resource type="Texture2D" uid="uid://d0rq5whyeale2" path="res://assets/assumblyHub/scroll.png" id="12_m2nop"]
+[ext_resource type="Texture2D" uid="uid://btnjnkvl85lk5" path="res://assets/assumblyHub/scroll_highlight.png" id="13_6jjnh"]
+[ext_resource type="Texture2D" uid="uid://bqns34ul56auk" path="res://assets/assumblyHub/scroll_pressed.png" id="14_t67js"]
+[ext_resource type="Script" uid="uid://tdhqe7eqecfv" path="res://AssemblyHub/action_slot_container.gd" id="15_t67js"]
+[ext_resource type="PackedScene" uid="uid://gl7mn0q7xkng" path="res://General_UI_parts/bars/HP_bar.tscn" id="16_8w617"]
+[ext_resource type="PackedScene" uid="uid://dhkr4a3x5tbdm" path="res://General_UI_parts/bars/ap_container.tscn" id="17_0i4km"]
+[ext_resource type="PackedScene" uid="uid://cbdftglk4vyqu" path="res://General_UI_parts/bars/supply_bar.tscn" id="18_spgdf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w617"]
+atlas = ExtResource("3_t67js")
+region = Rect2(2560, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mb5m1"]
+atlas = ExtResource("3_t67js")
+region = Rect2(1920, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6skj"]
+atlas = ExtResource("3_t67js")
+region = Rect2(1280, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nv5qg"]
+atlas = ExtResource("3_t67js")
+region = Rect2(640, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mttx6"]
+atlas = ExtResource("3_t67js")
+region = Rect2(0, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxqyl"]
+atlas = ExtResource("3_t67js")
+region = Rect2(0, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v002f"]
+atlas = ExtResource("3_t67js")
+region = Rect2(640, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gf4oa"]
+atlas = ExtResource("3_t67js")
+region = Rect2(1280, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ghe0"]
+atlas = ExtResource("3_t67js")
+region = Rect2(1920, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj6wu"]
+atlas = ExtResource("3_t67js")
+region = Rect2(2560, 0, 640, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1fef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w617")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mb5m1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6skj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nv5qg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mttx6")
+}],
+"loop": 0,
+"name": &"Close",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxqyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v002f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gf4oa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ghe0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj6wu")
+}],
+"loop": 0,
+"name": &"Open",
+"speed": 8.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s1fef"]
+shader = ExtResource("5_xhth4")
+shader_parameter/sand_color = Color(0.98, 0.85, 0.42, 1)
+shader_parameter/sparkle_color = Color(1, 0.95, 0.6, 1)
+shader_parameter/sparkle_threshold = 0.774000036765
+shader_parameter/sparkle_speed = 4.0
+shader_parameter/sand_resolution = 256.0
+shader_parameter/sparkle_resolution = 256.0
+shader_parameter/sparkle_size = 0.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i4km"]
+atlas = ExtResource("7_kvj2d")
+region = Rect2(0, 0, 12, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spgdf"]
+atlas = ExtResource("7_kvj2d")
+region = Rect2(12, 0, 12, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nonhh"]
+atlas = ExtResource("7_kvj2d")
+region = Rect2(24, 0, 12, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_casny"]
+atlas = ExtResource("7_kvj2d")
+region = Rect2(36, 0, 12, 66)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_khhxn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0i4km")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spgdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nonhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_casny")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjv6q"]
+atlas = ExtResource("8_m2nop")
+region = Rect2(0, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rwiq"]
+atlas = ExtResource("8_m2nop")
+region = Rect2(25, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hj4i"]
+atlas = ExtResource("8_m2nop")
+region = Rect2(50, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnllt"]
+atlas = ExtResource("8_m2nop")
+region = Rect2(75, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1jfk"]
+atlas = ExtResource("8_m2nop")
+region = Rect2(100, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu78f"]
+atlas = ExtResource("8_m2nop")
+region = Rect2(125, 0, 25, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qsuaf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjv6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rwiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hj4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnllt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1jfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu78f")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_khhxn"]
+texture = ExtResource("9_6jjnh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qsuaf"]
+texture = ExtResource("10_t67js")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wb4oo"]
+texture = ExtResource("11_8w617")
+
+[sub_resource type="Theme" id="Theme_s1fef"]
+Button/styles/hover = SubResource("StyleBoxTexture_khhxn")
+Button/styles/normal = SubResource("StyleBoxTexture_qsuaf")
+Button/styles/pressed = SubResource("StyleBoxTexture_wb4oo")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6jjnh"]
+texture = ExtResource("12_m2nop")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t67js"]
+texture = ExtResource("13_6jjnh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kk54x"]
+texture = ExtResource("14_t67js")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8w617"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0)
+border_width_left = 21
+border_color = Color(0.16862746, 0.16862746, 0.16862746, 0)
+
+[sub_resource type="Theme" id="Theme_t67js"]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_6jjnh")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_t67js")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_kk54x")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_8w617")
+
+[node name="Node2D" type="Node2D" unique_id=713968183 node_paths=PackedStringArray("Assumbly_manager") groups=["Assumbly_Scene"]]
+script = ExtResource("1_2yvg1")
+Assumbly_manager = NodePath("CanvasLayer/Control")
+metadata/_edit_vertical_guides_ = [1917.0]
+metadata/_edit_horizontal_guides_ = [201.0]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2042340280]
+
+[node name="Control" parent="CanvasLayer" unique_id=895487477 node_paths=PackedStringArray("finish_button", "assumbly_slot_manager", "ap_bar", "_hp_bar", "_supply_bar", "action_slot_container", "name_label") instance=ExtResource("1_hixtp")]
+finish_button = NodePath("../../Right_Panel/Finish_Button")
+assumbly_slot_manager = NodePath("../../AssemblySlotManager")
+ap_bar = NodePath("../../Right_Panel/bars/HBoxContainer")
+_hp_bar = NodePath("../../Right_Panel/bars/TextureProgressBar")
+_supply_bar = NodePath("../../Right_Panel/bars/HBoxContainer2")
+action_slot_container = NodePath("../../Right_Panel/ScrollContainer/VBoxContainer")
+name_label = NodePath("../../Right_Panel/Ship_Name")
+
+[node name="Button2" type="Button" parent="CanvasLayer" unique_id=1619176932]
+offset_left = 35.0
+offset_top = 91.0
+offset_right = 153.0
+offset_bottom = 122.0
+text = "to battle"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=323964324]
+position = Vector2(960, 540.00006)
+scale = Vector2(2.9999998, 3)
+sprite_frames = SubResource("SpriteFrames_s1fef")
+animation = &"Open"
+
+[node name="AssemblySlotManager" parent="." unique_id=977587642 node_paths=PackedStringArray("spawn_markers", "slot_spawn", "slot_exit", "back_ground_animatedsprite", "assembly_hub") instance=ExtResource("4_swwbo")]
+spawn_markers = [NodePath("Marker2D"), NodePath("Marker2D2"), NodePath("Marker2D3"), NodePath("Marker2D4"), NodePath("Marker2D5"), NodePath("Marker2D6"), NodePath("Marker2D7")]
+slot_spawn = NodePath("SlotSpawn")
+slot_exit = NodePath("SlotExit")
+back_ground_animatedsprite = NodePath("../AnimatedSprite2D")
+assembly_hub = NodePath("../CanvasLayer/Control")
+
+[node name="SlotSpawn" type="Marker2D" parent="AssemblySlotManager" unique_id=296895004]
+position = Vector2(377, 262)
+
+[node name="SlotExit" type="Marker2D" parent="AssemblySlotManager" unique_id=2094395026]
+position = Vector2(377, 690)
+
+[node name="Marker2D" type="Marker2D" parent="AssemblySlotManager" unique_id=1989049850]
+y_sort_enabled = true
+position = Vector2(378, 350)
+
+[node name="Marker2D2" type="Marker2D" parent="AssemblySlotManager" unique_id=1677075581]
+y_sort_enabled = true
+position = Vector2(378, 451)
+
+[node name="Marker2D3" type="Marker2D" parent="AssemblySlotManager" unique_id=76421156]
+y_sort_enabled = true
+position = Vector2(378, 552)
+
+[node name="Marker2D4" type="Marker2D" parent="AssemblySlotManager" unique_id=557337557]
+y_sort_enabled = true
+position = Vector2(378, 653)
+
+[node name="Marker2D5" type="Marker2D" parent="AssemblySlotManager" unique_id=841358136]
+y_sort_enabled = true
+position = Vector2(378, 754)
+
+[node name="Marker2D6" type="Marker2D" parent="AssemblySlotManager" unique_id=2037341340]
+y_sort_enabled = true
+position = Vector2(378, 855)
+
+[node name="Marker2D7" type="Marker2D" parent="AssemblySlotManager" unique_id=913253526]
+y_sort_enabled = true
+position = Vector2(378, 956)
+
+[node name="Button" type="Button" parent="AssemblySlotManager" unique_id=1580840806]
+offset_left = 1471.0
+offset_top = 985.0
+offset_right = 1539.0
+offset_bottom = 1019.0
+
+[node name="Button2" type="Button" parent="AssemblySlotManager" unique_id=2087171233]
+offset_left = 1328.0
+offset_top = 988.0
+offset_right = 1396.0
+offset_bottom = 1022.0
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1655354780]
+z_index = -10
+material = SubResource("ShaderMaterial_s1fef")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="Right_Panel" type="Node2D" parent="." unique_id=432622966]
+
+[node name="TextureRect" type="TextureRect" parent="Right_Panel" unique_id=1445554776]
+offset_left = 1236.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = ExtResource("6_tdksl")
+
+[node name="dec1" type="AnimatedSprite2D" parent="Right_Panel" unique_id=699787390]
+position = Vector2(1266, 234.00006)
+scale = Vector2(3.000002, 3.000002)
+sprite_frames = SubResource("SpriteFrames_khhxn")
+autoplay = "default"
+frame_progress = 0.50132096
+
+[node name="dec2" type="AnimatedSprite2D" parent="Right_Panel" unique_id=1888588636]
+position = Vector2(1896.0001, 231.00002)
+scale = Vector2(3.000002, 3.000002)
+sprite_frames = SubResource("SpriteFrames_khhxn")
+autoplay = "default"
+frame_progress = 0.40852454
+
+[node name="dec3" type="AnimatedSprite2D" parent="Right_Panel" unique_id=870199931]
+position = Vector2(1346, 1024)
+scale = Vector2(4.06, 4.06)
+sprite_frames = SubResource("SpriteFrames_qsuaf")
+autoplay = "default"
+
+[node name="dec4" type="AnimatedSprite2D" parent="Right_Panel" unique_id=815259867]
+position = Vector2(1816, 1020.00006)
+scale = Vector2(4.06, 4.06)
+sprite_frames = SubResource("SpriteFrames_qsuaf")
+autoplay = "default"
+
+[node name="Finish_Button" type="Button" parent="Right_Panel" unique_id=78030986]
+offset_left = 1407.0
+offset_top = 990.0
+offset_right = 1755.0
+offset_bottom = 1064.0
+theme = SubResource("Theme_s1fef")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 51
+text = "Finish"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Right_Panel" unique_id=1969790525]
+offset_left = 1293.0
+offset_top = 408.0
+offset_right = 1917.0
+offset_bottom = 903.0
+mouse_filter = 2
+theme = SubResource("Theme_t67js")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Right_Panel/ScrollContainer" unique_id=1620882109]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("15_t67js")
+
+[node name="bars" type="VBoxContainer" parent="Right_Panel" unique_id=1756077537]
+offset_left = 1299.0
+offset_top = 168.0
+offset_right = 1867.0
+offset_bottom = 328.0
+
+[node name="TextureProgressBar" parent="Right_Panel/bars" unique_id=966214435 instance=ExtResource("16_8w617")]
+layout_mode = 2
+
+[node name="HBoxContainer" parent="Right_Panel/bars" unique_id=1250987719 instance=ExtResource("17_0i4km")]
+layout_mode = 2
+
+[node name="HBoxContainer2" parent="Right_Panel/bars" unique_id=95941842 instance=ExtResource("18_spgdf")]
+layout_mode = 2
+
+[node name="Ship_Name" type="Label" parent="Right_Panel" unique_id=1840188978]
+offset_left = 1326.0
+offset_top = 25.0
+offset_right = 1836.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 50
+text = "TTTTTTTT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=228626615 groups=["card_menu_position"]]
+position = Vector2(666, 694)
+
+[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="AssemblySlotManager/Button" to="." method="_on_page_button_pressed"]
+[connection signal="pressed" from="AssemblySlotManager/Button2" to="." method="_on_prev_button_pressed"]

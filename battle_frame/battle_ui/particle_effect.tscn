@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bhmdk0b7pmghe"]
+
+[ext_resource type="Script" uid="uid://d2e5onsvd0xt6" path="res://battle_frame/battle_ui/particle_effect.gd" id="1_ijsoc"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s1fef"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 60.609997
+initial_velocity_max = 60.609997
+gravity = Vector3(0, 98, 0)
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=158838873]
+amount = 50
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_s1fef")
+script = ExtResource("1_ijsoc")

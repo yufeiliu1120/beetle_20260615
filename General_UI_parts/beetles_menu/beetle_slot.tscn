@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://m8d6s487unxc"]
+
+[ext_resource type="Texture2D" uid="uid://i3bwhcgoiqte" path="res://assets/General/beetle_slot.png" id="1_nfa5x"]
+[ext_resource type="Script" uid="uid://lhq1rlxnddyd" path="res://General_UI_parts/beetles_menu/beetle_slot.gd" id="2_3v1h2"]
+
+[sub_resource type="Shader" id="Shader_3v1h2"]
+code = "shader_type canvas_item;
+
+uniform vec4 outline_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform int outline_width : hint_range(0, 10) = 1;
+// 开启后为经典像素画的十字/菱形轮廓；关闭则为方形轮廓
+uniform bool pixel_style = true; 
+
+void fragment() {
+    vec4 original_color = texture(TEXTURE, UV);
+    
+    // 1. 如果当前像素已经是完全不透明的主体，直接保留原图
+    // (为了防止浮点数精度误差，这里使用 > 0.99 而不是 == 1.0)
+    if (original_color.a > 0.99) {
+        COLOR = original_color;
+    } else {
+        // 2. 当前像素为透明或半透明（例如阴影）时，探测其周围的像素
+        bool is_outline = false;
+        
+        for (int x = -outline_width; x <= outline_width; x++) {
+            for (int y = -outline_width; y <= outline_width; y++) {
+                if (x == 0 && y == 0) continue;
+                
+                // 像素画菱形轮廓判定
+                if (pixel_style && (abs(x) + abs(y) > outline_width)) {
+                    continue;
+                }
+                
+                vec2 sample_uv = UV + vec2(float(x), float(y)) * TEXTURE_PIXEL_SIZE;
+                vec4 sample_color = texture(TEXTURE, sample_uv);
+                
+                // 【核心逻辑】：只有探测到了透明度严格为 1 的像素，才会被视为碰到了主体
+                if (sample_color.a > 0.99) {
+                    is_outline = true;
+                    break;
+                }
+            }
+            if (is_outline) break;
+        }
+        
+        // 3. 最终输出
+        if (is_outline) {
+            // 如果挨着主体，将其覆盖为纯色轮廓
+            COLOR = outline_color;
+        } else {
+            // 如果没挨着主体（比如向外延伸的阴影区，或纯透明背景），原样输出
+            COLOR = original_color;
+        }
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x6ea0"]
+shader = SubResource("Shader_3v1h2")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0
+shader_parameter/pixel_style = true
+
+[node name="TextureRect" type="TextureRect" unique_id=232552610 node_paths=PackedStringArray("silhouette_rect", "name_label")]
+material = SubResource("ShaderMaterial_x6ea0")
+custom_minimum_size = Vector2(228, 306)
+anchors_preset = -1
+anchor_right = 0.119
+anchor_bottom = 0.28300002
+offset_right = -1.480011
+offset_bottom = -0.063079834
+mouse_filter = 0
+texture = ExtResource("1_nfa5x")
+script = ExtResource("2_3v1h2")
+silhouette_rect = NodePath("TextureRect")
+name_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="." unique_id=918221583]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 256.0
+offset_right = 208.0
+offset_bottom = 284.0
+text = "EMPTY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=219474520]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.075
+anchor_top = 0.056
+anchor_right = 0.075
+anchor_bottom = 0.056
+offset_left = -33.435
+offset_top = 9.249691
+offset_right = 136.5635
+offset_bottom = 136.62477
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

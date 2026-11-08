@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://cf38dc0hg2vf2"]
+
+[ext_resource type="Script" uid="uid://dvhamhxs4rjwq" path="res://test/assumbly_hub_test.gd" id="1_2yvg1"]
+[ext_resource type="PackedScene" uid="uid://gu34hkbe6ddk" path="res://AssemblyHub/AssemblyHub.tscn" id="1_hixtp"]
+[ext_resource type="Texture2D" uid="uid://b56vr6dvaprbg" path="res://assets/assumblyHub/port_sheet.png" id="3_pqy4h"]
+[ext_resource type="PackedScene" uid="uid://b81tmynxij34g" path="res://AssemblyHub/assembly_slot_manager.tscn" id="4_swwbo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ul7g"]
+atlas = ExtResource("3_pqy4h")
+region = Rect2(2560, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grtjt"]
+atlas = ExtResource("3_pqy4h")
+region = Rect2(1920, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdksl"]
+atlas = ExtResource("3_pqy4h")
+region = Rect2(1280, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvj2d"]
+atlas = ExtResource("3_pqy4h")
+region = Rect2(640, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2nop"]
+atlas = ExtResource("3_pqy4h")
+region = Rect2(0, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swwbo"]
+atlas = ExtResource("3_pqy4h")
+region = Rect2(0, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhth4"]
+atlas = ExtResource("3_pqy4h")
+region = Rect2(640, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7mu7"]
+atlas = ExtResource("3_pqy4h")
+region = Rect2(1280, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol8xb"]
+atlas = ExtResource("3_pqy4h")
+region = Rect2(1920, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shpw7"]
+atlas = ExtResource("3_pqy4h")
+region = Rect2(2560, 0, 640, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1fef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ul7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grtjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdksl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvj2d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2nop")
+}],
+"loop": 0,
+"name": &"Close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swwbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhth4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7mu7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol8xb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shpw7")
+}],
+"loop": 0,
+"name": &"Open",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=713968183]
+script = ExtResource("1_2yvg1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2042340280]
+
+[node name="Control" parent="CanvasLayer" unique_id=895487477 node_paths=PackedStringArray("assembly_slot_manager") instance=ExtResource("1_hixtp")]
+assembly_slot_manager = NodePath("../../AssemblySlotManager")
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=476331361]
+offset_left = 11.0
+offset_top = 158.0
+offset_right = 198.0
+offset_bottom = 202.0
+text = "Start Assembly"
+
+[node name="Button2" type="Button" parent="CanvasLayer" unique_id=1619176932]
+offset_left = 35.0
+offset_top = 91.0
+offset_right = 153.0
+offset_bottom = 122.0
+text = "to battle"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=323964324]
+position = Vector2(320, 182)
+sprite_frames = SubResource("SpriteFrames_s1fef")
+animation = &"Open"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=737855409]
+position = Vector2(320, 182)
+zoom = Vector2(3, 3)
+
+[node name="AssemblySlotManager" parent="." unique_id=977587642 node_paths=PackedStringArray("spawn_markers", "slot_spawn", "slot_exit", "back_ground_animatedsprite", "assembly_hub") instance=ExtResource("4_swwbo")]
+spawn_markers = [NodePath("Marker2D")]
+slot_spawn = NodePath("SlotSpawn")
+slot_exit = NodePath("SlotExit")
+back_ground_animatedsprite = NodePath("../AnimatedSprite2D")
+assembly_hub = NodePath("../CanvasLayer/Control")
+
+[node name="SlotSpawn" type="Marker2D" parent="AssemblySlotManager" unique_id=296895004]
+position = Vector2(126, 88)
+
+[node name="SlotExit" type="Marker2D" parent="AssemblySlotManager" unique_id=2094395026]
+position = Vector2(126, 400)
+
+[node name="Marker2D" type="Marker2D" parent="AssemblySlotManager" unique_id=1989049850]
+y_sort_enabled = true
+position = Vector2(126, 160)
+
+[node name="Marker2D2" type="Marker2D" parent="AssemblySlotManager" unique_id=1677075581]
+y_sort_enabled = true
+position = Vector2(126, 190)
+
+[node name="Marker2D3" type="Marker2D" parent="AssemblySlotManager" unique_id=76421156]
+y_sort_enabled = true
+position = Vector2(126, 210)
+
+[node name="Marker2D4" type="Marker2D" parent="AssemblySlotManager" unique_id=557337557]
+y_sort_enabled = true
+position = Vector2(126, 240)
+
+[node name="Marker2D5" type="Marker2D" parent="AssemblySlotManager" unique_id=841358136]
+y_sort_enabled = true
+position = Vector2(126, 270)
+
+[node name="Marker2D6" type="Marker2D" parent="AssemblySlotManager" unique_id=2037341340]
+y_sort_enabled = true
+position = Vector2(126, 300)
+
+[node name="Marker2D7" type="Marker2D" parent="AssemblySlotManager" unique_id=913253526]
+y_sort_enabled = true
+position = Vector2(126, 330)
+
+[node name="Button" type="Button" parent="AssemblySlotManager" unique_id=1580840806]
+offset_left = 483.0
+offset_top = 293.0
+offset_right = 551.0
+offset_bottom = 327.0
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="AssemblySlotManager/Button" to="." method="_on_page_button_pressed"]

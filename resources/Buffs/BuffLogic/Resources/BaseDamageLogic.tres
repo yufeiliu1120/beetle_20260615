@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BaseDamageBuffLogic" format=3 uid="uid://cn0ci36utpa07"]
+
+[ext_resource type="Script" uid="uid://cgcwfxex6cypl" path="res://resources/Buffs/BuffLogic/Scripts/BaseDamageBuff.gd" id="1_crb5h"]
+
+[resource]
+script = ExtResource("1_crb5h")
+logic_name = "伤害增加"
+count = 3
+metadata/_custom_type_script = "uid://cgcwfxex6cypl"

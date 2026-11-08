@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://blto5a6vbmt7i"]
+
+[ext_resource type="Script" uid="uid://bqkbrgwnjtu88" path="res://AssemblyHub/card/card_menu.gd" id="1_2dbg4"]
+[ext_resource type="Texture2D" uid="uid://k2p76hqx3vrc" path="res://assets/cards/card_base/pirate_panel.png" id="1_ggage"]
+[ext_resource type="PackedScene" uid="uid://dtogrcint4fg8" path="res://AssemblyHub/card/tag_container.tscn" id="2_3wvjb"]
+[ext_resource type="Texture2D" uid="uid://cjmtismsgaou0" path="res://assets/cards/card_base/pirate_normal_label.png" id="4_gyk0o"]
+[ext_resource type="Texture2D" uid="uid://ddn8gffdudqwm" path="res://assets/cards/card_base/card_title.png" id="5_h3imi"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_khhxn"]
+texture = ExtResource("1_ggage")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="Theme" id="Theme_s1fef"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_khhxn")
+
+[sub_resource type="Animation" id="Animation_gyk0o"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_h3imi"]
+resource_name = "fold"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_885i1"]
+_data = {
+&"RESET": SubResource("Animation_gyk0o"),
+&"fold": SubResource("Animation_h3imi")
+}
+
+[node name="Control" type="Control" unique_id=1706194184 node_paths=PackedStringArray("Titel", "Text_label", "tag_box", "Action_desc", "Action_Title", "Action_panel", "card_back", "text_panel")]
+layout_mode = 3
+anchor_right = 0.63500005
+anchor_bottom = 0.66800004
+offset_right = 0.79992676
+offset_bottom = -0.44006348
+mouse_filter = 1
+script = ExtResource("1_2dbg4")
+Titel = NodePath("Label")
+Text_label = NodePath("label/RichTextLabel")
+tag_box = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer")
+Action_desc = NodePath("PanelContainer/MarginContainer/VBoxContainer/RichTextLabel")
+tag_container = ExtResource("2_3wvjb")
+Action_Title = NodePath("PanelContainer/MarginContainer/VBoxContainer/Label")
+Action_panel = NodePath("PanelContainer")
+card_back = NodePath("label")
+text_panel = NodePath("label")
+metadata/_edit_horizontal_guides_ = [0.0]
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1346033336]
+clip_contents = true
+layout_mode = 0
+offset_left = 434.0
+offset_top = 41.0
+offset_right = 1189.0
+offset_bottom = 638.0
+mouse_filter = 1
+theme = SubResource("Theme_s1fef")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=301992342]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=107467658]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1216173040]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 60
+text = "TitleTitle"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1720971611]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 34
+text = "Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=302661087]
+layout_mode = 2
+
+[node name="label" type="TextureRect" parent="." unique_id=173561398]
+clip_contents = true
+layout_mode = 0
+offset_top = 184.0
+offset_right = 445.0
+offset_bottom = 690.0
+texture = ExtResource("4_gyk0o")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="label" unique_id=89189652]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 68.0
+offset_right = 365.0
+offset_bottom = 456.0
+mouse_filter = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 38
+bbcode_enabled = true
+text = "Test Test Test Test Test Test Test Test Test Test Test Test Test "
+
+[node name="title" type="TextureRect" parent="." unique_id=856719710]
+layout_mode = 0
+offset_right = 445.0
+offset_bottom = 205.0
+texture = ExtResource("5_h3imi")
+
+[node name="Label" type="Label" parent="." unique_id=217002097]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 39.999996
+offset_right = 356.0
+offset_bottom = 155.0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 50
+text = "TitleTitle"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1179624533]
+libraries/ = SubResource("AnimationLibrary_885i1")

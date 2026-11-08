@@ -1,0 +1,257 @@
+[gd_scene format=3 uid="uid://bjbddkrwwle83"]
+
+[ext_resource type="Script" uid="uid://cgsjmtjqycnto" path="res://Town_Scene/Beetle Breeding Facility/Beetle Breeding Facility.gd" id="1_hjj1k"]
+[ext_resource type="Texture2D" uid="uid://b1kudjxunojhp" path="res://assets/other/temple_inside.png" id="2_uvfyj"]
+[ext_resource type="Script" uid="uid://rb0ehym35dqi" path="res://battle_frame/camera.gd" id="3_o1jg4"]
+[ext_resource type="Texture2D" uid="uid://q4cmpvk1c1a3" path="res://assets/other/pixellab-The-furnacetemple_fire_sheet.png" id="4_kd3kn"]
+[ext_resource type="Texture2D" uid="uid://ncl07koug7cg" path="res://assets/beetle_test_parts/dust.png" id="5_bhvkh"]
+[ext_resource type="Script" uid="uid://wte3ryl6qe3i" path="res://Town_Scene/Beetle Breeding Facility/fire_light.gd" id="6_qluec"]
+[ext_resource type="PackedScene" uid="uid://dxh2em58hgs45" path="res://General_UI_parts/beetles_menu/beetles_menu.tscn" id="7_tv6ds"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhvkh"]
+atlas = ExtResource("4_kd3kn")
+region = Rect2(0, 0, 11, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qluec"]
+atlas = ExtResource("4_kd3kn")
+region = Rect2(11, 0, 11, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tv6ds"]
+atlas = ExtResource("4_kd3kn")
+region = Rect2(22, 0, 11, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bu3n"]
+atlas = ExtResource("4_kd3kn")
+region = Rect2(33, 0, 11, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crbli"]
+atlas = ExtResource("4_kd3kn")
+region = Rect2(44, 0, 11, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dy4w2"]
+atlas = ExtResource("4_kd3kn")
+region = Rect2(55, 0, 11, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1fef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhvkh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qluec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tv6ds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bu3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crbli")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dy4w2")
+}],
+"loop": 1,
+"name": &"burn",
+"speed": 8.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_qluec"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tv6ds"]
+gradient = SubResource("Gradient_qluec")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8bu3n"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, -50, 0)
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_tv6ds")
+
+[sub_resource type="Gradient" id="Gradient_bhvkh"]
+offsets = PackedFloat32Array(0.07377049, 0.2704918, 0.59836066)
+colors = PackedColorArray(1, 1, 1, 1, 0.93, 0.53428495, 0.2883, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s1fef"]
+gradient = SubResource("Gradient_bhvkh")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_tv6ds"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_8bu3n"]
+resource_name = "breed"
+length = 4.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1.8666667, 3.3333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"darken_scene"
+}, {
+"args": [],
+"method": &"parents_reset"
+}, {
+"args": [],
+"method": &"light_scene"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Control")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fold_panel"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_crbli"]
+_data = {
+&"RESET": SubResource("Animation_tv6ds"),
+&"breed": SubResource("Animation_8bu3n")
+}
+
+[node name="BeetleBreedingFacility" type="Node2D" unique_id=850827854 node_paths=PackedStringArray("parent_mark1", "parent_mark2", "child_mark", "menu", "animation_player")]
+script = ExtResource("1_hjj1k")
+parent_mark1 = NodePath("place1")
+parent_mark2 = NodePath("place2")
+child_mark = NodePath("place3")
+menu = NodePath("CanvasLayer/Control")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2143270285]
+z_index = -2
+position = Vector2(959.99994, 540)
+scale = Vector2(7.058823, 7.058823)
+texture = ExtResource("2_uvfyj")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=848199133]
+z_index = -2
+position = Vector2(959.99994, 540)
+scale = Vector2(7.058823, 7.058823)
+texture = ExtResource("2_uvfyj")
+
+[node name="custom_camera" type="Camera2D" parent="." unique_id=459707005 groups=["Camera"]]
+position = Vector2(960, 540)
+script = ExtResource("3_o1jg4")
+metadata/_custom_type_script = "uid://rb0ehym35dqi"
+
+[node name="place1" type="Marker2D" parent="." unique_id=449733755]
+position = Vector2(521, 600)
+
+[node name="place2" type="Marker2D" parent="." unique_id=1264056887]
+position = Vector2(1444, 600)
+
+[node name="place3" type="Marker2D" parent="." unique_id=2030852694]
+position = Vector2(960, 600)
+
+[node name="fires" type="Node2D" parent="." unique_id=433604980]
+
+[node name="fire1" type="AnimatedSprite2D" parent="fires" unique_id=657085348]
+position = Vector2(705.375, 138.04544)
+scale = Vector2(6.431821, 6.431821)
+sprite_frames = SubResource("SpriteFrames_s1fef")
+animation = &"burn"
+autoplay = "burn"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="fires/fire1" unique_id=1619062942]
+position = Vector2(0.0971756, -2.4946957)
+scale = Vector2(0.15547696, 0.15547696)
+amount = 16
+texture = ExtResource("5_bhvkh")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_8bu3n")
+
+[node name="PointLight2D" type="PointLight2D" parent="fires/fire1" unique_id=104848272]
+texture = SubResource("GradientTexture2D_s1fef")
+script = ExtResource("6_qluec")
+min_energy = 0.8
+
+[node name="fire2" type="AnimatedSprite2D" parent="fires" unique_id=854765945]
+position = Vector2(705.375, 880)
+scale = Vector2(6.431821, 6.431821)
+sprite_frames = SubResource("SpriteFrames_s1fef")
+animation = &"burn"
+autoplay = "burn"
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="fires/fire2" unique_id=789565018]
+z_index = 1
+position = Vector2(76.90279, -117.69605)
+scale = Vector2(0.15547696, 0.15547696)
+amount = 16
+texture = ExtResource("5_bhvkh")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_8bu3n")
+
+[node name="PointLight2D" type="PointLight2D" parent="fires/fire2" unique_id=234088392]
+texture = SubResource("GradientTexture2D_s1fef")
+script = ExtResource("6_qluec")
+min_energy = 0.8
+
+[node name="fire3" type="AnimatedSprite2D" parent="fires" unique_id=943194528]
+position = Vector2(1200, 881)
+scale = Vector2(6.431821, 6.431821)
+sprite_frames = SubResource("SpriteFrames_s1fef")
+animation = &"burn"
+autoplay = "burn"
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="fires/fire3" unique_id=215574828]
+position = Vector2(-77.27204, -2.0212097)
+scale = Vector2(0.15547696, 0.15547696)
+amount = 16
+texture = ExtResource("5_bhvkh")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_8bu3n")
+
+[node name="PointLight2D" type="PointLight2D" parent="fires/fire3" unique_id=1509137983]
+texture = SubResource("GradientTexture2D_s1fef")
+script = ExtResource("6_qluec")
+min_energy = 0.8
+
+[node name="fire4" type="AnimatedSprite2D" parent="fires" unique_id=898051873]
+position = Vector2(1200, 138)
+scale = Vector2(6.431821, 6.431821)
+sprite_frames = SubResource("SpriteFrames_s1fef")
+animation = &"burn"
+autoplay = "burn"
+
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="fires/fire4" unique_id=1111550802]
+position = Vector2(-0.1554718, 113.031746)
+scale = Vector2(0.15547696, 0.15547696)
+amount = 16
+texture = ExtResource("5_bhvkh")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_8bu3n")
+
+[node name="PointLight2D" type="PointLight2D" parent="fires/fire4" unique_id=945289757]
+texture = SubResource("GradientTexture2D_s1fef")
+script = ExtResource("6_qluec")
+min_energy = 0.8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1527372699]
+libraries/ = SubResource("AnimationLibrary_crbli")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1450049993]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=795047034]
+
+[node name="Control" parent="CanvasLayer" unique_id=123872482 instance=ExtResource("7_tv6ds")]

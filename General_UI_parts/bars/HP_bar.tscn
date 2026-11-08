@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://gl7mn0q7xkng"]
+
+[ext_resource type="Script" uid="uid://bmtfhw2kjkgu6" path="res://General_UI_parts/bars/hp_bar.gd" id="1_n60kg"]
+[ext_resource type="Texture2D" uid="uid://ckq1ggy6k2q5x" path="res://assets/General/HP_bar_under.png" id="1_qrday"]
+[ext_resource type="Texture2D" uid="uid://crchp44058ima" path="res://assets/General/HP_bar_cover.png" id="2_cc0ag"]
+[ext_resource type="Texture2D" uid="uid://dm4cy5uy1slvl" path="res://assets/battle_ui/shield.png" id="2_mngig"]
+[ext_resource type="Texture2D" uid="uid://dfcbiptpna1a5" path="res://assets/General/HP_bar_grogress.png" id="2_ompjq"]
+
+[node name="HBoxContainer" type="HBoxContainer" unique_id=1141623102 node_paths=PackedStringArray("bar", "label", "shield", "shield_count_label")]
+custom_minimum_size = Vector2(0, 30)
+offset_right = 578.0
+offset_bottom = 40.0
+script = ExtResource("1_n60kg")
+bar = NodePath("TextureProgressBar")
+label = NodePath("RichTextLabel")
+shield = NodePath("Shield")
+shield_count_label = NodePath("Shield/Label")
+metadata/_edit_horizontal_guides_ = [424.0]
+
+[node name="Shield" type="TextureRect" parent="." unique_id=804002938]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+texture = ExtResource("2_mngig")
+
+[node name="Label" type="Label" parent="Shield" unique_id=1842329841]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 31.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 20
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1376758467]
+layout_mode = 2
+step = 0.1
+value = 50.0
+texture_under = ExtResource("1_qrday")
+texture_over = ExtResource("2_cc0ag")
+texture_progress = ExtResource("2_ompjq")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1396866229]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+text = "HP: 100/100"

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://5q4xkp1diqa0"]
+
+[ext_resource type="Script" uid="uid://8hlo646ofmu2" path="res://test/test.gd" id="1_j5phd"]
+[ext_resource type="Resource" uid="uid://d30rhdmnw6t6l" path="res://resources/beetle_resources/enemy_beetle/beetle1.tres" id="2_kmq6d"]
+[ext_resource type="Script" uid="uid://dy5ba6ku4uwpc" path="res://battle_frame/combat_manager.gd" id="3_8jfyu"]
+[ext_resource type="Script" uid="uid://ck8gwobidg082" path="res://battle_frame/ActionResolver.gd" id="4_137by"]
+[ext_resource type="PackedScene" uid="uid://buwfdrw4p5fjl" path="res://battle_frame/battle_ui/action_ui_manager.tscn" id="5_u0nfm"]
+
+[node name="Node2D" type="Node2D" unique_id=553631274]
+script = ExtResource("1_j5phd")
+enemy_chassis = ExtResource("2_kmq6d")
+metadata/_edit_vertical_guides_ = [1202.0]
+metadata/_edit_horizontal_guides_ = [729.0]
+
+[node name="CombatManager" type="Node" parent="." unique_id=364711174 node_paths=PackedStringArray("ui_manager", "action_resolver")]
+script = ExtResource("3_8jfyu")
+ui_manager = NodePath("../CanvasLayer/ActionUIManager")
+action_resolver = NodePath("ActionResolver")
+metadata/_custom_type_script = "uid://dy5ba6ku4uwpc"
+
+[node name="ActionResolver" type="Node" parent="CombatManager" unique_id=40895964]
+script = ExtResource("4_137by")
+metadata/_custom_type_script = "uid://ck8gwobidg082"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=966504313]
+
+[node name="ActionUIManager" parent="CanvasLayer" unique_id=1211023341 node_paths=PackedStringArray("combat_manager") instance=ExtResource("5_u0nfm")]
+combat_manager = NodePath("../../CombatManager")

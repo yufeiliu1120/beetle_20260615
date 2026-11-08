@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://4eel8cu1oe5j"]
+
+[ext_resource type="Texture2D" uid="uid://crido6i0l1x84" path="res://assets/battle_ui/action_panel.png" id="1_lhfog"]
+[ext_resource type="Script" uid="uid://bpcppnjov10p5" path="res://Explore_Scene/map_node_menu.gd" id="2_ipjcs"]
+[ext_resource type="Texture2D" uid="uid://bcmpqi2gmn7oe" path="res://assets/assumblyHub/Finish_Button_hover.png" id="2_xj17h"]
+[ext_resource type="Texture2D" uid="uid://blwx8hjmainx" path="res://assets/assumblyHub/Finish_Button.png" id="3_ipjcs"]
+[ext_resource type="Texture2D" uid="uid://cijv84f2susjx" path="res://assets/assumblyHub/Finish_Button_pressed.png" id="4_tcpgl"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_khhxn"]
+texture = ExtResource("1_lhfog")
+
+[sub_resource type="Theme" id="Theme_s1fef"]
+Button/styles/disabled = null
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_khhxn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xsa8g"]
+texture = ExtResource("2_xj17h")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qsuaf"]
+texture = ExtResource("3_ipjcs")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wb4oo"]
+texture = ExtResource("4_tcpgl")
+
+[sub_resource type="Theme" id="Theme_3jw3r"]
+Button/styles/hover = SubResource("StyleBoxTexture_xsa8g")
+Button/styles/normal = SubResource("StyleBoxTexture_qsuaf")
+Button/styles/pressed = SubResource("StyleBoxTexture_wb4oo")
+
+[node name="PanelContainer" type="PanelContainer" unique_id=24604890 node_paths=PackedStringArray("text_label", "start_button")]
+z_index = 5
+offset_right = 990.0
+offset_bottom = 1160.3005
+scale = Vector2(0.3, 0.3)
+theme = SubResource("Theme_s1fef")
+script = ExtResource("2_ipjcs")
+text_label = NodePath("MarginContainer/VBoxContainer/RichTextLabel")
+start_button = NodePath("MarginContainer/VBoxContainer/Button")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1671208796]
+layout_mode = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 49
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=602763775]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1594271698]
+custom_minimum_size = Vector2(0, 1000)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "Title
+DescDescDescDescDescDsecSSDSEDSFSEFDFE
+Supply Cost: 500"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=499772163]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme = SubResource("Theme_3jw3r")
+theme_override_font_sizes/font_size = 60
+text = "Start Voyage"

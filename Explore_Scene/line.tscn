@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b20er8q7836jt"]
+
+[ext_resource type="Texture2D" uid="uid://sjufth7ccs36" path="res://assets/explore/line.png" id="1_3o6l0"]
+
+[node name="Line2D" type="Line2D" unique_id=807915108]
+texture_repeat = 2
+width = 5.0
+texture = ExtResource("1_3o6l0")
+texture_mode = 1

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ActionData" format=3 uid="uid://cbi2ebxv2y3no"]
+
+[ext_resource type="Script" uid="uid://c4nryiyhmuqrd" path="res://resources/Actions/Effects/Scripts/BaseActionEffect.gd" id="1_pnb5r"]
+[ext_resource type="Script" uid="uid://dckryyg4w2nhj" path="res://resources/Actions/Effects/Scripts/ComboActionEffect.gd" id="2_2phhb"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionDatas/Scripts/ActionData.gd" id="2_q4sal"]
+[ext_resource type="Texture2D" uid="uid://doydjgnbv3sg2" path="res://assets/action_slot/Icon_attackt.png" id="3_2phhb"]
+
+[sub_resource type="Resource" id="Resource_yft46"]
+script = ExtResource("2_2phhb")
+trigger_tag = "Cannon"
+metadata/_custom_type_script = "uid://dckryyg4w2nhj"
+
+[resource]
+script = ExtResource("2_q4sal")
+action_name = "齐射"
+action_icon = ExtResource("3_2phhb")
+base_cooldown = 1
+tile_anim_name = "Combo"
+action_effects = Array[ExtResource("1_pnb5r")]([SubResource("Resource_yft46")])
+metadata/_custom_type_script = "uid://ybacxqsnbg5a"

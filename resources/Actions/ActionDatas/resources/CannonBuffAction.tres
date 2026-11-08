@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ActionData" format=3 uid="uid://c471eakydbilk"]
+
+[ext_resource type="Script" uid="uid://c4nryiyhmuqrd" path="res://resources/Actions/Effects/Scripts/BaseActionEffect.gd" id="1_givr6"]
+[ext_resource type="Script" uid="uid://c0q0kmxxiqra0" path="res://resources/Actions/Effects/Scripts/BaseBuffEffect.gd" id="2_6blvh"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionDatas/Scripts/ActionData.gd" id="2_hbo1f"]
+[ext_resource type="Resource" uid="uid://ddtqlw7usr2bg" path="res://resources/Buffs/BuffData/Resources/Cannon_buff.tres" id="2_q2awp"]
+[ext_resource type="Texture2D" uid="uid://bv2miqt5hp6ta" path="res://assets/action_slot/Icon_buff.png" id="3_6blvh"]
+
+[sub_resource type="Resource" id="Resource_6blvh"]
+script = ExtResource("2_6blvh")
+buff_data = ExtResource("2_q2awp")
+metadata/_custom_type_script = "uid://c0q0kmxxiqra0"
+
+[resource]
+script = ExtResource("2_hbo1f")
+action_name = "额外装药"
+action_icon = ExtResource("3_6blvh")
+base_cooldown = 1
+action_effects = Array[ExtResource("1_givr6")]([SubResource("Resource_6blvh")])
+metadata/_custom_type_script = "uid://ybacxqsnbg5a"

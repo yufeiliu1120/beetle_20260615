@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ccpgispyspcab"]
+
+[ext_resource type="Script" uid="uid://bsd0q77nk4b0d" path="res://Autoloads/RewardPool.gd" id="1_80ppp"]
+[ext_resource type="PackedScene" uid="uid://bbp5lbaveatrt" path="res://tiles/test_large_tile/large_tile_card.tscn" id="2_snemj"]
+[ext_resource type="PackedScene" uid="uid://fjqp7ntsl7sf" path="res://tiles/cannon/cannon_card.tscn" id="3_1sxh0"]
+[ext_resource type="PackedScene" uid="uid://bcgwib34elcnv" path="res://tiles/battery_test/battery_card.tscn" id="4_cieff"]
+[ext_resource type="PackedScene" uid="uid://c2fcw46owtfn5" path="res://General_UI_parts/tile_rewards_scene/tile_rewards_scene.tscn" id="5_1sxh0"]
+
+[node name="RewardPool" type="Node" unique_id=1170719766]
+script = ExtResource("1_80ppp")
+all_tiles_cards = Array[PackedScene]([ExtResource("2_snemj"), ExtResource("3_1sxh0"), ExtResource("4_cieff")])
+tile_rewards_ui = ExtResource("5_1sxh0")
+metadata/_custom_type_script = "uid://bsd0q77nk4b0d"

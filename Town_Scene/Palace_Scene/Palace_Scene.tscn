@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cn8obsv64b2g1"]
+
+[ext_resource type="Texture2D" uid="uid://dcgpc2oyl5t4t" path="res://assets/other/palace_inside_sheet.png" id="1_qx2cf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b66ck"]
+atlas = ExtResource("1_qx2cf")
+region = Rect2(0, 0, 344, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otsgi"]
+atlas = ExtResource("1_qx2cf")
+region = Rect2(344, 0, 344, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cg6i"]
+atlas = ExtResource("1_qx2cf")
+region = Rect2(688, 0, 344, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxwle"]
+atlas = ExtResource("1_qx2cf")
+region = Rect2(1032, 0, 344, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wkqa"]
+atlas = ExtResource("1_qx2cf")
+region = Rect2(1376, 0, 344, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8mcy"]
+atlas = ExtResource("1_qx2cf")
+region = Rect2(1720, 0, 344, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to4kd"]
+atlas = ExtResource("1_qx2cf")
+region = Rect2(2064, 0, 344, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31fd4"]
+atlas = ExtResource("1_qx2cf")
+region = Rect2(2408, 0, 344, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1fef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b66ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otsgi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cg6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxwle")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wkqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8mcy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_to4kd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31fd4")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=1853734154]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=811152324]
+position = Vector2(959.99994, 540)
+scale = Vector2(5.581395, 5.625)
+sprite_frames = SubResource("SpriteFrames_s1fef")
+autoplay = "default"

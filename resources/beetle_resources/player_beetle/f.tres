@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BeetleChassisData" format=3]
+
+[ext_resource type="PackedScene" path="res://warship_parts/base.tscn" id="1_0doij"]
+[ext_resource type="PackedScene" path="res://beetle_parts/test_beetle/front.tscn" id="2_bxuvb"]
+[ext_resource type="PackedScene" path="res://beetle_parts/test_beetle/mid.tscn" id="3_als1a"]
+[ext_resource type="PackedScene" path="res://beetle_parts/test_beetle/ship_back.tscn" id="4_113ev"]
+[ext_resource type="Script" path="res://resources/beetle_resources/enemy_beetle/beetle_base.gd" id="5_1upyx"]
+
+[resource]
+script = ExtResource("5_1upyx")
+ship_name = "f"
+base_ship_scene = ExtResource("1_0doij")
+part_scenes = Array[PackedScene]([ExtResource("2_bxuvb"), ExtResource("3_als1a"), ExtResource("4_113ev")])

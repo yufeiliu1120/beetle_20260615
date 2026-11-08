@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ActionData" format=3 uid="uid://0kcm58uw81yr"]
+
+[ext_resource type="Script" uid="uid://c4nryiyhmuqrd" path="res://resources/Actions/Effects/Scripts/BaseActionEffect.gd" id="1_l4miq"]
+[ext_resource type="Script" uid="uid://ybacxqsnbg5a" path="res://resources/Actions/ActionDatas/Scripts/ActionData.gd" id="2_jv0on"]
+[ext_resource type="Resource" uid="uid://d0jaax24omr5r" path="res://resources/Buffs/BuffData/Resources/BaseDamageBuff.tres" id="2_udkh5"]
+[ext_resource type="Script" uid="uid://c0q0kmxxiqra0" path="res://resources/Actions/Effects/Scripts/BaseBuffEffect.gd" id="3_xpfgv"]
+[ext_resource type="Texture2D" uid="uid://bv2miqt5hp6ta" path="res://assets/action_slot/Icon_buff.png" id="4_8kq14"]
+
+[sub_resource type="Resource" id="Resource_cgy5h"]
+script = ExtResource("3_xpfgv")
+buff_data = ExtResource("2_udkh5")
+effect_name = "Buff"
+metadata/_custom_type_script = "uid://c0q0kmxxiqra0"
+
+[resource]
+script = ExtResource("2_jv0on")
+action_name = "提升伤害"
+action_icon = ExtResource("4_8kq14")
+description = "提供力量效果"
+tags = Array[String](["Buff"])
+base_cooldown = 3
+action_effects = Array[ExtResource("1_l4miq")]([SubResource("Resource_cgy5h")])
+metadata/_custom_type_script = "uid://ybacxqsnbg5a"

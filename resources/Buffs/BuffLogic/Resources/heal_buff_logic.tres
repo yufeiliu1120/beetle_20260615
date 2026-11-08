@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="HealBuffLogic" format=3 uid="uid://dwg6ju3l5jogs"]
+
+[ext_resource type="Script" uid="uid://dek4ptieq07pv" path="res://resources/Buffs/BuffLogic/Scripts/HealBuff.gd" id="1_5grt8"]
+
+[resource]
+script = ExtResource("1_5grt8")
+logic_name = "治疗"
+count = 5
+metadata/_custom_type_script = "uid://dek4ptieq07pv"

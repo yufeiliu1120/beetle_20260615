@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BaseBuffActionEffect" format=3 uid="uid://cdmoy5c4dqb30"]
+
+[ext_resource type="Script" uid="uid://c0q0kmxxiqra0" path="res://resources/Actions/Effects/Scripts/BaseBuffEffect.gd" id="1_ky0bf"]
+[ext_resource type="Resource" uid="uid://tdin4ryr7u7j" path="res://resources/Buffs/BuffData/Resources/heal_buff.tres" id="1_r4leh"]
+
+[resource]
+script = ExtResource("1_ky0bf")
+buff_data = ExtResource("1_r4leh")
+effect_name = "Buff"
+metadata/_custom_type_script = "uid://c0q0kmxxiqra0"

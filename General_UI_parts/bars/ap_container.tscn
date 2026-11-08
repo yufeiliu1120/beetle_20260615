@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dhkr4a3x5tbdm"]
+
+[ext_resource type="Script" uid="uid://bsdpbon8p7hu0" path="res://General_UI_parts/bars/ap_bar.gd" id="1_t4u6t"]
+[ext_resource type="PackedScene" uid="uid://b0r2vxjdvory7" path="res://General_UI_parts/bars/AP_Icon.tscn" id="2_6bjj8"]
+[ext_resource type="PackedScene" uid="uid://tpgrip564j8l" path="res://General_UI_parts/bars/AP_Icon_Red.tscn" id="3_6bjj8"]
+[ext_resource type="Texture2D" uid="uid://cl3sj0catvlp0" path="res://assets/General/Ap_Bar_under.png" id="3_ltxwj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qsuaf"]
+texture = ExtResource("3_ltxwj")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="Theme" id="Theme_khhxn"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_qsuaf")
+
+[node name="HBoxContainer" type="HBoxContainer" unique_id=1680567843 node_paths=PackedStringArray("ap_bar", "label")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_t4u6t")
+ap_icon_scene = ExtResource("2_6bjj8")
+ap_icon_red_scene = ExtResource("3_6bjj8")
+ap_bar = NodePath("PanelContainer/AP_BAR")
+label = NodePath("Text")
+
+[node name="Control" type="Control" parent="." unique_id=1759443748]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=584509373]
+layout_mode = 2
+theme = SubResource("Theme_khhxn")
+
+[node name="AP_BAR" type="HFlowContainer" parent="PanelContainer" unique_id=628321160]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+
+[node name="Text" type="RichTextLabel" parent="." unique_id=1975801736]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+text = "AP:"
+vertical_alignment = 1

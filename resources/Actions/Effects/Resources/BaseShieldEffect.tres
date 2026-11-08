@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BaseShieldAction" format=3 uid="uid://5a7jlvl53q52"]
+
+[ext_resource type="Script" uid="uid://cbtewhrfrkluk" path="res://resources/Actions/Effects/Scripts/BaseShieldEffect.gd" id="1_atol2"]
+
+[resource]
+script = ExtResource("1_atol2")
+effect_name = "Shield"
+is_on_start = true
+base_count = 1
+metadata/_custom_type_script = "uid://cbtewhrfrkluk"

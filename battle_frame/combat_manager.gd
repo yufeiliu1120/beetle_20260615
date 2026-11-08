@@ -18,14 +18,13 @@ var current_state: CombatState = CombatState.TURN_START
 var player_warship: Warship
 var enemy_warship: Warship
 
+
 @export var ui_manager: ActionUIManager
 @export var action_resolver: ActionResolver
 
 signal battle_ended
 
-func _ready() -> void:
-	# 不在 _ready 自动启动，等待测试场景或外部总控脚本手动呼叫 start_battle()
-	pass
+
 
 # ==========================================
 # 手动启动战斗的入口
@@ -53,11 +52,12 @@ func start_battle() -> void:
 	await player_warship.visual_controller.entrance_finished
 	
 	print("⚔️ 登场完毕，正式开始绑定 UI 与第一回合！")
+	if ui_manager:
 	# 3. 绑定 UI：注意！UI 依然只看纯数据，所以我们把战舰里的 combatentity 挑出来喂给 UI
-	ui_manager.bind_entities(player_warship.combatentity, enemy_warship.combatentity)
+		ui_manager.bind_entities(player_warship.combatentity, enemy_warship.combatentity)
 	
-	if not ui_manager.turn_submitted.is_connected(_on_player_turn_submitted):
-		ui_manager.turn_submitted.connect(_on_player_turn_submitted)
+		if not ui_manager.turn_submitted.is_connected(_on_player_turn_submitted):
+			ui_manager.turn_submitted.connect(_on_player_turn_submitted)
 	
 	print("⚔️ 战斗系统就绪，正式开始第一回合！")
 	change_state(CombatState.TURN_START)
@@ -92,44 +92,66 @@ func change_state(new_state: CombatState) -> void:
 		CombatState.TURN_END: _state_turn_end()
 
 func _state_turn_start() -> void:
-	print("\n========== 第 新 回 合 ==========")
+	print("\n========== 新 回 合 ==========")
 	# 回合开始，恢复 AP 和削减 CD
 	player_warship.combatentity.on_turn_start()
 	enemy_warship.combatentity.on_turn_start()
+	#UI视觉层触发函数
+	if ui_manager:
+		await ui_manager._on_turn_start()
 	change_state(CombatState.ENEMY_THINKING)
 
 func _state_enemy_thinking() -> void:
 	print("🤖 敌方 AI 正在思考...")
-	# AI 直接操作底层的 combatentity
 	var e_entity = enemy_warship.combatentity
 	var available_actions = []
+	var enemy_chosen_actions: Array = [] 
 	
+	# 1. 初始获取所有目前可用（无CD、AP足够）的动作
 	for action in e_entity.action_pool:
 		if e_entity.is_action_available(action):
 			available_actions.append(action)
 			
 	while available_actions.size() > 0 and e_entity.current_ap > 0:
 		var random_action = available_actions.pick_random()
+		
 		if e_entity.current_ap >= random_action.ap_cost:
-			e_entity.use_action(random_action)
-		else:
-			break
-		available_actions.clear()
-		for action in e_entity.action_pool:
-			if e_entity.is_action_available(action):
-				available_actions.append(action)
+			enemy_chosen_actions.append(random_action)
+			e_entity.current_ap -= random_action.ap_cost 
+			
+		# 【核心修改 1】：无论 AP 是否足够，直接将该动作从备选池中彻底移除
+		# 保证每个动作在当前回合只会被 AI 考虑并选中一次
+		available_actions.erase(random_action)
+			
+		# 【核心修改 2】：抛弃原先的清空重扫逻辑，改为直接剔除那些剩余 AP 无法支付的动作
+		# 如果抽到的动作太贵，AI 不会直接 break 结束回合，而是继续尝试抽便宜的动作
+		for i in range(available_actions.size() - 1, -1, -1):
+			if e_entity.current_ap < available_actions[i].ap_cost:
+				available_actions.remove_at(i)
 				
+	action_resolver.init_turn(enemy_chosen_actions)
+	
+	e_entity.stats_changed.emit()
+	
+	if ui_manager:
+		await ui_manager._on_enemy_thinking()
+		
 	change_state(CombatState.PLAYER_PHASE)
 
 func _state_player_phase() -> void:
 	print("🎮 等待玩家操作...")
 	# 放开 UI 的点击屏蔽
-	ui_manager.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
-func _on_player_turn_submitted(final_queue: Array[ActionData]) -> void:
+	if ui_manager:
+		ui_manager.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		await ui_manager._on_player_phase()
+	
+func _on_player_turn_submitted() -> void:
 	if current_state == CombatState.PLAYER_PHASE:
 		# 屏蔽 UI 点击，防止结算时乱点
 		ui_manager.mouse_filter = Control.MOUSE_FILTER_STOP
+		#UI视觉层触发函数
+		if ui_manager:
+			await ui_manager._on_submit()
 		change_state(CombatState.RESOLUTION)
 
 func _state_resolution() -> void:
@@ -145,6 +167,8 @@ func _state_turn_end() -> void:
 		_handle_battle_end()
 	else:
 		# 活着的话，等 1 秒进入下一回合，给玩家一点喘息时间
+		player_warship.combatentity._on_turn_end()
+		enemy_warship.combatentity._on_turn_end()
 		await get_tree().create_timer(1.0).timeout
 		change_state(CombatState.TURN_START)
 
@@ -156,7 +180,21 @@ func _handle_battle_end() -> void:
 		print("💀 同归于尽！")
 	elif p_hp <= 0:
 		print("💀 玩家战败！")
+		await player_warship.visual_controller.play_death_animation(2)
+		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(1).timeout
+		if ui_manager:
+			ui_manager.handle_player_defeated()
+		await get_tree().create_timer(1).timeout
+			
+		enemy_warship.queue_free()
 	else:
-		print("🏆 玩家胜利！")
-		
+		print("玩家胜利！")
+		await enemy_warship.visual_controller.play_death_animation(2)
+		await get_tree().create_timer(0.5).timeout
+		RewardPool.spawn_tile_reward_ui()
+		await RewardPool.rewards_chosen
+		await get_tree().create_timer(1).timeout
+		SceneManager.load_scene(ExploreData.explore_scene)
+		player_warship.queue_free()
 	battle_ended.emit()

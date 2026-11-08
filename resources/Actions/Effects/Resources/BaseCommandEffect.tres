@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ComboAction" format=3 uid="uid://dra3sf6feoii4"]
+
+[ext_resource type="Script" uid="uid://dckryyg4w2nhj" path="res://resources/Actions/Effects/Scripts/ComboActionEffect.gd" id="1_oioho"]
+
+[resource]
+script = ExtResource("1_oioho")
+trigger_tag = "Cannon"
+put_sub_actions_on_cooldown = null
+effect_name = "CannonCommand"
+metadata/_custom_type_script = "uid://dckryyg4w2nhj"
